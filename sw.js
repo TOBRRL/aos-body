@@ -1,4 +1,4 @@
-const CACHE = 'aos-body-v1.4-20261015';
+const CACHE = 'aos-body-v1.7-20261015';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting()));

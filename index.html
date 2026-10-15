@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V1.3</title>
+<title>A-OS Body V1.7</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -869,6 +869,253 @@ html[data-theme="dark"] .restClock{
   margin-top:8px;
 }
 
+
+/* ===== V1.5 Daily Status ===== */
+.statusHero{
+  width:100%;text-align:left;color:var(--text);border:1px solid var(--line);
+  cursor:pointer;
+}
+.statusHeroTop{display:flex;align-items:center;justify-content:space-between}
+.statusEditHint{font-size:11px;color:var(--muted);font-weight:800}
+.statusLabel{font-size:15px;font-weight:900;margin-top:1px}
+.statusSummary{font-size:11px;color:var(--muted);line-height:1.55;margin-top:7px}
+.dailyStatusSheet{max-height:88vh;overflow-y:auto}
+.dailyStatusForm{padding-top:6px}
+.statusField{display:block;margin:14px 0}
+.statusField>span{display:block;font-size:12px;color:var(--muted);font-weight:800;margin:0 0 7px 2px}
+.statusField em{font-style:normal;font-size:9px;opacity:.8}
+.statusInputWrap{
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;
+  border:1px solid var(--line);background:var(--ui-card2);border-radius:14px;padding:0 12px
+}
+.statusInput{
+  width:100%;border:0;outline:0;background:transparent;color:var(--text);
+  font-size:21px;font-weight:900;padding:12px 0
+}
+.statusInputWrap b{font-size:11px;color:var(--muted)}
+.statusSegment{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.statusSegment.five{grid-template-columns:repeat(5,1fr)}
+.statusSegment button{
+  min-height:42px;border:1px solid var(--line);background:var(--ui-card2);color:var(--muted);
+  border-radius:12px;font-weight:900
+}
+.statusSegment button.active{
+  background:var(--text);color:var(--bg2);border-color:var(--text)
+}
+.statusScaleHint{display:flex;justify-content:space-between;color:var(--muted);font-size:9px;margin-top:5px;padding:0 2px}
+.statusBaselineNote{
+  margin:13px 0;padding:10px 12px;border-radius:12px;background:var(--ui-card2);
+  color:var(--muted);font-size:10px;line-height:1.55
+}
+.statusDisclaimer{text-align:center;color:var(--muted);font-size:9px;line-height:1.5;margin-top:9px}
+
+
+/* ===== V1.6 Nutrition + Calendar integration ===== */
+.bottom{
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background:var(--ui-nav) !important;
+}
+.foodHeader{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:16px;
+  margin:2px 2px 14px
+}
+.foodHeader h3{font-size:23px;margin:3px 0 0}
+.foodHeaderHint{font-size:10px;color:var(--muted);padding-bottom:3px}
+.foodMeals{display:grid;gap:11px}
+.foodMealCard{padding:15px}
+.foodMealTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.foodMealName{font-size:17px;font-weight:900}
+.foodMealKcal{font-size:12px;color:var(--muted);font-weight:800}
+.macroInputGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.macroField{
+  background:var(--ui-card2);border:1px solid var(--line);border-radius:13px;padding:10px 10px 8px
+}
+.macroField span{display:block;font-size:9px;color:var(--muted);margin-bottom:5px;font-weight:700}
+.macroInputLine{display:flex;align-items:baseline;gap:4px}
+.macroInput{
+  width:100%;min-width:0;border:0;background:transparent;color:var(--text);outline:0;
+  font-size:19px;font-weight:900;padding:0
+}
+.macroInputLine b{font-size:9px;color:var(--muted);font-weight:700}
+.foodTotalCard{margin-top:14px}
+.foodTotalTop{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
+.foodCalories{font-size:38px;font-weight:950;line-height:1.05;margin-top:5px}
+.foodCalories small{font-size:12px;color:var(--muted)}
+.foodFormula{max-width:150px;text-align:right;font-size:9px;color:var(--muted);line-height:1.4}
+.foodMacroTotals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}
+.foodMacroTotals>div{background:var(--ui-card2);border:1px solid var(--line);border-radius:12px;padding:9px}
+.foodMacroTotals span{display:block;font-size:9px;color:var(--muted)}
+.foodMacroTotals b{display:block;font-size:13px;margin-top:3px}
+.foodNote{margin-top:11px;line-height:1.45}
+
+.selectedDateActions{
+  margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:9px
+}
+.selectedDateActions button{
+  border:1px solid var(--line);background:var(--ui-card2);color:var(--text);
+  min-height:70px;border-radius:15px;padding:11px;
+  display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;text-align:left
+}
+.selectedDateActions button.active{
+  border-color:var(--text);background:var(--ui-card)
+}
+.selectedDateActions b{display:block;font-size:13px}
+.selectedDateActions small{display:block;color:var(--muted);font-size:9px;margin-top:4px;line-height:1.3}
+.calendarActionIcon{
+  width:32px;height:32px;border-radius:10px;background:var(--ui-card);border:1px solid var(--line);
+  display:grid;place-items:center;font-size:11px;font-weight:900
+}
+.calendarDayDetail{margin-top:13px;display:grid;gap:12px}
+.calendarDetailHeader{
+  padding:0 3px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px
+}
+.calendarDetailDate{font-size:19px;font-weight:900}
+.calendarDetailHint{font-size:10px;color:var(--muted)}
+.calendarFoodSummary{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
+.calendarFoodSummary>div{background:var(--ui-card2);border:1px solid var(--line);border-radius:12px;padding:9px}
+.calendarFoodSummary span{display:block;font-size:8px;color:var(--muted)}
+.calendarFoodSummary b{font-size:13px;display:block;margin-top:3px}
+.calendarMealList{display:grid;gap:7px;margin-top:12px}
+.calendarMealRow{
+  display:grid;grid-template-columns:58px 1fr auto;gap:8px;align-items:center;
+  border-top:1px solid var(--line);padding-top:9px
+}
+.calendarMealRow:first-child{border-top:0;padding-top:0}
+.calendarMealName{font-weight:900;font-size:12px}
+.calendarMealMacros{font-size:10px;color:var(--muted)}
+.calendarMealKcal{font-size:11px;font-weight:900}
+.calendarWorkoutCard{padding:17px}
+.calendarWorkoutTitle{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.calendarWorkoutName{font-size:18px;font-weight:900}
+.calendarWorkoutMeta{color:var(--muted);font-size:10px;margin-top:4px}
+.calendarWorkoutCard .historyDetail{border-top:0;padding:14px 0 0;background:transparent}
+.calendarWorkoutCard .workoutAnalysis{margin-top:14px}
+@media(max-width:430px){
+  .macroInputGrid{gap:6px}
+  .macroField{padding:9px 8px 7px}
+  .macroInput{font-size:17px}
+  .calendarFoodSummary{grid-template-columns:1fr 1fr}
+}
+
+
+/* ===== V1.7 training type markers + supplement tracker ===== */
+
+/* Bottom navigation: deliberately flat, no shadow / blur */
+.bottom{
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background:var(--ui-nav) !important;
+}
+.bottom::before,.bottom::after{display:none !important}
+.navBtn{box-shadow:none !important;filter:none !important}
+.navBtn.active{box-shadow:none !important}
+
+/* Calendar training day colors */
+.trainTypeDots{
+  position:absolute;
+  left:50%;
+  bottom:5px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:3px;
+  align-items:center;
+  justify-content:center;
+  max-width:28px;
+}
+.trainTypeDot{
+  width:5px;height:5px;border-radius:999px;display:block;flex:0 0 auto;
+}
+.trainTypeDot.chest,.calendarLegend i.chest{background:#ec7f9e}
+.trainTypeDot.back,.calendarLegend i.back{background:#6f9df4}
+.trainTypeDot.leg,.calendarLegend i.leg{background:#68b58f}
+.trainTypeDot.other,.calendarLegend i.other{background:#a887e8}
+.dayCell{position:relative}
+.calendarLegend{
+  display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+  margin:10px 0 2px;color:var(--muted);font-size:9px;
+}
+.calendarLegend span{display:flex;align-items:center;gap:5px}
+.calendarLegend i{width:6px;height:6px;border-radius:999px;display:block}
+
+/* Supplements / medication */
+.supplementCard{margin-top:14px}
+.supplementTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.supplementSub{font-size:10px;color:var(--muted);margin-top:4px}
+.supplementCount{
+  border:1px solid var(--line);background:var(--ui-card2);border-radius:999px;
+  padding:5px 9px;font-size:10px;color:var(--muted);font-weight:800
+}
+.supplementGrid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px
+}
+.supplementChip{
+  position:relative;
+  min-height:82px;
+  border:1px solid var(--line);
+  background:var(--ui-card2);
+  color:var(--text);
+  border-radius:14px;
+  padding:10px 8px 8px;
+  text-align:center;
+  box-shadow:none !important;
+}
+.supplementChip.active{
+  border-color:var(--text);
+  background:var(--ui-card);
+}
+.supplementChip.medication{
+  border-style:dashed;
+}
+.supplementIcon{
+  width:32px;height:32px;border-radius:10px;
+  display:grid;place-items:center;margin:0 auto 7px;
+  background:var(--ui-card);border:1px solid var(--line);
+  font-size:11px;font-weight:950;letter-spacing:-.3px
+}
+.supplementChip.medication .supplementIcon{
+  background:var(--dangerBg);border-color:var(--dangerLine);color:var(--dangerText)
+}
+.supplementName{
+  display:block;font-size:9px;font-weight:800;line-height:1.25;
+  color:var(--muted)
+}
+.supplementChip.active .supplementName{color:var(--text)}
+.supplementCheck{
+  position:absolute;right:7px;top:6px;font-size:9px;font-weight:900
+}
+.supplementLegend{
+  display:flex;justify-content:space-between;gap:10px;
+  color:var(--muted);font-size:8px;margin-top:9px;padding:0 2px
+}
+.supplementLegend b{font-size:9px}
+
+.calendarSupplements{
+  margin-top:14px;padding-top:12px;border-top:1px solid var(--line)
+}
+.calendarSupplementIcons{
+  display:flex;gap:7px;flex-wrap:wrap
+}
+.calendarSupplementIcons>span{
+  display:flex;align-items:center;gap:5px;
+  border:1px solid var(--line);background:var(--ui-card2);
+  border-radius:999px;padding:5px 8px
+}
+.calendarSupplementIcons>span.medication{
+  border-style:dashed;border-color:var(--dangerLine)
+}
+.calendarSupplementIcons b{font-size:9px}
+.calendarSupplementIcons small{font-size:8px;color:var(--muted)}
+
+@media(max-width:430px){
+  .supplementGrid{grid-template-columns:repeat(3,1fr);gap:6px}
+  .supplementChip{min-height:78px;padding-left:5px;padding-right:5px}
+  .supplementName{font-size:8.5px}
+}
+
 </style>
 </head>
 <body>
@@ -879,11 +1126,15 @@ html[data-theme="dark"] .restClock{
   </div>
 
   <section id="homeView" class="view active">
-    <div class="card hero">
-      <div class="muted">今日状态</div>
-      <div class="statusBig">78</div>
-      <div class="muted">Demo 状态分 · 后续接真实恢复数据</div>
-    </div>
+    <button class="card hero statusHero" onclick="openDailyStatusModal()">
+      <div class="statusHeroTop">
+        <div class="muted">今日状态</div>
+        <div class="statusEditHint">更新 ›</div>
+      </div>
+      <div class="statusBig" id="dailyStatusScore">--</div>
+      <div class="statusLabel" id="dailyStatusLabel">点击录入今天状态</div>
+      <div class="statusSummary" id="dailyStatusSummary">睡眠、静息心率、昨日训练与主观精神状态</div>
+    </button>
 
     <div id="homeStartCard" class="card">
       <div class="sectionTitle" style="margin-top:0"><h3>快速开始</h3></div>
@@ -1014,8 +1265,45 @@ html[data-theme="dark"] .restClock{
   </section>
 
   <section id="trendView" class="view">
-    <div class="sectionTitle" style="margin-top:2px"><h3>最近训练</h3></div>
-    <div id="historyList" class="historyWrap"></div>
+    <div class="foodHeader">
+      <div>
+        <div class="tiny">今日饮食</div>
+        <h3 id="foodDateTitle"></h3>
+      </div>
+      <div class="foodHeaderHint">三大营养素手动记录</div>
+    </div>
+
+    <div id="foodMeals" class="foodMeals"></div>
+
+    <div class="card supplementCard">
+      <div class="supplementTop">
+        <div>
+          <div class="muted">今日补剂 / 药物</div>
+          <div class="supplementSub">点一下记录今天是否摄入</div>
+        </div>
+        <div id="supplementCount" class="supplementCount">0 / 9</div>
+      </div>
+      <div id="supplementGrid" class="supplementGrid"></div>
+      <div class="supplementLegend"><span><b>Rx</b> = 药物</span><span>其余为补剂</span></div>
+    </div>
+
+    <div class="card foodTotalCard">
+      <div class="foodTotalTop">
+        <div>
+          <div class="muted">今日总热量</div>
+          <div class="foodCalories"><span id="foodTotalKcal">0</span> <small>kcal</small></div>
+        </div>
+        <div class="foodFormula">碳水×4 + 蛋白质×4 + 脂肪×9</div>
+      </div>
+      <div class="foodMacroTotals">
+        <div><span>碳水</span><b id="foodTotalCarbs">0 g</b></div>
+        <div><span>蛋白质</span><b id="foodTotalProtein">0 g</b></div>
+        <div><span>脂肪</span><b id="foodTotalFat">0 g</b></div>
+      </div>
+      <div class="tiny foodNote">这里只做记录与汇总，不设置热量或体重目标。</div>
+    </div>
+
+    <div id="historyList" style="display:none"></div>
   </section>
 
   <section id="calendarView" class="view">
@@ -1032,18 +1320,28 @@ html[data-theme="dark"] .restClock{
       </div>
 
       <div id="calGrid" class="calGrid"></div>
-
-      <div class="selectedInfo">
-        <div>
-          <div class="tiny">已选择</div>
-          <div id="selectedDateText" style="font-weight:900;margin-top:3px">尚未选择日期</div>
-        </div>
-        <div id="selectedCount" class="tiny"></div>
+      <div class="calendarLegend">
+        <span><i class="chest"></i>胸</span>
+        <span><i class="back"></i>背</span>
+        <span><i class="leg"></i>腿</span>
+        <span><i class="other"></i>其他</span>
       </div>
 
-      <button class="secondary" style="margin-top:12px" onclick="exportSelectedDate()">导出所选日期 JSON</button>
-      <div class="version">A-OS BODY · V1.3 WHEEL</div>
+      <div id="selectedDateActions" class="selectedDateActions" style="display:none">
+        <button id="calendarFoodBtn" onclick="showCalendarDayPanel('food')">
+          <span class="calendarActionIcon">餐</span>
+          <span><b>饮食记录</b><small>当天摄入与汇总</small></span>
+        </button>
+        <button id="calendarWorkoutBtn" onclick="showCalendarDayPanel('workout')">
+          <span class="calendarActionIcon">练</span>
+          <span><b>训练分析</b><small>当天训练与对比</small></span>
+        </button>
+      </div>
+
+      <div class="version">A-OS BODY · V1.7 TRACK</div>
     </div>
+
+    <div id="calendarDayDetail" class="calendarDayDetail" style="display:none"></div>
   </section>
 </div>
 
@@ -1097,6 +1395,62 @@ html[data-theme="dark"] .restClock{
 </div>
 
 
+
+
+<div id="dailyStatusBackdrop" class="pickerBackdrop" onclick="closeDailyStatusModal()"></div>
+<div id="dailyStatusSheet" class="pickerSheet dailyStatusSheet">
+  <div class="pickerHandle"></div>
+  <div class="pickerTop">
+    <div>
+      <div class="pickerTitle">更新今日状态</div>
+      <div class="pickerSub">约 20 秒 · 数据只保存在本机</div>
+    </div>
+    <button class="pickerClose" onclick="closeDailyStatusModal()">✕</button>
+  </div>
+
+  <div class="dailyStatusForm">
+    <label class="statusField">
+      <span>昨晚睡眠</span>
+      <div class="statusInputWrap"><input id="statusSleepHours" class="statusInput" inputmode="decimal" placeholder="8.0"><b>小时</b></div>
+    </label>
+
+    <label class="statusField">
+      <span>小米睡眠评分</span>
+      <div class="statusInputWrap"><input id="statusSleepScore" class="statusInput" inputmode="numeric" placeholder="85"><b>/100</b></div>
+    </label>
+
+    <label class="statusField">
+      <span>今日静息心率 <em>可选</em></span>
+      <div class="statusInputWrap"><input id="statusRhr" class="statusInput" inputmode="numeric" placeholder="62"><b>bpm</b></div>
+    </label>
+
+    <div class="statusField">
+      <span>昨天训练负荷</span>
+      <div class="statusSegment" id="statusLoadSegment">
+        <button type="button" data-value="none" onclick="pickStatusLoad('none')">无</button>
+        <button type="button" data-value="light" onclick="pickStatusLoad('light')">轻</button>
+        <button type="button" data-value="moderate" onclick="pickStatusLoad('moderate')">中</button>
+        <button type="button" data-value="heavy" onclick="pickStatusLoad('heavy')">重</button>
+      </div>
+    </div>
+
+    <div class="statusField">
+      <span>现在精神状态</span>
+      <div class="statusSegment five" id="statusMoodSegment">
+        <button type="button" data-value="1" onclick="pickStatusMood(1)">1</button>
+        <button type="button" data-value="2" onclick="pickStatusMood(2)">2</button>
+        <button type="button" data-value="3" onclick="pickStatusMood(3)">3</button>
+        <button type="button" data-value="4" onclick="pickStatusMood(4)">4</button>
+        <button type="button" data-value="5" onclick="pickStatusMood(5)">5</button>
+      </div>
+      <div class="statusScaleHint"><span>很疲惫</span><span>精神很好</span></div>
+    </div>
+
+    <div id="statusBaselineNote" class="statusBaselineNote"></div>
+    <button class="primary" onclick="saveDailyStatus()">计算并保存今日状态</button>
+    <div class="statusDisclaimer">状态分用于观察个人趋势，不用于诊断疾病或决定是否必须训练。</div>
+  </div>
+</div>
 
 <div id="templateWheelBackdrop" class="pickerBackdrop" onclick="closeTemplateWheel()"></div>
 <div id="templateWheelSheet" class="templateWheelSheet">
@@ -1171,7 +1525,7 @@ html[data-theme="dark"] .restClock{
 <nav class="bottom">
   <button class="navBtn active" data-view="homeView">首页</button>
   <button class="navBtn" data-view="trainView">训练</button>
-  <button class="navBtn" data-view="trendView">分析</button>
+  <button class="navBtn" data-view="trendView">饮食</button>
   <button class="navBtn" data-view="calendarView">日历</button>
 </nav>
 
@@ -1188,9 +1542,406 @@ const PARTS=Object.keys(LIB);
 const STORE="aos_body_v051_history";
 const ACTIVE_SESSION_STORE="aos_body_active_session_v11";
 const TEMPLATE_STORE="aos_body_templates_v12";
+const DAILY_STATUS_STORE="aos_body_daily_status_v15";
+const NUTRITION_STORE="aos_body_nutrition_v16";
 let selectedTemplateId="none";
 let pendingTemplateId="none";
 const $=id=>document.getElementById(id);
+
+let pendingStatusLoad="none";
+let pendingStatusMood=3;
+
+function localDateKey(d=new Date()){
+  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");
+  return `${y}-${m}-${day}`;
+}
+function getDailyStatuses(){
+  try{return JSON.parse(localStorage.getItem(DAILY_STATUS_STORE)||"{}")}catch{return{}}
+}
+function setDailyStatuses(v){localStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(v))}
+function median(nums){
+  const a=[...nums].sort((x,y)=>x-y);
+  if(!a.length)return null;
+  const mid=Math.floor(a.length/2);
+  return a.length%2?a[mid]:(a[mid-1]+a[mid])/2;
+}
+function previousRhrValues(limit=7){
+  const all=getDailyStatuses();
+  const today=localDateKey();
+  return Object.entries(all)
+    .filter(([k,v])=>k!==today && Number(v.rhr)>0)
+    .sort((a,b)=>b[0].localeCompare(a[0]))
+    .slice(0,limit)
+    .map(([,v])=>Number(v.rhr));
+}
+function sleepDurationScore(h){
+  if(h>=8 && h<=10)return 100;
+  if(h>=7)return 88 + (h-7)*12;
+  if(h>=6)return 75 + (h-6)*13;
+  if(h>=5)return 60 + (h-5)*15;
+  if(h>=4)return 45 + (h-4)*15;
+  if(h<4)return Math.max(20,25+h*5);
+  if(h<=11)return 100-(h-10)*8;
+  return Math.max(65,92-(h-11)*10);
+}
+function rhrRecoveryScore(rhr,baseline){
+  const d=rhr-baseline;
+  if(d<=-3)return 100;
+  if(d<=0)return 96;
+  if(d<=3)return 88;
+  if(d<=6)return 75;
+  if(d<=10)return 60;
+  return 45;
+}
+function statusLabelFor(score){
+  if(score>=85)return "状态很好";
+  if(score>=70)return "状态不错";
+  if(score>=55)return "状态一般";
+  return "今天偏疲劳";
+}
+function calculateDailyStatus(values){
+  const durationScore=Math.max(0,Math.min(100,sleepDurationScore(values.sleepHours)));
+  const sleepScore=Math.max(0,Math.min(100,values.sleepScore));
+  const loadScore={none:100,light:92,moderate:80,heavy:68}[values.load] ?? 80;
+  const moodScore={1:45,2:60,3:75,4:88,5:100}[values.mood] ?? 75;
+
+  const oldRhr=previousRhrValues(7);
+  const baseline=oldRhr.length>=5?median(oldRhr):null;
+  let score,parts;
+
+  if(values.rhr && baseline){
+    const rhrScore=rhrRecoveryScore(values.rhr,baseline);
+    score=durationScore*.30+sleepScore*.25+rhrScore*.20+loadScore*.10+moodScore*.15;
+    parts={durationScore,sleepScore,rhrScore,loadScore,moodScore,baseline};
+  }else{
+    score=durationScore*.35+sleepScore*.30+loadScore*.15+moodScore*.20;
+    parts={durationScore,sleepScore,rhrScore:null,loadScore,moodScore,baseline};
+  }
+  return {score:Math.round(score),parts};
+}
+function pickStatusLoad(v){
+  pendingStatusLoad=v;
+  document.querySelectorAll("#statusLoadSegment button").forEach(b=>b.classList.toggle("active",b.dataset.value===v));
+}
+function pickStatusMood(v){
+  pendingStatusMood=Number(v);
+  document.querySelectorAll("#statusMoodSegment button").forEach(b=>b.classList.toggle("active",Number(b.dataset.value)===Number(v)));
+}
+function updateStatusBaselineNote(){
+  const vals=previousRhrValues(7);
+  const box=$("statusBaselineNote"); if(!box)return;
+  if(vals.length>=5){
+    const base=Math.round(median(vals));
+    box.textContent=`静息心率个人基线约 ${base} bpm（最近 ${vals.length} 次记录中位数）。今天的静息心率会参与评分。`;
+  }else{
+    box.textContent=`静息心率正在建立个人基线：已累计 ${vals.length}/5 次历史记录。基线建立前，静息心率只保存，不参与状态分。`;
+  }
+}
+function openDailyStatusModal(){
+  const today=getDailyStatuses()[localDateKey()];
+  $("statusSleepHours").value=today?.sleepHours ?? "";
+  $("statusSleepScore").value=today?.sleepScore ?? "";
+  $("statusRhr").value=today?.rhr ?? "";
+  pendingStatusLoad=today?.load ?? "none";
+  pendingStatusMood=Number(today?.mood ?? 3);
+  pickStatusLoad(pendingStatusLoad);
+  pickStatusMood(pendingStatusMood);
+  updateStatusBaselineNote();
+  $("dailyStatusBackdrop").classList.add("open");
+  $("dailyStatusSheet").classList.add("open");
+}
+function closeDailyStatusModal(){
+  $("dailyStatusBackdrop").classList.remove("open");
+  $("dailyStatusSheet").classList.remove("open");
+}
+function saveDailyStatus(){
+  const sleepHours=Number($("statusSleepHours").value);
+  const sleepScore=Number($("statusSleepScore").value);
+  const rhrRaw=$("statusRhr").value.trim();
+  const rhr=rhrRaw?Number(rhrRaw):null;
+
+  if(!Number.isFinite(sleepHours)||sleepHours<=0||sleepHours>16){
+    showToast("请填写合理的睡眠时长");return;
+  }
+  if(!Number.isFinite(sleepScore)||sleepScore<0||sleepScore>100){
+    showToast("睡眠评分请填 0–100");return;
+  }
+  if(rhr!==null && (!Number.isFinite(rhr)||rhr<30||rhr>220)){
+    showToast("静息心率数值看起来不对");return;
+  }
+
+  const result=calculateDailyStatus({sleepHours,sleepScore,rhr,load:pendingStatusLoad,mood:pendingStatusMood});
+  const all=getDailyStatuses();
+  all[localDateKey()]={
+    date:new Date().toISOString(),
+    sleepHours,
+    sleepScore,
+    rhr,
+    load:pendingStatusLoad,
+    mood:pendingStatusMood,
+    score:result.score,
+    parts:result.parts
+  };
+  setDailyStatuses(all);
+  closeDailyStatusModal();
+  renderDailyStatus();
+  showToast(`今日状态 ${result.score}`);
+}
+function renderDailyStatus(){
+  const rec=getDailyStatuses()[localDateKey()];
+  if(!rec){
+    $("dailyStatusScore").textContent="--";
+    $("dailyStatusLabel").textContent="点击录入今天状态";
+    $("dailyStatusSummary").textContent="睡眠、静息心率、昨日训练与主观精神状态";
+    return;
+  }
+  $("dailyStatusScore").textContent=rec.score;
+  $("dailyStatusLabel").textContent=statusLabelFor(rec.score);
+  const pieces=[
+    `睡眠 ${Number(rec.sleepHours).toFixed(1)}h`,
+    `睡眠分 ${rec.sleepScore}`,
+    rec.rhr?`静息 ${rec.rhr} bpm`:"静息心率未填",
+    `精神 ${rec.mood}/5`
+  ];
+  $("dailyStatusSummary").textContent=pieces.join(" · ");
+}
+
+
+
+const MEAL_KEYS=[
+  ["breakfast","早餐"],
+  ["lunch","午餐"],
+  ["dinner","晚餐"],
+  ["preworkout","训前"],
+  ["postworkout","训后"],
+  ["other","其他餐"]
+];
+
+const SUPPLEMENT_KEYS=[
+  {id:"multivitamin", icon:"MV", name:"复合维生素", kind:"supplement"},
+  {id:"d3", icon:"D3", name:"维生素 D3", kind:"supplement"},
+  {id:"finasteride", icon:"Rx", name:"非那雄胺", kind:"medication"},
+  {id:"fishoil", icon:"Ω3", name:"鱼油", kind:"supplement"},
+  {id:"curcumin", icon:"Cu", name:"姜黄素", kind:"supplement"},
+  {id:"magnesium", icon:"Mg", name:"甘氨酸镁", kind:"supplement"},
+  {id:"q10", icon:"Q10", name:"辅酶 Q10", kind:"supplement"},
+  {id:"grapeseed", icon:"GP", name:"葡萄籽提取物", kind:"supplement"},
+  {id:"creatine", icon:"Cr", name:"肌酸", kind:"supplement"}
+];
+
+let calendarDayPanel=null;
+
+function blankMeal(){return {carbs:0,protein:0,fat:0}}
+function getNutritionStore(){
+  try{return JSON.parse(localStorage.getItem(NUTRITION_STORE)||"{}")}catch{return{}}
+}
+function setNutritionStore(v){localStorage.setItem(NUTRITION_STORE,JSON.stringify(v))}
+function getNutritionDay(key){
+  const all=getNutritionStore();
+  const saved=all[key]||{};
+  const meals={};
+  for(const [id] of MEAL_KEYS){
+    const m=saved.meals?.[id]||{};
+    meals[id]={
+      carbs:Number(m.carbs)||0,
+      protein:Number(m.protein)||0,
+      fat:Number(m.fat)||0
+    };
+  }
+  const supplements={};
+  for(const item of SUPPLEMENT_KEYS){
+    supplements[item.id]=!!saved.supplements?.[item.id];
+  }
+  return {date:key,meals,supplements};
+}
+function macroKcal(m){return (Number(m.carbs)||0)*4+(Number(m.protein)||0)*4+(Number(m.fat)||0)*9}
+function nutritionTotals(day){
+  let carbs=0,protein=0,fat=0,kcal=0,recorded=0;
+  for(const [id] of MEAL_KEYS){
+    const m=day.meals?.[id]||blankMeal();
+    carbs+=Number(m.carbs)||0; protein+=Number(m.protein)||0; fat+=Number(m.fat)||0;
+    const mk=macroKcal(m); kcal+=mk;
+    if((Number(m.carbs)||0)>0||(Number(m.protein)||0)>0||(Number(m.fat)||0)>0) recorded++;
+  }
+  return {carbs,protein,fat,kcal,recorded};
+}
+function fmtMacro(v){return Number.isInteger(v)?String(v):Number(v).toFixed(1)}
+function renderNutritionView(){
+  if(!$("foodMeals"))return;
+  const key=localDateKey();
+  const day=getNutritionDay(key);
+  $("foodDateTitle").textContent=key;
+
+  $("foodMeals").innerHTML=MEAL_KEYS.map(([id,label])=>{
+    const m=day.meals[id];
+    return `<div class="card foodMealCard">
+      <div class="foodMealTop">
+        <div class="foodMealName">${label}</div>
+        <div class="foodMealKcal" id="mealKcal_${id}">${Math.round(macroKcal(m))} kcal</div>
+      </div>
+      <div class="macroInputGrid">
+        ${nutritionInputHtml(id,"carbs","碳水",m.carbs)}
+        ${nutritionInputHtml(id,"protein","蛋白质",m.protein)}
+        ${nutritionInputHtml(id,"fat","脂肪",m.fat)}
+      </div>
+    </div>`;
+  }).join("");
+  renderSupplementTracker();
+  updateNutritionTotals();
+}
+function nutritionInputHtml(meal,macro,label,value){
+  return `<label class="macroField">
+    <span>${label}</span>
+    <div class="macroInputLine">
+      <input class="macroInput" inputmode="decimal" value="${value?fmtMacro(value):""}"
+        placeholder="0" oninput="updateNutritionValue('${meal}','${macro}',this.value)">
+      <b>g</b>
+    </div>
+  </label>`;
+}
+function updateNutritionValue(meal,macro,value){
+  const key=localDateKey();
+  const all=getNutritionStore();
+  const day=getNutritionDay(key);
+  const n=Math.max(0,Number(value)||0);
+  day.meals[meal][macro]=n;
+  all[key]={date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
+  setNutritionStore(all);
+  const kcalEl=$(`mealKcal_${meal}`);
+  if(kcalEl)kcalEl.textContent=`${Math.round(macroKcal(day.meals[meal]))} kcal`;
+  updateNutritionTotals();
+  if(selectedDateKey===key && calendarDayPanel==="food") renderCalendarDayDetail();
+}
+function updateNutritionTotals(){
+  const t=nutritionTotals(getNutritionDay(localDateKey()));
+  if($("foodTotalKcal"))$("foodTotalKcal").textContent=Math.round(t.kcal);
+  if($("foodTotalCarbs"))$("foodTotalCarbs").textContent=`${fmtMacro(t.carbs)} g`;
+  if($("foodTotalProtein"))$("foodTotalProtein").textContent=`${fmtMacro(t.protein)} g`;
+  if($("foodTotalFat"))$("foodTotalFat").textContent=`${fmtMacro(t.fat)} g`;
+}
+
+function renderSupplementTracker(){
+  if(!$("supplementGrid")) return;
+  const day=getNutritionDay(localDateKey());
+  $("supplementGrid").innerHTML=SUPPLEMENT_KEYS.map(item=>`
+    <button class="supplementChip ${day.supplements[item.id]?"active":""} ${item.kind==="medication"?"medication":""}"
+      onclick="toggleSupplement('${item.id}')">
+      <span class="supplementIcon">${item.icon}</span>
+      <span class="supplementName">${item.name}</span>
+      <span class="supplementCheck">${day.supplements[item.id]?"✓":""}</span>
+    </button>`).join("");
+  const count=Object.values(day.supplements).filter(Boolean).length;
+  if($("supplementCount")) $("supplementCount").textContent=`${count} / ${SUPPLEMENT_KEYS.length}`;
+}
+function toggleSupplement(id){
+  const key=localDateKey();
+  const all=getNutritionStore();
+  const day=getNutritionDay(key);
+  day.supplements[id]=!day.supplements[id];
+  all[key]={date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
+  setNutritionStore(all);
+  renderSupplementTracker();
+  if(selectedDateKey===key && calendarDayPanel==="food") renderCalendarDayDetail();
+}
+
+function showCalendarDayPanel(type){
+  if(!selectedDateKey)return;
+  calendarDayPanel=type;
+  $("calendarFoodBtn")?.classList.toggle("active",type==="food");
+  $("calendarWorkoutBtn")?.classList.toggle("active",type==="workout");
+  renderCalendarDayDetail();
+}
+function calendarFoodHtml(key){
+  const day=getNutritionDay(key),t=nutritionTotals(day);
+  const recordedMeals=MEAL_KEYS.filter(([id])=>macroKcal(day.meals[id])>0);
+  const rows=MEAL_KEYS.map(([id,label])=>{
+    const m=day.meals[id],k=Math.round(macroKcal(m));
+    return `<div class="calendarMealRow">
+      <div class="calendarMealName">${label}</div>
+      <div class="calendarMealMacros">碳水 ${fmtMacro(m.carbs)}g · 蛋白 ${fmtMacro(m.protein)}g · 脂肪 ${fmtMacro(m.fat)}g</div>
+      <div class="calendarMealKcal">${k} kcal</div>
+    </div>`;
+  }).join("");
+  return `<div class="calendarDetailHeader">
+      <div><div class="tiny">饮食记录</div><div class="calendarDetailDate">${key}</div></div>
+      <div class="calendarDetailHint">已记录 ${t.recorded}/6 餐</div>
+    </div>
+    <div class="card">
+      <div class="calendarFoodSummary">
+        <div><span>总热量</span><b>${Math.round(t.kcal)} kcal</b></div>
+        <div><span>碳水</span><b>${fmtMacro(t.carbs)} g</b></div>
+        <div><span>蛋白质</span><b>${fmtMacro(t.protein)} g</b></div>
+        <div><span>脂肪</span><b>${fmtMacro(t.fat)} g</b></div>
+      </div>
+      <div class="calendarMealList">${rows}</div>
+      <div class="calendarSupplements">
+        <div class="tiny" style="margin-bottom:7px">补剂 / 药物</div>
+        <div class="calendarSupplementIcons">
+          ${SUPPLEMENT_KEYS.filter(item=>day.supplements?.[item.id]).map(item=>`
+            <span class="${item.kind==="medication"?"medication":""}" title="${item.name}">
+              <b>${item.icon}</b><small>${item.name}</small>
+            </span>`).join("") || '<div class="tiny">当天暂无补剂或药物记录</div>'}
+        </div>
+      </div>
+      <div class="tiny" style="margin-top:12px;line-height:1.5">${t.recorded?`当天共记录 ${t.recorded} 餐。以上为摄入记录的客观汇总。`:"当天暂无饮食记录。"}</div>
+    </div>`;
+}
+function workoutDetailHtml(w,index,h,ordinal){
+  const exercises=w.exercises||[];
+  const previous=findPreviousSameType(h,index);
+  const detailExercises=exercises.map(e=>{
+    const sets=(e.sets||[]).map((st,si)=>`
+      <div class="setDetail">
+        <div class="setIndex">${si+1}</div>
+        <div><b>${st.weight ?? "-"} kg × ${st.reps ?? "-"} 次</b></div>
+        <div class="setRest">${st.restAfterSec!=null?`休 ${fmtMMSS(st.restAfterSec)}`:"最后一组"}</div>
+      </div>`).join("");
+    return `<div class="detailExercise">
+      <div class="detailExerciseName">${e.name}</div>
+      <div class="detailExerciseMeta">${e.part} · ${e.muscle}</div>
+      ${sets||'<div class="tiny">无组数据</div>'}
+    </div>`;
+  }).join("");
+  return `<div class="card calendarWorkoutCard">
+    <div class="calendarWorkoutTitle">
+      <div>
+        <div class="tiny">当天第 ${ordinal} 次训练</div>
+        <div class="calendarWorkoutName">${exercises.map(e=>e.name).join(" · ")||"训练记录"}</div>
+        <div class="calendarWorkoutMeta">${w.totalSets||0} 组 · ${fmtClock(w.duration||0)} · 休息 ${fmtMMSS(w.totalRest||0)}</div>
+      </div>
+      <div class="dayTypeBadge ${workoutDayType(w).key}">${workoutDayType(w).label}</div>
+    </div>
+    <div class="historyDetail">
+      <div class="sessionOverview">
+        <div class="miniStat"><div class="tiny">部位</div><div class="miniVal">${uniqueParts(w)||"-"}</div></div>
+        <div class="miniStat"><div class="tiny">训练容量</div><div class="miniVal">${Math.round(calcWorkoutVolume(w))}</div></div>
+        <div class="miniStat"><div class="tiny">总休息</div><div class="miniVal">${fmtMMSS(w.totalRest||0)}</div></div>
+      </div>
+      ${detailExercises}
+      <button class="historyEditBtn" onclick="openHistoryEditor(${index})">编辑本次记录</button>
+      ${renderWorkoutAnalysis(w,previous)}
+    </div>
+  </div>`;
+}
+function calendarWorkoutHtml(key){
+  const h=getHistory();
+  const matches=h.map((w,index)=>({w,index})).filter(x=>dateKeyFromDate(new Date(x.w.date))===key);
+  if(!matches.length){
+    return `<div class="calendarDetailHeader">
+      <div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div>
+    </div><div class="card empty">当天没有训练记录</div>`;
+  }
+  return `<div class="calendarDetailHeader">
+    <div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div>
+    <div class="calendarDetailHint">${matches.length} 次训练</div>
+  </div>`+matches.map((x,i)=>workoutDetailHtml(x.w,x.index,h,i+1)).join("");
+}
+function renderCalendarDayDetail(){
+  const box=$("calendarDayDetail");
+  if(!box||!selectedDateKey||!calendarDayPanel){if(box)box.style.display="none";return}
+  box.style.display="grid";
+  box.innerHTML=calendarDayPanel==="food"?calendarFoodHtml(selectedDateKey):calendarWorkoutHtml(selectedDateKey);
+}
 
 const THEME_KEY="aos_body_theme";
 const todayForCalendar=new Date();
@@ -1214,7 +1965,7 @@ function switchView(id){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   $(id).classList.add("active");
   document.querySelectorAll(".navBtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
-  if(id==="trendView") renderHistory();
+  if(id==="trendView") renderNutritionView();
   if(id==="calendarView") renderCalendar();
 }
 document.querySelectorAll(".navBtn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
@@ -2109,6 +2860,7 @@ function renderWorkoutAnalysis(current,previous){
 }
 
 function renderHistory(){
+  if(!$("historyList")) return;
   const h=getHistory();
   if(!h.length){
     $("historyList").innerHTML='<div class="card empty">暂无训练记录</div>';
@@ -2182,6 +2934,17 @@ function workoutsByDateKey(key){
 function trainingDateSet(){
   return new Set(getHistory().map(w=>dateKeyFromDate(new Date(w.date))));
 }
+
+function trainingTypesByDate(){
+  const map={};
+  for(const w of getHistory()){
+    const key=dateKeyFromDate(new Date(w.date));
+    if(!map[key]) map[key]=new Set();
+    map[key].add(workoutDayType(w).key);
+  }
+  return map;
+}
+
 function changeMonth(delta){
   calMonth+=delta;
   if(calMonth<0){calMonth=11;calYear--}
@@ -2190,7 +2953,9 @@ function changeMonth(delta){
 }
 function selectDate(key){
   selectedDateKey=key;
+  calendarDayPanel=null;
   renderCalendar();
+  renderCalendarDayDetail();
 }
 function renderCalendar(){
   if(!$("calGrid")) return;
@@ -2201,6 +2966,7 @@ function renderCalendar(){
   const daysInMonth=last.getDate();
   const prevLast=new Date(calYear,calMonth,0).getDate();
   const marked=trainingDateSet();
+  const typeMap=trainingTypesByDate();
   const todayKey=dateKeyFromDate(new Date());
   let cells=[];
 
@@ -2224,20 +2990,23 @@ function renderCalendar(){
       "dayCell",other?"other":"",key===todayKey?"today":"",key===selectedDateKey?"selected":""
     ].filter(Boolean).join(" ");
 
+    const dayTypes=typeMap[key]?[...typeMap[key]]:[];
+    const typeDots=dayTypes.map(t=>`<span class="trainTypeDot ${t}"></span>`).join("");
     cells.push(`<button class="${classes}" onclick="selectDate('${key}')">
       <div class="dayNum">${day}</div>
-      ${marked.has(key)?'<div class="trainMark"></div>':''}
+      ${dayTypes.length?`<div class="trainTypeDots">${typeDots}</div>`:""}
     </button>`);
   }
   $("calGrid").innerHTML=cells.join("");
 
+  const actions=$("selectedDateActions");
   if(!selectedDateKey){
-    $("selectedDateText").textContent="尚未选择日期";
-    $("selectedCount").textContent="";
+    if(actions) actions.style.display="none";
+    if($("calendarDayDetail")) $("calendarDayDetail").style.display="none";
   }else{
-    $("selectedDateText").textContent=selectedDateKey;
-    const count=workoutsByDateKey(selectedDateKey).length;
-    $("selectedCount").textContent=count?`${count} 次训练`:"无训练记录";
+    if(actions) actions.style.display="grid";
+    $("calendarFoodBtn")?.classList.toggle("active",calendarDayPanel==="food");
+    $("calendarWorkoutBtn")?.classList.toggle("active",calendarDayPanel==="workout");
   }
 }
 function exportSelectedDate(){
@@ -2266,7 +3035,7 @@ document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="hidden") persistActiveSession();
 });
 
-renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();
+renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();renderDailyStatus();renderNutritionView();
 if($("templateWheel")){
   $("templateWheel").addEventListener("scroll",()=>{
     clearTimeout(window.__wheelTimer);
