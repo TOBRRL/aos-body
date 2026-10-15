@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>A-OS Body V1.3</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="A-OS Body">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<style>
+:root{
+  --bg:#08101d; --bg2:#0f172a; --card:#111827; --text:#f8fafc;
+  --muted:#94a3b8; --line:#2b394f; --accent:#e2e8f0;
+  --warn:#fde68a; --warnText:#78350f;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(180deg,#0f172a,#0b1220 42%,#08101d);
+  color:var(--text);min-height:100vh
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:760px;margin:auto;padding:16px 14px 98px}
+.top{display:flex;justify-content:space-between;align-items:center;margin:4px 0 14px}
+.brand{font-size:22px;font-weight:900}
+.badge{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:5px 9px;border-radius:999px}
+.card{
+  background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(13,21,34,.98));
+  border:1px solid var(--line);border-radius:20px;padding:16px
+}
+.hero{padding:18px;margin-bottom:12px}
+.muted{color:var(--muted);font-size:13px}
+.tiny{color:var(--muted);font-size:11px}
+.primary,.secondary,.danger{
+  width:100%;border-radius:14px;padding:13px 14px;font-weight:800
+}
+.primary{background:var(--accent);color:#0f172a;border:none}
+.secondary{background:#0a1322;color:var(--text);border:1px solid var(--line)}
+.danger{background:#24151a;color:#fecdd3;border:1px solid #4c1d2d}
+.sectionTitle{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 10px}
+.sectionTitle h3{margin:0;font-size:16px}
+.statusBig{font-size:46px;font-weight:900;margin:6px 0}
+.homeTrainingClock{font-size:40px;font-weight:900;margin:8px 0 4px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{padding:14px}.statVal{font-size:24px;font-weight:900;margin-top:5px}
+.view{display:none}.view.active{display:block}
+
+.partLine{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.partName{font-size:15px;font-weight:800}
+.progressPill{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px}
+.currentExercise{padding:18px}
+.exerciseName{font-size:26px;font-weight:900;margin:4px 0}
+.exerciseMeta{color:var(--muted);font-size:12px}
+.flags{
+  min-height:14px;
+  display:flex;
+  gap:1px;
+  flex-wrap:wrap;
+  margin-top:6px;
+  align-items:center;
+}
+.flag{
+  font-size:12px;
+  line-height:1;
+}
+.setArea{transition:.2s}
+.setArea.hidden{display:none}
+.setLabel{text-align:center;color:var(--muted);font-size:12px;margin:24px 0 10px}
+.setEditor{display:grid;grid-template-columns:1fr 34px 1fr;gap:10px;align-items:center}
+.bigInput{
+  width:100%;background:#09111f;color:var(--text);border:1px solid var(--line);
+  border-radius:16px;padding:18px 12px;text-align:center;font-size:28px;font-weight:900
+}
+.x{text-align:center;color:var(--muted);font-size:24px}
+.unit{text-align:center;color:var(--muted);font-size:11px;margin-top:5px}
+.completeBtn{margin-top:14px;padding:16px;font-size:17px}
+
+/* rest mode */
+.restBox{
+  margin-top:24px;text-align:center;padding:20px 16px;border:1px solid var(--line);
+  border-radius:20px;background:#0b1424
+}
+.restBox.expired{
+  border-color:#8a6a19;
+  box-shadow:0 0 0 1px rgba(253,230,138,.08),0 0 26px rgba(253,230,138,.06)
+}
+.restLabel{color:var(--muted);font-size:13px}
+.restClock{font-size:64px;font-weight:900;line-height:1;margin:12px 0}
+.restTarget{color:var(--muted);font-size:12px}
+.overtime{
+  display:none;margin:12px auto 0;padding:9px 12px;border-radius:999px;
+  background:rgba(253,230,138,.12);color:var(--warn);font-size:13px;font-weight:800;width:max-content
+}
+.restBtns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.endRestBtn{display:none;margin-top:14px;padding:16px;font-size:17px;background:var(--warn);color:var(--warnText);border:none;border-radius:14px;font-weight:900}
+.pulse{animation:pulse .9s ease-in-out 3}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+
+.navExercise{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.drawerHandle{
+  margin-top:14px;padding:12px;border-radius:14px;background:#0b1424;border:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center
+}
+.drawer{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:-100%;width:min(760px,100%);
+  background:#0b1220;border:1px solid var(--line);border-radius:24px 24px 0 0;
+  padding:14px 14px 28px;transition:.28s;z-index:30;max-height:75vh;overflow:auto;
+  box-shadow:0 -18px 60px rgba(0,0,0,.45)
+}
+.drawer.open{bottom:0}
+.drawerTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.exerciseRow{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:12px;border-bottom:1px solid rgba(43,57,79,.75)
+}
+.exerciseRow.active{background:#111c2f;border-radius:14px}
+.rowTitle{font-weight:800}.rowMeta{color:var(--muted);font-size:11px;margin-top:3px}
+.rowFlags{font-size:12px;white-space:nowrap;max-width:44%;overflow:hidden;text-overflow:ellipsis}
+
+.chips{display:flex;gap:8px;overflow:auto;padding:2px 0 4px;scrollbar-width:none}
+.chip{
+  flex:0 0 auto;border:1px solid var(--line);background:#0d1626;color:var(--muted);
+  padding:9px 13px;border-radius:999px;font-weight:700
+}
+.chip.active{background:var(--accent);color:#0f172a;border-color:var(--accent)}
+.formRow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+select{
+  width:100%;background:#0a1322;color:var(--text);border:1px solid var(--line);
+  border-radius:12px;padding:12px
+}
+.bottom{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:10px;width:min(730px,calc(100% - 18px));
+  display:grid;grid-template-columns:repeat(4,1fr);background:rgba(10,18,32,.96);
+  border:1px solid var(--line);border-radius:18px;padding:7px;backdrop-filter:blur(12px);z-index:20
+}
+.navBtn{border:none;background:transparent;color:var(--muted);padding:8px 4px;font-size:12px;border-radius:12px}
+.navBtn.active{background:#172235;color:var(--text);font-weight:800}
+.historyWrap{display:grid;gap:12px}
+.historyCard{background:linear-gradient(180deg,rgba(17,24,39,.97),rgba(13,21,34,.98));border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.historyCard summary{list-style:none;padding:18px;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.historyCard summary::-webkit-details-marker{display:none}
+.historyDate{font-size:18px;font-weight:900}
+.historyExercises{font-size:12px;color:var(--muted);margin-top:5px}
+.historyRight{text-align:right}
+.historySets{font-size:18px}
+.historyMeta{font-size:11px;color:var(--muted);margin-top:4px}
+.expandHint{display:inline-block;color:var(--muted);font-size:16px;transition:.2s;margin-left:4px}
+details[open] .expandHint{transform:rotate(180deg)}
+.historyDetail{border-top:1px solid var(--line);padding:16px 18px 18px;background:rgba(5,12,23,.34)}
+.sessionOverview{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.miniStat{background:#0a1322;border:1px solid var(--line);border-radius:13px;padding:10px}
+.miniVal{font-size:15px;font-weight:900;margin-top:4px}
+.detailExercise{padding:14px 0;border-top:1px solid rgba(43,57,79,.7)}
+.detailExercise:first-of-type{border-top:none}
+.detailExerciseName{font-weight:900;font-size:16px}
+.detailExerciseMeta{font-size:11px;color:var(--muted);margin-top:3px;margin-bottom:8px}
+.setDetail{display:grid;grid-template-columns:38px 1fr auto;gap:8px;align-items:center;padding:7px 0;font-size:13px}
+.setIndex{width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;color:var(--muted)}
+.setRest{font-size:11px;color:var(--muted);text-align:right}
+.empty{text-align:center;padding:28px 8px;color:var(--muted)}
+@media(max-width:480px){
+  .restClock{font-size:58px}.exerciseName{font-size:24px}
+  .flag{font-size:12px}
+}
+
+/* ===== V0.7 theme + calendar ===== */
+:root{
+  --ui-card:#111827; --ui-card2:#0a1322; --ui-nav:rgba(10,18,32,.96);
+  --ui-accentText:#0f172a; --ui-selected:#dbeafe; --ui-selectedText:#1e3a8a;
+}
+html[data-theme="light"]{
+  --bg:#eef3f8; --bg2:#f7f9fc; --card:#ffffff; --text:#172033;
+  --muted:#6b778c; --line:#d6deea; --accent:#172033;
+  --ui-card:#ffffff; --ui-card2:#f3f6fa; --ui-nav:rgba(255,255,255,.96);
+  --ui-accentText:#ffffff; --ui-selected:#172033; --ui-selectedText:#ffffff;
+}
+body{
+  background:linear-gradient(180deg,var(--bg2),var(--bg) 42%,var(--bg));
+  transition:background .2s,color .2s;
+}
+.card,.historyCard{background:var(--ui-card)}
+.secondary,.bigInput,select,.chip,.drawerHandle,.miniStat{background:var(--ui-card2)}
+.primary,.chip.active{color:var(--ui-accentText)}
+.drawer{background:var(--bg2)}
+.exerciseRow.active{background:var(--ui-card)}
+.historyDetail{background:var(--ui-card2)}
+.bottom{background:var(--ui-nav)}
+.navBtn.active{background:var(--ui-card);color:var(--text)}
+.themeBtn{
+  width:38px;height:38px;border-radius:999px;border:1px solid var(--line);
+  background:var(--ui-card);color:var(--text);display:grid;place-items:center;
+  font-size:18px;padding:0
+}
+.calendarCard{padding:18px}
+.calHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.calTitle{font-size:20px;font-weight:900}
+.calNav{
+  width:36px;height:36px;border-radius:11px;border:1px solid var(--line);
+  background:var(--ui-card2);color:var(--text);display:grid;place-items:center;font-size:18px
+}
+.weekRow,.calGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.weekCell{text-align:center;color:var(--muted);font-size:11px;padding:6px 0}
+.dayCell{
+  min-height:52px;border-radius:14px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:4px;position:relative;border:1px solid transparent;
+  color:var(--text);background:transparent
+}
+.dayCell.other{opacity:.26}
+.dayCell.today{border-color:var(--line)}
+.dayCell.selected{background:var(--ui-selected);color:var(--ui-selectedText);border-color:var(--ui-selected)}
+.dayNum{font-weight:800;font-size:14px}
+.trainMark{width:6px;height:6px;border-radius:999px;background:#f59e0b}
+.dayCell.selected .trainMark{background:currentColor}
+.selectedInfo{
+  margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--ui-card2);
+  border:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;align-items:center
+}
+.version{
+  text-align:right;margin-top:28px;padding-right:4px;color:var(--muted);
+  font-size:10px;letter-spacing:.5px;opacity:.75
+}
+
+
+/* ===== V0.8 custom picker ===== */
+.pickerRow{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.pickerField{
+  width:100%;
+  min-height:70px;
+  border-radius:15px;
+  border:1px solid var(--line);
+  background:var(--ui-card2);
+  color:var(--text);
+  padding:12px 13px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  text-align:left;
+}
+.pickerField:active{transform:scale(.985)}
+.pickerLabel{
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:5px;
+  font-weight:600;
+}
+.pickerValue{
+  font-size:14px;
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:150px;
+}
+.pickerChevron{
+  color:var(--muted);
+  font-size:23px;
+  line-height:1;
+}
+.addActionBtn{margin-top:10px}
+
+.pickerBackdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.48);
+  opacity:0;
+  pointer-events:none;
+  transition:.22s;
+  z-index:39;
+  backdrop-filter:blur(2px);
+}
+.pickerBackdrop.open{
+  opacity:1;
+  pointer-events:auto;
+}
+.pickerSheet{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%) translateY(110%);
+  bottom:0;
+  width:min(760px,100%);
+  max-height:76vh;
+  overflow:hidden;
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-bottom:none;
+  border-radius:26px 26px 0 0;
+  box-shadow:0 -22px 70px rgba(0,0,0,.35);
+  z-index:40;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1);
+  padding:9px 14px 22px;
+}
+.pickerSheet.open{
+  transform:translateX(-50%) translateY(0);
+}
+.pickerHandle{
+  width:38px;
+  height:4px;
+  background:var(--line);
+  border-radius:999px;
+  margin:2px auto 13px;
+}
+.pickerTop{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 4px 11px;
+}
+.pickerTitle{
+  font-size:19px;
+  font-weight:900;
+}
+.pickerSub{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+.pickerClose{
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  border:1px solid var(--line);
+  background:var(--ui-card2);
+  color:var(--muted);
+  display:grid;
+  place-items:center;
+}
+.pickerContent{
+  overflow:auto;
+  max-height:calc(76vh - 88px);
+  padding:1px 2px 14px;
+}
+.pickerGroup{
+  margin:8px 0 16px;
+}
+.pickerGroupTitle{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  padding:0 5px 7px;
+  letter-spacing:.5px;
+}
+.pickerOptions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.pickerOption{
+  min-height:52px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background:var(--ui-card);
+  color:var(--text);
+  padding:11px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  text-align:left;
+  font-weight:750;
+}
+.pickerOption.active{
+  background:var(--accent);
+  color:var(--ui-accentText);
+  border-color:var(--accent);
+}
+.pickerOptionCheck{
+  font-size:14px;
+  opacity:.9;
+}
+.pickerOptionMeta{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+  font-weight:500;
+}
+.pickerOption.active .pickerOptionMeta{
+  color:inherit;
+  opacity:.72;
+}
+body.pickerLocked{overflow:hidden}
+
+@media(max-width:420px){
+  .pickerValue{max-width:118px}
+  .pickerOptions{grid-template-columns:1fr}
+}
+
+
+/* ===== V0.9 compact add-action + analysis ===== */
+:root{
+  --dangerBg:#3a151c;
+  --dangerText:#ffd7de;
+  --dangerLine:#773041;
+}
+html[data-theme="light"]{
+  --dangerBg:#fff0f2;
+  --dangerText:#b4233d;
+  --dangerLine:#ef9baa;
+}
+.danger{
+  background:var(--dangerBg);
+  color:var(--dangerText);
+  border:1px solid var(--dangerLine);
+}
+.finishTrainingBtn{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+}
+.trainingControlCard{
+  padding:12px;
+}
+.addExercisePanel{
+  margin-top:18px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--ui-card);
+}
+.addExerciseToggle{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:900;
+  text-align:left;
+}
+.addExerciseChevron{
+  color:var(--muted);
+  transition:transform .2s;
+  font-size:18px;
+}
+.addExercisePanel.open .addExerciseChevron{
+  transform:rotate(180deg);
+}
+.addExerciseBody{
+  display:none;
+  padding:0 14px 14px;
+  border-top:1px solid transparent;
+}
+.addExercisePanel.open .addExerciseBody{
+  display:block;
+  border-top-color:var(--line);
+  padding-top:14px;
+}
+
+/* workout type badge */
+.historySummaryRight{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:9px;
+}
+.dayTypeBadge{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  flex:0 0 34px;
+  font-size:13px;
+  font-weight:900;
+  border:1px solid rgba(255,255,255,.08);
+}
+.dayTypeBadge.other{
+  font-size:10px;
+}
+.dayTypeBadge.chest{
+  background:rgba(244,114,182,.16);
+  color:#f9a8d4;
+}
+.dayTypeBadge.back{
+  background:rgba(96,165,250,.16);
+  color:#93c5fd;
+}
+.dayTypeBadge.leg{
+  background:rgba(52,211,153,.16);
+  color:#6ee7b7;
+}
+.dayTypeBadge.other{
+  background:rgba(167,139,250,.16);
+  color:#c4b5fd;
+}
+html[data-theme="light"] .dayTypeBadge.chest{
+  background:#fce7f3;color:#be185d;border-color:#fbcfe8;
+}
+html[data-theme="light"] .dayTypeBadge.back{
+  background:#dbeafe;color:#1d4ed8;border-color:#bfdbfe;
+}
+html[data-theme="light"] .dayTypeBadge.leg{
+  background:#d1fae5;color:#047857;border-color:#a7f3d0;
+}
+html[data-theme="light"] .dayTypeBadge.other{
+  background:#ede9fe;color:#6d28d9;border-color:#ddd6fe;
+}
+
+/* analysis box */
+.workoutAnalysis{
+  margin-top:15px;
+  padding-top:15px;
+  border-top:1px solid var(--line);
+}
+.analysisTitle{
+  font-size:13px;
+  font-weight:900;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.analysisTitle .analysisBadgeMini{
+  width:22px;height:22px;border-radius:7px;
+  display:grid;place-items:center;font-size:10px;
+  background:var(--ui-card);border:1px solid var(--line);
+}
+.analysisGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.analysisMetric{
+  background:var(--ui-card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:10px;
+}
+.analysisMetricLabel{
+  color:var(--muted);
+  font-size:10px;
+}
+.analysisMetricValue{
+  font-size:16px;
+  font-weight:900;
+  margin-top:4px;
+}
+.analysisMetricSub{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+.analysisNote{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  background:var(--ui-card);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:11px 12px;
+}
+.metricUp{color:#22c55e}
+.metricDown{color:#ef4444}
+.metricFlat{color:var(--text)}
+@media(max-width:430px){
+  .analysisGrid{grid-template-columns:1fr}
+}
+
+
+.appModalBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.52);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:.22s;z-index:60}
+.appModalBackdrop.open{opacity:1;pointer-events:auto}
+.appModal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%) scale(.97);width:min(430px,calc(100% - 34px));background:var(--ui-card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 24px 80px rgba(0,0,0,.35);z-index:61;opacity:0;pointer-events:none;transition:.22s}
+.appModal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.appModalIcon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--dangerBg);color:var(--dangerText);border:1px solid var(--dangerLine);font-weight:900;margin-bottom:14px}
+.appModalTitle{font-size:21px;font-weight:900;margin-bottom:9px}
+.appModalText{color:var(--muted);font-size:13px;line-height:1.65}
+.appModalActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.appModalCancel,.appModalConfirm{min-height:46px;border-radius:14px;font-weight:900}
+.appModalCancel{background:var(--ui-card2);color:var(--text);border:1px solid var(--line)}
+.appModalConfirm{background:var(--dangerBg);color:var(--dangerText);border:1px solid var(--dangerLine)}
+.historyCard summary{grid-template-columns:auto 1fr auto;gap:12px}
+.historySummaryBadge{align-self:center}
+.historySummaryRight{display:block}
+
+
+/* ===== V1.1 field-test reliability ===== */
+.flagsLine{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;
+}
+.flagsLine .flags{margin-top:0}
+.tinyActionBtn,.undoSetBtn{
+  border:0;background:transparent;color:var(--muted);font-size:11px;padding:6px 4px;
+}
+.undoSetBtn{width:100%;margin-top:9px}
+.tinyActionBtn:active,.undoSetBtn:active{opacity:.6}
+
+.appModalBackdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.52);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:.2s;z-index:70
+}
+.appModalBackdrop.open{opacity:1;pointer-events:auto}
+.appModal{
+  position:fixed;left:50%;top:50%;transform:translate(-50%,-46%) scale(.97);
+  width:min(430px,calc(100% - 34px));background:var(--ui-card);
+  border:1px solid var(--line);border-radius:24px;padding:22px;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);z-index:71;
+  opacity:0;pointer-events:none;transition:.2s
+}
+.appModal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.appModalIcon{
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+  background:var(--dangerBg);color:var(--dangerText);border:1px solid var(--dangerLine);
+  font-weight:900;margin-bottom:14px
+}
+.restoreIcon{
+  background:var(--ui-card2);color:var(--text);border-color:var(--line)
+}
+.appModalTitle{font-size:21px;font-weight:900;margin-bottom:9px}
+.appModalText{color:var(--muted);font-size:13px;line-height:1.65}
+.appModalActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.appModalCancel,.appModalConfirm,.appModalResume{
+  min-height:46px;border-radius:14px;font-weight:900
+}
+.appModalCancel{background:var(--ui-card2);color:var(--text);border:1px solid var(--line)}
+.appModalConfirm{background:var(--dangerBg);color:var(--dangerText);border:1px solid var(--dangerLine)}
+.appModalResume{background:var(--accent);color:var(--ui-accentText);border:1px solid var(--accent)}
+
+.setEditRow{
+  display:grid;grid-template-columns:36px 1fr 22px 1fr 42px;gap:8px;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--line)
+}
+.setEditIndex{
+  width:32px;height:32px;border-radius:10px;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--muted);font-weight:800
+}
+.setEditInput{
+  width:100%;min-width:0;border:1px solid var(--line);background:var(--ui-card2);
+  color:var(--text);border-radius:11px;padding:10px 8px;text-align:center;font-weight:800
+}
+.setEditX{text-align:center;color:var(--muted)}
+.setDeleteBtn{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--dangerLine);
+  background:var(--dangerBg);color:var(--dangerText)
+}
+.editorEmpty{padding:30px 10px;text-align:center;color:var(--muted)}
+.editorHint{font-size:10px;color:var(--muted);padding-top:10px;line-height:1.5}
+
+
+/* ===== V1.2 field enhancements ===== */
+.restClock{
+  color:var(--text) !important;
+  opacity:1 !important;
+  text-shadow:none;
+}
+html[data-theme="light"] .restBox{
+  background:#ffffff;
+}
+html[data-theme="light"] .restClock{
+  color:#172033 !important;
+}
+html[data-theme="dark"] .restClock{
+  color:#f8fafc !important;
+}
+
+.templateList{display:grid;gap:9px;margin-bottom:4px}
+.templateEmpty{
+  border:1px dashed var(--line);border-radius:16px;padding:16px;text-align:center;color:var(--muted);font-size:12px
+}
+.templateCard{
+  border:1px solid var(--line);background:var(--ui-card);border-radius:17px;padding:13px 14px;
+  display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center
+}
+.templateName{font-weight:900;font-size:15px}
+.templateMeta{font-size:11px;color:var(--muted);margin-top:4px}
+.templateActions{display:flex;gap:7px;align-items:center}
+.templateStart{
+  border:1px solid var(--line);background:var(--ui-card2);color:var(--text);
+  border-radius:11px;padding:8px 11px;font-weight:800;font-size:12px
+}
+.templateDelete{
+  width:32px;height:32px;border-radius:10px;border:1px solid var(--line);
+  background:transparent;color:var(--muted)
+}
+.templateIcon{background:var(--ui-card2);color:var(--text);border-color:var(--line)}
+.modalTextInput{
+  width:100%;margin-top:14px;background:var(--ui-card2);color:var(--text);border:1px solid var(--line);
+  border-radius:13px;padding:12px 13px;outline:none
+}
+
+.historyEditBtn{
+  width:100%;margin:13px 0 2px;border:1px solid var(--line);background:var(--ui-card);
+  color:var(--text);border-radius:12px;padding:10px 12px;font-weight:800;font-size:12px
+}
+.historyEditorBlock{padding:12px 0;border-bottom:1px solid var(--line)}
+.historyEditorBlock:last-child{border-bottom:0}
+.historyEditorTitle{font-weight:900;margin-bottom:3px}
+.historyEditorMeta{font-size:10px;color:var(--muted);margin-bottom:8px}
+.historyEditorRow{
+  display:grid;grid-template-columns:32px 1fr 20px 1fr 38px;gap:7px;align-items:center;padding:7px 0
+}
+.historyEditorIndex{
+  width:29px;height:29px;border-radius:9px;border:1px solid var(--line);
+  display:grid;place-items:center;color:var(--muted);font-size:11px
+}
+.historyEditorInput{
+  width:100%;min-width:0;border:1px solid var(--line);background:var(--ui-card2);
+  color:var(--text);border-radius:10px;padding:9px 7px;text-align:center;font-weight:800
+}
+.historyDeleteSet{
+  width:34px;height:34px;border:1px solid var(--dangerLine);background:var(--dangerBg);
+  color:var(--dangerText);border-radius:10px
+}
+
+.toast{
+  position:fixed;left:50%;bottom:92px;transform:translate(-50%,18px);
+  background:var(--text);color:var(--bg2);padding:10px 14px;border-radius:999px;
+  font-size:12px;font-weight:800;z-index:100;opacity:0;pointer-events:none;
+  transition:.22s;white-space:nowrap;max-width:calc(100% - 32px);overflow:hidden;text-overflow:ellipsis
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+
+/* ===== V1.3 compact template wheel ===== */
+.quickTemplatePicker{
+  width:100%;
+  min-height:60px;
+  border:1px solid var(--line);
+  background:var(--ui-card2);
+  color:var(--text);
+  border-radius:15px;
+  padding:11px 13px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  text-align:left;
+}
+.quickTemplateLabel{
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:4px;
+}
+.quickTemplateValue{
+  font-size:15px;
+  font-weight:900;
+}
+.quickTemplateArrow{
+  color:var(--muted);
+  font-size:24px;
+  line-height:1;
+}
+.saveTemplateInlineBtn{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:11px;
+  padding:11px 6px 1px;
+  font-weight:700;
+}
+.finishOnlyCard{
+  margin-top:18px;
+  padding:12px;
+}
+
+.templateWheelSheet{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%) translateY(110%);
+  width:min(760px,100%);
+  background:var(--bg2);
+  border:1px solid var(--line);
+  border-bottom:none;
+  border-radius:26px 26px 0 0;
+  padding:9px 14px 24px;
+  box-shadow:0 -22px 70px rgba(0,0,0,.32);
+  z-index:52;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1);
+}
+.templateWheelSheet.open{
+  transform:translateX(-50%) translateY(0);
+}
+.templateWheelTop{
+  display:grid;
+  grid-template-columns:70px 1fr 70px;
+  align-items:center;
+  padding:0 2px 8px;
+}
+.templateWheelTitle{
+  text-align:center;
+  font-weight:900;
+  font-size:17px;
+}
+.wheelTextBtn{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:9px 4px;
+  font-size:13px;
+}
+.wheelConfirmBtn{
+  color:var(--text);
+  font-weight:900;
+  text-align:right;
+}
+.wheelViewport{
+  position:relative;
+  height:220px;
+  overflow:hidden;
+  margin-top:2px;
+}
+.templateWheel{
+  height:100%;
+  overflow-y:auto;
+  scroll-snap-type:y mandatory;
+  scrollbar-width:none;
+  padding:84px 0;
+}
+.templateWheel::-webkit-scrollbar{display:none}
+.wheelItem{
+  height:52px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  scroll-snap-align:center;
+  color:var(--muted);
+  font-size:17px;
+  font-weight:700;
+  transition:transform .12s,color .12s,opacity .12s;
+}
+.wheelItem.active{
+  color:var(--text);
+  font-size:20px;
+  font-weight:900;
+}
+.wheelSelection{
+  pointer-events:none;
+  position:absolute;
+  top:50%;
+  left:14px;
+  right:14px;
+  height:52px;
+  transform:translateY(-50%);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  border-radius:10px;
+  background:rgba(127,127,127,.035);
+}
+.wheelFade{
+  position:absolute;
+  left:0;right:0;
+  height:70px;
+  z-index:2;
+  pointer-events:none;
+}
+.wheelFadeTop{
+  top:0;
+  background:linear-gradient(var(--bg2),rgba(0,0,0,0));
+}
+.wheelFadeBottom{
+  bottom:0;
+  background:linear-gradient(rgba(0,0,0,0),var(--bg2));
+}
+.wheelHint{
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:8px;
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand">A-OS BODY</div>
+    <button id="themeBtn" class="themeBtn" aria-label="切换日夜模式">☀️</button>
+  </div>
+
+  <section id="homeView" class="view active">
+    <div class="card hero">
+      <div class="muted">今日状态</div>
+      <div class="statusBig">78</div>
+      <div class="muted">Demo 状态分 · 后续接真实恢复数据</div>
+    </div>
+
+    <div id="homeStartCard" class="card">
+      <div class="sectionTitle" style="margin-top:0"><h3>快速开始</h3></div>
+
+      <button class="quickTemplatePicker" onclick="openTemplateWheel()">
+        <div>
+          <div class="quickTemplateLabel">训练模板</div>
+          <div class="quickTemplateValue" id="quickTemplateValue">无</div>
+        </div>
+        <div class="quickTemplateArrow">›</div>
+      </button>
+
+      <button class="primary" style="margin-top:10px" onclick="startSelectedTraining()">开始今天的训练</button>
+    </div>
+
+    <div id="homeActiveCard" class="card" style="display:none">
+      <div class="muted">训练进行中</div>
+      <div class="homeTrainingClock" id="homeClock">00:00:00</div>
+      <div class="tiny" id="homeProgress">完成 0 组</div>
+      <button class="primary" style="margin-top:14px" onclick="switchView('trainView')">返回训练</button>
+    </div>
+
+    <div class="sectionTitle"><h3>本周概览</h3></div>
+    <div class="stats">
+      <div class="card stat"><div class="muted">训练</div><div class="statVal" id="weekSessions">0</div><div class="tiny">次</div></div>
+      <div class="card stat"><div class="muted">完成组</div><div class="statVal" id="weekSets">0</div><div class="tiny">组</div></div>
+      <div class="card stat"><div class="muted">容量</div><div class="statVal" id="weekVolume">0</div><div class="tiny">kg·次</div></div>
+    </div>
+  </section>
+
+  <section id="trainView" class="view">
+    <div class="partLine">
+      <div class="partName" id="sessionParts">胸</div>
+      <div class="progressPill" id="exerciseProgress">0 / 0 动作</div>
+    </div>
+
+    <div id="noExerciseCard" class="card">
+      <div class="empty">还没有动作。先添加今天的第一个训练动作。</div>
+    </div>
+
+    <div id="focusCard" class="card currentExercise" style="display:none">
+      <div class="muted">当前动作</div>
+      <div class="exerciseName" id="currentExerciseName">杠铃卧推</div>
+      <div class="exerciseMeta" id="currentExerciseMeta">胸 · 胸整体</div>
+      <div class="flagsLine">
+        <div id="flags" class="flags"></div>
+        <button id="editSetsBtn" class="tinyActionBtn" style="display:none" onclick="openSetEditor()">编辑组</button>
+      </div>
+
+      <div id="setArea" class="setArea">
+        <div class="setLabel" id="setLabel">当前第 1 组</div>
+        <div class="setEditor">
+          <div>
+            <input id="weightInput" class="bigInput" inputmode="decimal" placeholder="kg">
+            <div class="unit">kg</div>
+          </div>
+          <div class="x">×</div>
+          <div>
+            <input id="repsInput" class="bigInput" inputmode="numeric" placeholder="次">
+            <div class="unit">次</div>
+          </div>
+        </div>
+        <button class="primary completeBtn" onclick="completeSet()">✓ 完成本组</button>
+      </div>
+
+      <div id="restBox" class="restBox" style="display:none">
+        <div class="restLabel" id="restLabel">组间休息</div>
+        <div class="restClock" id="restClock">02:00</div>
+        <div class="restTarget" id="restTarget">目标 02:00 · 完成本组后自动开始</div>
+        <div class="overtime" id="overtimeBadge">已超目标 +00:00</div>
+
+        <div id="preZeroBtns" class="restBtns">
+          <button class="secondary" onclick="addRest(30)">+30秒</button>
+          <button class="secondary" onclick="endRest(true)">跳过休息</button>
+        </div>
+
+        <button id="endRestBtn" class="endRestBtn" onclick="endRest(false)">结束休息 · 进入下一组</button>
+      </div>
+
+      <div id="exerciseNav" class="navExercise">
+        <button class="secondary" onclick="prevExercise()">← 上一动作</button>
+        <button class="secondary" onclick="nextExercise()">下一动作 →</button>
+      </div>
+
+      <button class="drawerHandle secondary" onclick="openDrawer()">
+        <span>☰ 本次训练动作</span><span id="drawerProgress">0 / 0</span>
+      </button>
+    </div>
+
+    <div id="addExercisePanel" class="addExercisePanel">
+      <button class="addExerciseToggle" onclick="toggleAddExercisePanel()">
+        <span>＋ 添加动作</span>
+        <span id="addExerciseChevron" class="addExerciseChevron">⌄</span>
+      </button>
+
+      <div id="addExerciseBody" class="addExerciseBody">
+        <div class="chips" id="partChips"></div>
+
+        <div class="pickerRow" style="margin-top:10px">
+          <button class="pickerField" onclick="openPicker('muscle')">
+            <div>
+              <div class="pickerLabel">目标肌群</div>
+              <div class="pickerValue" id="muscleDisplay">请选择</div>
+            </div>
+            <div class="pickerChevron">›</div>
+          </button>
+
+          <button class="pickerField" onclick="openPicker('exercise')">
+            <div>
+              <div class="pickerLabel">训练动作</div>
+              <div class="pickerValue" id="exerciseDisplay">请选择</div>
+            </div>
+            <div class="pickerChevron">›</div>
+          </button>
+        </div>
+
+        <select id="muscleSelect" style="display:none"></select>
+        <select id="exerciseSelect" style="display:none"></select>
+
+        <button class="secondary addActionBtn" onclick="addExercise()">添加到本次训练</button>
+        <button class="saveTemplateInlineBtn" onclick="openTemplateSaveModal()">保存当前动作为模板</button>
+      </div>
+    </div>
+
+    <div class="card trainingControlCard finishOnlyCard">
+      <button class="danger finishTrainingBtn" onclick="requestFinishSession()">结束今天的训练</button>
+    </div>
+  </section>
+
+  <section id="trendView" class="view">
+    <div class="sectionTitle" style="margin-top:2px"><h3>最近训练</h3></div>
+    <div id="historyList" class="historyWrap"></div>
+  </section>
+
+  <section id="calendarView" class="view">
+    <div class="card calendarCard">
+      <div class="calHeader">
+        <button class="calNav" onclick="changeMonth(-1)">‹</button>
+        <div class="calTitle" id="calTitle"></div>
+        <button class="calNav" onclick="changeMonth(1)">›</button>
+      </div>
+
+      <div class="weekRow">
+        <div class="weekCell">日</div><div class="weekCell">一</div><div class="weekCell">二</div>
+        <div class="weekCell">三</div><div class="weekCell">四</div><div class="weekCell">五</div><div class="weekCell">六</div>
+      </div>
+
+      <div id="calGrid" class="calGrid"></div>
+
+      <div class="selectedInfo">
+        <div>
+          <div class="tiny">已选择</div>
+          <div id="selectedDateText" style="font-weight:900;margin-top:3px">尚未选择日期</div>
+        </div>
+        <div id="selectedCount" class="tiny"></div>
+      </div>
+
+      <button class="secondary" style="margin-top:12px" onclick="exportSelectedDate()">导出所选日期 JSON</button>
+      <div class="version">A-OS BODY · V1.3 WHEEL</div>
+    </div>
+  </section>
+</div>
+
+
+
+<div id="finishModalBackdrop" class="appModalBackdrop" onclick="closeFinishModal()"></div>
+<div id="finishModal" class="appModal" role="dialog" aria-modal="true">
+  <div class="appModalIcon">✓</div>
+  <div class="appModalTitle">结束今天的训练？</div>
+  <div class="appModalText">将保存本次已经完成的动作、组数、训练时长和有效休息记录。当前未完成的一组不会写入记录。</div>
+  <div class="appModalActions">
+    <button class="appModalCancel" onclick="closeFinishModal()">继续训练</button>
+    <button class="appModalConfirm" onclick="confirmFinishSession()">确认结束</button>
+  </div>
+</div>
+
+
+<div id="finishModalBackdrop" class="appModalBackdrop" onclick="closeFinishModal()"></div>
+<div id="finishModal" class="appModal">
+  <div class="appModalIcon">✓</div>
+  <div class="appModalTitle">结束今天的训练？</div>
+  <div class="appModalText">将保存已完成的动作、组数、训练时长和有效休息记录。</div>
+  <div class="appModalActions">
+    <button class="appModalCancel" onclick="closeFinishModal()">继续训练</button>
+    <button class="appModalConfirm" onclick="confirmFinishSession()">确认结束</button>
+  </div>
+</div>
+
+<div id="restoreModalBackdrop" class="appModalBackdrop"></div>
+<div id="restoreModal" class="appModal">
+  <div class="appModalIcon restoreIcon">↻</div>
+  <div class="appModalTitle">检测到未结束训练</div>
+  <div class="appModalText" id="restoreModalText">上一次训练还没有正常结束，可以从断开的地方继续。</div>
+  <div class="appModalActions">
+    <button class="appModalCancel" onclick="discardSavedSession()">放弃记录</button>
+    <button class="appModalResume" onclick="resumeSavedSession()">继续训练</button>
+  </div>
+</div>
+
+<div id="setEditorBackdrop" class="pickerBackdrop" onclick="closeSetEditor()"></div>
+<div id="setEditorSheet" class="pickerSheet">
+  <div class="pickerHandle"></div>
+  <div class="pickerTop">
+    <div>
+      <div class="pickerTitle">编辑已完成组</div>
+      <div class="pickerSub" id="setEditorSubtitle">修改重量、次数或删除误记录</div>
+    </div>
+    <button class="pickerClose" onclick="closeSetEditor()">✕</button>
+  </div>
+  <div id="setEditorContent" class="pickerContent"></div>
+</div>
+
+
+
+<div id="templateWheelBackdrop" class="pickerBackdrop" onclick="closeTemplateWheel()"></div>
+<div id="templateWheelSheet" class="templateWheelSheet">
+  <div class="pickerHandle"></div>
+  <div class="templateWheelTop">
+    <button class="wheelTextBtn" onclick="closeTemplateWheel()">取消</button>
+    <div class="templateWheelTitle">选择训练模板</div>
+    <button class="wheelTextBtn wheelConfirmBtn" onclick="confirmTemplateWheel()">完成</button>
+  </div>
+
+  <div class="wheelViewport">
+    <div class="wheelFade wheelFadeTop"></div>
+    <div id="templateWheel" class="templateWheel"></div>
+    <div class="wheelSelection"></div>
+    <div class="wheelFade wheelFadeBottom"></div>
+  </div>
+
+  <div class="wheelHint">“无”表示从空白训练开始</div>
+</div>
+
+<div id="templateModalBackdrop" class="appModalBackdrop" onclick="closeTemplateSaveModal()"></div>
+<div id="templateModal" class="appModal">
+  <div class="appModalIcon templateIcon">★</div>
+  <div class="appModalTitle">保存训练模板</div>
+  <div class="appModalText">以后可以从首页一键载入这些动作。</div>
+  <input id="templateNameInput" class="modalTextInput" placeholder="例如：胸 + 三头 A">
+  <div class="appModalActions">
+    <button class="appModalCancel" onclick="closeTemplateSaveModal()">取消</button>
+    <button class="appModalResume" onclick="saveCurrentAsTemplate()">保存模板</button>
+  </div>
+</div>
+
+<div id="historyEditorBackdrop" class="pickerBackdrop" onclick="closeHistoryEditor()"></div>
+<div id="historyEditorSheet" class="pickerSheet historyEditorSheet">
+  <div class="pickerHandle"></div>
+  <div class="pickerTop">
+    <div>
+      <div class="pickerTitle">编辑训练记录</div>
+      <div class="pickerSub" id="historyEditorSubtitle">修改后自动重算组数与容量</div>
+    </div>
+    <button class="pickerClose" onclick="closeHistoryEditor()">✕</button>
+  </div>
+  <div id="historyEditorContent" class="pickerContent"></div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<div id="pickerBackdrop" class="pickerBackdrop" onclick="closePicker()"></div>
+<div id="pickerSheet" class="pickerSheet">
+  <div class="pickerHandle"></div>
+  <div class="pickerTop">
+    <div>
+      <div class="pickerTitle" id="pickerTitle">选择目标肌群</div>
+      <div class="pickerSub" id="pickerSub">选择后会自动进入动作选择</div>
+    </div>
+    <button class="pickerClose" onclick="closePicker()">✕</button>
+  </div>
+  <div id="pickerContent" class="pickerContent"></div>
+</div>
+
+<div id="drawer" class="drawer">
+  <div class="drawerTop">
+    <div>
+      <div style="font-weight:900;font-size:18px">本次训练</div>
+      <div class="tiny">点动作切换</div>
+    </div>
+    <button class="secondary" style="width:auto;padding:8px 12px" onclick="closeDrawer()">关闭</button>
+  </div>
+  <div id="drawerList"></div>
+</div>
+
+<nav class="bottom">
+  <button class="navBtn active" data-view="homeView">首页</button>
+  <button class="navBtn" data-view="trainView">训练</button>
+  <button class="navBtn" data-view="trendView">分析</button>
+  <button class="navBtn" data-view="calendarView">日历</button>
+</nav>
+
+<script>
+const LIB={
+  "胸":{"上胸":["上斜哑铃卧推","上斜杠铃卧推","上斜器械推胸"],"胸整体":["杠铃卧推","哑铃卧推","器械推胸","蝴蝶机夹胸"]},
+  "背":{"背阔肌":["高位下拉","引体向上","单臂下拉","直臂下压"],"上背":["坐姿划船","胸托划船","杠铃划船","器械划船"]},
+  "腿":{"股四头":["深蹲","哈克深蹲","腿举","腿屈伸"],"腘绳肌":["罗马尼亚硬拉","俯卧腿弯举","坐姿腿弯举"],"臀":["臀推","保加利亚分腿蹲"]},
+  "肩":{"前束":["哑铃推肩","杠铃推举"],"中束":["哑铃侧平举","绳索侧平举","器械侧平举"],"后束":["反向蝴蝶机","面拉"]},
+  "臂":{"肱二头":["杠铃弯举","哑铃弯举","锤式弯举"],"肱三头":["绳索下压","过顶臂屈伸","窄距卧推"]},
+  "核心":{"腹直肌":["卷腹","绳索卷腹","悬垂举腿","仰卧举腿"],"腹斜肌":["俄罗斯转体","绳索伐木","侧向卷腹"],"核心稳定":["平板支撑","死虫","鸟狗","农夫走"]}
+};
+const PARTS=Object.keys(LIB);
+const STORE="aos_body_v051_history";
+const ACTIVE_SESSION_STORE="aos_body_active_session_v11";
+const TEMPLATE_STORE="aos_body_templates_v12";
+let selectedTemplateId="none";
+let pendingTemplateId="none";
+const $=id=>document.getElementById(id);
+
+const THEME_KEY="aos_body_theme";
+const todayForCalendar=new Date();
+let calYear=todayForCalendar.getFullYear();
+let calMonth=todayForCalendar.getMonth();
+let selectedDateKey=null;
+
+function applyTheme(theme){
+  document.documentElement.dataset.theme=theme;
+  localStorage.setItem(THEME_KEY,theme);
+  $("themeBtn").textContent=theme==="light"?"🌙":"☀️";
+}
+applyTheme(localStorage.getItem(THEME_KEY)||"light");
+$("themeBtn").onclick=()=>applyTheme(document.documentElement.dataset.theme==="light"?"dark":"light");
+
+let selectedParts=new Set(["胸","臂"]);
+let session=null,currentIndex=0,sessionTicker=null;
+let restState=null,restTicker=null,audioCtx=null;
+
+function switchView(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  $(id).classList.add("active");
+  document.querySelectorAll(".navBtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
+  if(id==="trendView") renderHistory();
+  if(id==="calendarView") renderCalendar();
+}
+document.querySelectorAll(".navBtn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
+
+function fmtClock(sec){
+  sec=Math.max(0,Math.floor(sec));
+  const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+  return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function fmtMMSS(sec){
+  sec=Math.max(0,Math.floor(sec));
+  const m=Math.floor(sec/60),s=sec%60;
+  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function getHistory(){try{return JSON.parse(localStorage.getItem(STORE)||"[]")}catch{return[]}}
+function setHistory(v){localStorage.setItem(STORE,JSON.stringify(v))}
+
+function getTemplates(){try{return JSON.parse(localStorage.getItem(TEMPLATE_STORE)||"[]")}catch{return[]}}
+function setTemplates(v){localStorage.setItem(TEMPLATE_STORE,JSON.stringify(v))}
+let toastTimer=null;
+function showToast(msg){
+  const t=$("toast"); if(!t)return;
+  t.textContent=msg;t.classList.add("show");
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+function selectedTemplateName(){
+  if(selectedTemplateId==="none") return "无";
+  const t=getTemplates().find(x=>x.id===selectedTemplateId);
+  return t ? t.name : "无";
+}
+function updateQuickTemplateLabel(){
+  if($("quickTemplateValue")) $("quickTemplateValue").textContent=selectedTemplateName();
+}
+function templateWheelOptions(){
+  return [{id:"none",name:"无"},...getTemplates().map(t=>({id:t.id,name:t.name}))];
+}
+function openTemplateWheel(){
+  const opts=templateWheelOptions();
+  if(!opts.some(x=>x.id===selectedTemplateId)) selectedTemplateId="none";
+  pendingTemplateId=selectedTemplateId;
+
+  const wheel=$("templateWheel");
+  wheel.innerHTML=opts.map(x=>`<div class="wheelItem" data-id="${x.id}">${escapeHtml(x.name)}</div>`).join("");
+
+  $("templateWheelBackdrop").classList.add("open");
+  $("templateWheelSheet").classList.add("open");
+
+  requestAnimationFrame(()=>{
+    const index=Math.max(0,opts.findIndex(x=>x.id===pendingTemplateId));
+    wheel.scrollTop=index*52;
+    updateWheelActive();
+  });
+}
+function closeTemplateWheel(){
+  $("templateWheelBackdrop").classList.remove("open");
+  $("templateWheelSheet").classList.remove("open");
+}
+function updateWheelActive(){
+  const wheel=$("templateWheel");
+  if(!wheel)return;
+  const items=[...wheel.querySelectorAll(".wheelItem")];
+  if(!items.length)return;
+
+  const index=Math.max(0,Math.min(items.length-1,Math.round(wheel.scrollTop/52)));
+  items.forEach((el,i)=>el.classList.toggle("active",i===index));
+  pendingTemplateId=items[index].dataset.id;
+}
+function confirmTemplateWheel(){
+  selectedTemplateId=pendingTemplateId||"none";
+  updateQuickTemplateLabel();
+  closeTemplateWheel();
+}
+function startSelectedTraining(){
+  if(selectedTemplateId==="none"){
+    startSession();
+    return;
+  }
+  const t=getTemplates().find(x=>x.id===selectedTemplateId);
+  if(!t){
+    selectedTemplateId="none";
+    updateQuickTemplateLabel();
+    startSession();
+    return;
+  }
+  startFromTemplate(t.id);
+}
+
+function renderTemplates(){
+  const list=getTemplates();
+  const root=$("templateList"); if(!root)return;
+  if(!list.length){
+    root.innerHTML='<div class="templateEmpty">暂无模板。开始一次训练并在“训练控制”里保存即可。</div>';
+    return;
+  }
+  root.innerHTML=list.map(t=>`
+    <div class="templateCard">
+      <div>
+        <div class="templateName">${escapeHtml(t.name)}</div>
+        <div class="templateMeta">${(t.exercises||[]).map(x=>x.name).join(" · ")} · ${(t.exercises||[]).length} 个动作</div>
+      </div>
+      <div class="templateActions">
+        <button class="templateStart" onclick="startFromTemplate('${t.id}')">开始</button>
+        <button class="templateDelete" onclick="deleteTemplate('${t.id}')">×</button>
+      </div>
+    </div>`).join("");
+}
+function escapeHtml(v){
+  const d=document.createElement("div");
+  d.textContent=String(v??"");
+  return d.innerHTML;
+}
+
+
+function serializeActiveSession(){
+  if(!session) return null;
+  let rest=null;
+  if(restState){
+    const exIndex=session.exercises.findIndex(e=>e===currentExercise());
+    const setIndex=exIndex>=0 ? session.exercises[exIndex].sets.findIndex(st=>st===restState.completedSetRef) : -1;
+    rest={
+      startedAt:restState.startedAt,
+      targetSeconds:restState.targetSeconds,
+      targetEnd:restState.targetEnd,
+      zeroReached:restState.zeroReached,
+      exIndex,
+      setIndex
+    };
+  }
+  return {
+    savedAt:Date.now(),
+    session,
+    currentIndex,
+    selectedParts:[...selectedParts],
+    rest
+  };
+}
+function persistActiveSession(){
+  if(!session){
+    localStorage.removeItem(ACTIVE_SESSION_STORE);
+    return;
+  }
+  try{
+    localStorage.setItem(ACTIVE_SESSION_STORE,JSON.stringify(serializeActiveSession()));
+  }catch(e){}
+}
+function clearPersistedSession(){
+  localStorage.removeItem(ACTIVE_SESSION_STORE);
+}
+function readPersistedSession(){
+  try{return JSON.parse(localStorage.getItem(ACTIVE_SESSION_STORE)||"null")}catch{return null}
+}
+function showRestorePromptIfNeeded(){
+  const saved=readPersistedSession();
+  if(!saved || !saved.session) return;
+  const done=(saved.session.exercises||[]).reduce((n,e)=>n+(e.sets||[]).length,0);
+  const minutes=Math.max(1,Math.round((Date.now()-saved.session.start)/60000));
+  $("restoreModalText").textContent=`检测到一条约 ${minutes} 分钟前开始、已完成 ${done} 组的训练记录。`;
+  $("restoreModalBackdrop").classList.add("open");
+  $("restoreModal").classList.add("open");
+}
+function resumeSavedSession(){
+  const saved=readPersistedSession();
+  if(!saved || !saved.session){discardSavedSession();return}
+  session=saved.session;
+  currentIndex=Math.min(saved.currentIndex||0,Math.max(0,session.exercises.length-1));
+  selectedParts=new Set(saved.selectedParts&&saved.selectedParts.length?saved.selectedParts:["胸"]);
+
+  restState=null;
+  if(saved.rest && saved.rest.exIndex>=0 && saved.rest.setIndex>=0){
+    const ex=session.exercises[saved.rest.exIndex];
+    const st=ex && ex.sets ? ex.sets[saved.rest.setIndex] : null;
+    if(st){
+      restState={
+        startedAt:saved.rest.startedAt,
+        targetSeconds:saved.rest.targetSeconds,
+        targetEnd:saved.rest.targetEnd,
+        completedSetRef:st,
+        zeroReached:!!saved.rest.zeroReached
+      };
+      clearInterval(restTicker);
+      restTicker=setInterval(renderRest,200);
+    }
+  }
+
+  $("restoreModalBackdrop").classList.remove("open");
+  $("restoreModal").classList.remove("open");
+  $("homeStartCard").style.display="none";
+  $("homeActiveCard").style.display="block";
+  renderParts();
+  renderFocus();
+  startSessionClock();
+  if(restState) renderRest();
+  switchView("trainView");
+}
+function discardSavedSession(){
+  clearPersistedSession();
+  $("restoreModalBackdrop").classList.remove("open");
+  $("restoreModal").classList.remove("open");
+}
+
+
+function startSession(){
+  if(session){switchView("trainView");return}
+  session={start:Date.now(),exercises:[]};
+  persistActiveSession();
+  $("homeStartCard").style.display="none";
+  $("homeActiveCard").style.display="block";
+  startSessionClock();
+  switchView("trainView");
+}
+function startSessionClock(){
+  clearInterval(sessionTicker);
+  sessionTicker=setInterval(()=>{
+    if(!session)return;
+    $("homeClock").textContent=fmtClock((Date.now()-session.start)/1000);
+    updateHomeProgress();
+  },500)
+}
+function updateHomeProgress(){
+  if(!session)return;
+  const done=session.exercises.reduce((a,e)=>a+e.sets.length,0);
+  $("homeProgress").textContent=`完成 ${done} 组 · ${session.exercises.length} 个动作`;
+}
+
+function renderParts(){
+  $("partChips").innerHTML=PARTS.map(p=>`<button class="chip ${selectedParts.has(p)?"active":""}" onclick="togglePart('${p}')">${p}</button>`).join("");
+  renderMuscleOptions()
+}
+function togglePart(p){
+  if(selectedParts.has(p))selectedParts.delete(p);else selectedParts.add(p);
+  if(selectedParts.size===0)selectedParts.add(p);
+  renderParts()
+}
+function renderMuscleOptions(){
+  const previous=$("muscleSelect").value;
+  const opts=[];
+  selectedParts.forEach(p=>Object.keys(LIB[p]).forEach(m=>opts.push({p,m})));
+  $("muscleSelect").innerHTML=opts.map(x=>`<option value="${x.p}|${x.m}">${x.p} · ${x.m}</option>`).join("");
+  if(previous && opts.some(x=>`${x.p}|${x.m}`===previous)) $("muscleSelect").value=previous;
+  renderExerciseOptions()
+}
+$("muscleSelect").onchange=renderExerciseOptions;
+function renderExerciseOptions(){
+  const v=$("muscleSelect").value;
+  if(!v){
+    $("exerciseSelect").innerHTML="";
+    updatePickerLabels();
+    return
+  }
+  const [p,m]=v.split("|");
+  const previous=$("exerciseSelect").value;
+  $("exerciseSelect").innerHTML=LIB[p][m].map(e=>`<option>${e}</option>`).join("");
+  if(previous && LIB[p][m].includes(previous)) $("exerciseSelect").value=previous;
+  updatePickerLabels();
+}
+
+function updatePickerLabels(){
+  const mv=$("muscleSelect")?.value||"";
+  const ev=$("exerciseSelect")?.value||"";
+  if($("muscleDisplay")){
+    $("muscleDisplay").textContent=mv ? mv.split("|")[1] : "请选择";
+  }
+  if($("exerciseDisplay")){
+    $("exerciseDisplay").textContent=ev || "请选择";
+  }
+}
+
+
+let addExerciseOpen=false;
+
+function setAddExercisePanel(open){
+  addExerciseOpen=!!open;
+  const panel=$("addExercisePanel");
+  if(!panel) return;
+  panel.classList.toggle("open",addExerciseOpen);
+}
+function toggleAddExercisePanel(){
+  setAddExercisePanel(!addExerciseOpen);
+}
+function syncAddExercisePanel(){
+  if(!session || !session.exercises || session.exercises.length===0){
+    setAddExercisePanel(true);
+  }
+}
+
+let pickerMode=null;
+
+function openPicker(mode){
+  pickerMode=mode;
+  $("pickerBackdrop").classList.add("open");
+  $("pickerSheet").classList.add("open");
+  document.body.classList.add("pickerLocked");
+
+  if(mode==="exercise" && !$("muscleSelect").value){
+    pickerMode="muscle";
+  }
+  renderPicker();
+}
+
+function closePicker(){
+  $("pickerBackdrop").classList.remove("open");
+  $("pickerSheet").classList.remove("open");
+  document.body.classList.remove("pickerLocked");
+}
+
+function renderPicker(){
+  if(pickerMode==="muscle"){
+    $("pickerTitle").textContent="选择目标肌群";
+    $("pickerSub").textContent="选择后会自动进入动作选择";
+
+    const current=$("muscleSelect").value;
+    let html="";
+
+    selectedParts.forEach(part=>{
+      html+=`<div class="pickerGroup">
+        <div class="pickerGroupTitle">${part}</div>
+        <div class="pickerOptions">`;
+
+      Object.keys(LIB[part]).forEach(muscle=>{
+        const value=`${part}|${muscle}`;
+        const active=value===current;
+        html+=`<button class="pickerOption ${active?"active":""}" onclick="pickMuscle('${part}','${muscle}')">
+          <div>
+            <div>${muscle}</div>
+            <div class="pickerOptionMeta">${part}</div>
+          </div>
+          <div class="pickerOptionCheck">${active?"✓":""}</div>
+        </button>`;
+      });
+
+      html+=`</div></div>`;
+    });
+
+    $("pickerContent").innerHTML=html;
+    return;
+  }
+
+  const mv=$("muscleSelect").value;
+  if(!mv){
+    pickerMode="muscle";
+    renderPicker();
+    return;
+  }
+
+  const [part,muscle]=mv.split("|");
+  const current=$("exerciseSelect").value;
+
+  $("pickerTitle").textContent="选择训练动作";
+  $("pickerSub").textContent=`${part} · ${muscle}`;
+
+  $("pickerContent").innerHTML=`
+    <div class="pickerGroup">
+      <div class="pickerOptions">
+        ${LIB[part][muscle].map(name=>{
+          const active=name===current;
+          return `<button class="pickerOption ${active?"active":""}" onclick="pickExercise('${name.replace(/'/g,"&#39;")}')">
+            <div>${name}</div>
+            <div class="pickerOptionCheck">${active?"✓":""}</div>
+          </button>`;
+        }).join("")}
+      </div>
+    </div>
+  `;
+}
+
+function pickMuscle(part,muscle){
+  $("muscleSelect").value=`${part}|${muscle}`;
+  renderExerciseOptions();
+  pickerMode="exercise";
+  renderPicker();
+}
+
+function pickExercise(name){
+  $("exerciseSelect").value=name;
+  updatePickerLabels();
+  closePicker();
+}
+
+function addExercise(){
+  if(!$("muscleSelect").value || !$("exerciseSelect").value){
+    openPicker(!$("muscleSelect").value ? "muscle" : "exercise");
+    return;
+  }
+  if(!session)startSession();
+  const [part,muscle]=$("muscleSelect").value.split("|");
+  const name=$("exerciseSelect").value;
+  const existingIndex=session.exercises.findIndex(e=>e.name===name);
+  if(existingIndex>=0){
+    currentIndex=existingIndex;
+    persistActiveSession();
+    renderFocus();
+    showToast("这个动作已经在本次训练里了");
+    return;
+  }
+  session.exercises.push({part,muscle,name,sets:[]});
+  currentIndex=session.exercises.length-1;
+  persistActiveSession();
+  renderFocus()
+}
+function currentExercise(){
+  if(!session||!session.exercises.length)return null;
+  currentIndex=Math.max(0,Math.min(currentIndex,session.exercises.length-1));
+  return session.exercises[currentIndex]
+}
+function flagsFor(n){
+  return Array.from({length:n},()=>'<span class="flag">🚩</span>').join("")
+}
+function getSuggestedSet(ex){
+  if(ex.sets.length) return ex.sets[ex.sets.length-1];
+  const history=getHistory();
+  for(const workout of history){
+    const oldEx=(workout.exercises||[]).find(x=>x.name===ex.name);
+    if(oldEx && oldEx.sets && oldEx.sets.length) return oldEx.sets[oldEx.sets.length-1];
+  }
+  return null;
+}
+function renderFocus(){
+  const ex=currentExercise();
+  const has=!!ex;
+  $("noExerciseCard").style.display=has?"none":"block";
+  $("focusCard").style.display=has?"block":"none";
+  if(!has){
+    $("exerciseProgress").textContent="0 / 0 动作";
+    syncAddExercisePanel();
+    return
+  }
+
+  $("sessionParts").textContent=[...new Set(session.exercises.map(x=>x.part))].join(" + ");
+  $("exerciseProgress").textContent=`${currentIndex+1} / ${session.exercises.length} 动作`;
+  $("drawerProgress").textContent=`${currentIndex+1} / ${session.exercises.length}`;
+  $("currentExerciseName").textContent=ex.name;
+  $("currentExerciseMeta").textContent=`${ex.part} · ${ex.muscle}`;
+  $("flags").innerHTML=flagsFor(ex.sets.length);
+  if($("editSetsBtn")) $("editSetsBtn").style.display=ex.sets.length?"block":"none";
+  $("setLabel").textContent=`当前第 ${ex.sets.length+1} 组`;
+
+  const suggested=getSuggestedSet(ex);
+  if(suggested){
+    $("weightInput").value=suggested.weight ?? "";
+    $("repsInput").value=suggested.reps ?? "";
+  }else{
+    $("weightInput").value="";
+    $("repsInput").value="";
+  }
+
+  const resting=!!restState;
+  $("setArea").classList.toggle("hidden",resting);
+  $("restBox").style.display=resting?"block":"none";
+  $("exerciseNav").style.display=resting?"none":"grid";
+  renderDrawer();
+  updateHomeProgress()
+}
+
+function completeSet(){
+  const ex=currentExercise(); if(!ex)return;
+  const weight=$("weightInput").value.trim();
+  const reps=$("repsInput").value.trim();
+  if(!weight||!reps){alert("先填重量和次数");return}
+
+  try{
+    audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+    if(audioCtx.state==="suspended")audioCtx.resume()
+  }catch(e){}
+
+  const setObj={weight,reps,doneAt:new Date().toISOString(),restAfterSec:null};
+  ex.sets.push(setObj);
+  startRest(120,setObj);
+  renderFocus()
+}
+
+function startRest(seconds,setObj){
+  clearInterval(restTicker);
+  const t=Date.now();
+  restState={startedAt:t,targetSeconds:seconds,targetEnd:t+seconds*1000,completedSetRef:setObj,zeroReached:false};
+  $("setArea").classList.add("hidden");
+  $("restBox").style.display="block";
+  $("restBox").classList.remove("expired","pulse");
+  $("preZeroBtns").style.display="grid";
+  $("endRestBtn").style.display="none";
+  $("overtimeBadge").style.display="none";
+  $("restLabel").textContent="组间休息";
+  $("restTarget").textContent=`目标 ${fmtMMSS(seconds)} · 倒计时结束后继续记录实际休息`;
+  persistActiveSession();
+  renderRest();
+  restTicker=setInterval(renderRest,200)
+}
+function renderRest(){
+  if(!restState)return;
+  const now=Date.now();
+  const remain=(restState.targetEnd-now)/1000;
+  if(remain>0){
+    $("restClock").textContent=fmtMMSS(remain);
+    return
+  }
+  if(!restState.zeroReached){
+    restState.zeroReached=true;
+    onRestTargetReached()
+  }
+  const overtime=Math.max(0,(now-restState.targetEnd)/1000);
+  $("restClock").textContent="00:00";
+  $("overtimeBadge").style.display="block";
+  $("overtimeBadge").textContent=`已超目标 +${fmtMMSS(overtime)} · 实际休息 ${fmtMMSS((now-restState.startedAt)/1000)}`;
+}
+function onRestTargetReached(){
+  $("restBox").classList.add("expired","pulse");
+  $("restLabel").textContent="目标休息时间已到";
+  $("preZeroBtns").style.display="none";
+  $("endRestBtn").style.display="block";
+  if(navigator.vibrate){
+    try{navigator.vibrate([220,100,220,100,350])}catch(e){}
+  }
+}
+function addRest(sec){
+  if(!restState)return;
+  restState.targetEnd+=sec*1000;
+  restState.targetSeconds+=sec;
+  persistActiveSession();
+  $("restTarget").textContent=`目标 ${fmtMMSS(restState.targetSeconds)} · 倒计时结束后继续记录实际休息`;
+  renderRest()
+}
+function endRest(){
+  if(!restState)return;
+  const actual=Math.max(0,(Date.now()-restState.startedAt)/1000);
+  restState.completedSetRef.restAfterSec=Math.round(actual);
+  clearInterval(restTicker);
+  restState=null;
+  $("restBox").style.display="none";
+  $("restBox").classList.remove("expired","pulse");
+  $("setArea").classList.remove("hidden");
+  $("exerciseNav").style.display="grid";
+  persistActiveSession();
+  renderFocus()
+}
+
+function prevExercise(){
+  if(restState)return;
+  if(session&&currentIndex>0){currentIndex--;persistActiveSession();renderFocus()}
+}
+function nextExercise(){
+  if(restState)return;
+  if(session&&currentIndex<session.exercises.length-1){currentIndex++;persistActiveSession();renderFocus()}
+}
+function openDrawer(){renderDrawer();$("drawer").classList.add("open")}
+function closeDrawer(){$("drawer").classList.remove("open")}
+function renderDrawer(){
+  if(!session||!session.exercises.length){
+    $("drawerList").innerHTML='<div class="empty">暂无动作</div>';return
+  }
+  $("drawerList").innerHTML=session.exercises.map((e,i)=>`
+    <div class="exerciseRow ${i===currentIndex?"active":""}" onclick="jumpExercise(${i})">
+      <div>
+        <div class="rowTitle">${i+1}. ${e.name}</div>
+        <div class="rowMeta">${e.part} · ${e.muscle}</div>
+      </div>
+      <div class="rowFlags">${"🚩".repeat(e.sets.length)}</div>
+    </div>`).join("")
+}
+function jumpExercise(i){
+  if(restState){alert("先结束当前组间休息，再切换动作");return}
+  currentIndex=i;persistActiveSession();renderFocus();closeDrawer()
+}
+
+
+
+
+function openTemplateSaveModal(){
+  if(!session || !session.exercises || !session.exercises.length){
+    showToast("先添加至少一个训练动作");
+    return;
+  }
+  $("templateNameInput").value="";
+  $("templateModalBackdrop").classList.add("open");
+  $("templateModal").classList.add("open");
+  setTimeout(()=>$("templateNameInput").focus(),120);
+}
+function closeTemplateSaveModal(){
+  $("templateModalBackdrop").classList.remove("open");
+  $("templateModal").classList.remove("open");
+}
+function saveCurrentAsTemplate(){
+  if(!session || !session.exercises.length)return;
+  const name=$("templateNameInput").value.trim();
+  if(!name){showToast("给模板起个名字");return}
+  const list=getTemplates();
+  const template={
+    id:"tpl_"+Date.now(),
+    name,
+    createdAt:new Date().toISOString(),
+    exercises:session.exercises.map(e=>({part:e.part,muscle:e.muscle,name:e.name}))
+  };
+  list.unshift(template);setTemplates(list);
+  closeTemplateSaveModal();renderTemplates();updateQuickTemplateLabel();
+  showToast("模板已保存");
+}
+function startFromTemplate(id){
+  if(session){showToast("已有训练正在进行");return}
+  const t=getTemplates().find(x=>x.id===id);
+  if(!t)return;
+  session={
+    start:Date.now(),
+    exercises:(t.exercises||[]).map(e=>({part:e.part,muscle:e.muscle,name:e.name,sets:[]}))
+  };
+  selectedParts=new Set(session.exercises.map(e=>e.part));
+  currentIndex=0;
+  persistActiveSession();
+  $("homeStartCard").style.display="none";
+  $("homeActiveCard").style.display="block";
+  renderParts();renderFocus();startSessionClock();switchView("trainView");
+}
+function deleteTemplate(id){
+  setTemplates(getTemplates().filter(x=>x.id!==id));
+  if(selectedTemplateId===id) selectedTemplateId="none";
+  renderTemplates();updateQuickTemplateLabel();showToast("模板已删除");
+}
+
+function openSetEditor(){
+  const ex=currentExercise();
+  if(!ex || !ex.sets.length) return;
+  $("setEditorSubtitle").textContent=`${ex.name} · ${ex.sets.length} 组`;
+  renderSetEditor();
+  $("setEditorBackdrop").classList.add("open");
+  $("setEditorSheet").classList.add("open");
+}
+function closeSetEditor(){
+  $("setEditorBackdrop").classList.remove("open");
+  $("setEditorSheet").classList.remove("open");
+}
+function renderSetEditor(){
+  const ex=currentExercise();
+  if(!ex || !ex.sets.length){
+    $("setEditorContent").innerHTML='<div class="editorEmpty">暂无已完成组</div>';
+    return;
+  }
+  $("setEditorContent").innerHTML=ex.sets.map((st,i)=>`
+    <div class="setEditRow">
+      <div class="setEditIndex">${i+1}</div>
+      <input class="setEditInput" inputmode="decimal" value="${st.weight ?? ""}"
+        onchange="editCompletedSet(${i},'weight',this.value)">
+      <div class="setEditX">×</div>
+      <input class="setEditInput" inputmode="numeric" value="${st.reps ?? ""}"
+        onchange="editCompletedSet(${i},'reps',this.value)">
+      <button class="setDeleteBtn" onclick="deleteCompletedSet(${i})">×</button>
+    </div>
+  `).join("") + '<div class="editorHint">修改会立即保存到当前训练草稿。删除误记录后，旗子数量和当前组号会同步更新。</div>';
+}
+function editCompletedSet(i,field,value){
+  const ex=currentExercise();
+  if(!ex || !ex.sets[i]) return;
+  ex.sets[i][field]=value;
+  persistActiveSession();
+  renderFocus();
+}
+function deleteCompletedSet(i){
+  const ex=currentExercise();
+  if(!ex || !ex.sets[i]) return;
+  if(restState && restState.completedSetRef===ex.sets[i]){
+    clearInterval(restTicker);
+    restState=null;
+  }
+  ex.sets.splice(i,1);
+  persistActiveSession();
+  renderSetEditor();
+  renderFocus();
+}
+function undoLastSet(){
+  const ex=currentExercise();
+  if(!ex || !ex.sets.length) return;
+  clearInterval(restTicker);
+  restState=null;
+  ex.sets.pop();
+  $("restBox").style.display="none";
+  $("setArea").classList.remove("hidden");
+  $("exerciseNav").style.display="grid";
+  persistActiveSession();
+  renderFocus();
+}
+
+function requestFinishSession(){
+  if(!session) return;
+  $("finishModalBackdrop").classList.add("open");
+  $("finishModal").classList.add("open");
+}
+function closeFinishModal(){
+  $("finishModalBackdrop").classList.remove("open");
+  $("finishModal").classList.remove("open");
+}
+function confirmFinishSession(){
+  closeFinishModal();
+  finishSession();
+}
+
+function finishSession(){
+  if(!session)return;
+  if(restState){
+    clearInterval(restTicker);
+    if(restState.completedSetRef) restState.completedSetRef.restAfterSec=null;
+    restState=null;
+  }
+  const exercises=session.exercises.filter(e=>e.sets.length>0);
+  const totalSets=exercises.reduce((a,e)=>a+e.sets.length,0);
+  const totalVolume=exercises.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(parseFloat(s.weight)||0)*(parseInt(s.reps)||0),0),0);
+  const totalRest=exercises.reduce((a,e)=>a+e.sets.reduce((b,s)=>b+(s.restAfterSec||0),0),0);
+  const entry={date:new Date().toISOString(),duration:Math.round((Date.now()-session.start)/1000),totalSets,totalVolume,totalRest,exercises};
+  if(totalSets>0){const h=getHistory();h.unshift(entry);setHistory(h)}
+  session=null;currentIndex=0;clearInterval(sessionTicker);
+  clearPersistedSession();
+  $("homeStartCard").style.display="block";
+  $("homeActiveCard").style.display="none";
+  $("homeClock").textContent="00:00:00";
+  renderFocus();updateStats();renderHistory();renderCalendar();switchView("homeView")
+}
+function updateStats(){
+  const all=getHistory();
+  const now=new Date();
+  const day=now.getDay();
+  const diffToMonday=(day+6)%7;
+  const weekStart=new Date(now.getFullYear(),now.getMonth(),now.getDate()-diffToMonday,0,0,0,0);
+  const weekEnd=new Date(weekStart);
+  weekEnd.setDate(weekStart.getDate()+7);
+
+  const h=all.filter(x=>{
+    const d=new Date(x.date);
+    return d>=weekStart && d<weekEnd;
+  });
+
+  $("weekSessions").textContent=h.length;
+  $("weekSets").textContent=h.reduce((a,x)=>a+(Number(x.totalSets)||0),0);
+  $("weekVolume").textContent=Math.round(h.reduce((a,x)=>a+(Number(x.totalVolume)||0),0));
+}
+function uniqueParts(workout){
+  return [...new Set((workout.exercises||[]).map(e=>e.part))].join(" + ");
+}
+
+
+let historyEditIndex=null;
+function openHistoryEditor(index){
+  historyEditIndex=index;
+  renderHistoryEditor();
+  $("historyEditorBackdrop").classList.add("open");
+  $("historyEditorSheet").classList.add("open");
+}
+function closeHistoryEditor(){
+  historyEditIndex=null;
+  $("historyEditorBackdrop").classList.remove("open");
+  $("historyEditorSheet").classList.remove("open");
+}
+function recalcHistoryWorkout(w){
+  w.exercises=(w.exercises||[]).filter(e=>(e.sets||[]).length>0);
+  w.totalSets=w.exercises.reduce((a,e)=>a+e.sets.length,0);
+  w.totalVolume=w.exercises.reduce((a,e)=>a+e.sets.reduce((b,st)=>b+(Number(st.weight)||0)*(Number(st.reps)||0),0),0);
+  w.totalRest=w.exercises.reduce((a,e)=>a+e.sets.reduce((b,st)=>b+(Number(st.restAfterSec)||0),0),0);
+}
+function renderHistoryEditor(){
+  const h=getHistory(),w=h[historyEditIndex];
+  if(!w){closeHistoryEditor();return}
+  $("historyEditorSubtitle").textContent=`${new Date(w.date).toLocaleDateString()} · ${w.totalSets||0} 组`;
+  $("historyEditorContent").innerHTML=(w.exercises||[]).map((e,ei)=>`
+    <div class="historyEditorBlock">
+      <div class="historyEditorTitle">${escapeHtml(e.name)}</div>
+      <div class="historyEditorMeta">${escapeHtml(e.part)} · ${escapeHtml(e.muscle)}</div>
+      ${(e.sets||[]).map((st,si)=>`
+        <div class="historyEditorRow">
+          <div class="historyEditorIndex">${si+1}</div>
+          <input class="historyEditorInput" inputmode="decimal" value="${st.weight??""}" onchange="editHistorySet(${ei},${si},'weight',this.value)">
+          <div class="setEditX">×</div>
+          <input class="historyEditorInput" inputmode="numeric" value="${st.reps??""}" onchange="editHistorySet(${ei},${si},'reps',this.value)">
+          <button class="historyDeleteSet" onclick="deleteHistorySet(${ei},${si})">×</button>
+        </div>`).join("")}
+    </div>`).join("") || '<div class="editorEmpty">这条记录已经没有训练组了</div>';
+}
+function editHistorySet(ei,si,field,value){
+  const h=getHistory(),w=h[historyEditIndex];
+  if(!w||!w.exercises?.[ei]?.sets?.[si])return;
+  w.exercises[ei].sets[si][field]=value;
+  recalcHistoryWorkout(w);setHistory(h);
+  renderHistory();renderCalendar();updateStats();
+}
+function deleteHistorySet(ei,si){
+  const h=getHistory(),w=h[historyEditIndex];
+  if(!w||!w.exercises?.[ei]?.sets?.[si])return;
+  w.exercises[ei].sets.splice(si,1);
+  recalcHistoryWorkout(w);setHistory(h);
+  renderHistoryEditor();renderHistory();renderCalendar();updateStats();
+}
+
+function workoutDayType(workout){
+  const parts=new Set((workout.exercises||[]).map(e=>e.part));
+  if(parts.has("胸")) return {key:"chest",label:"胸"};
+  if(parts.has("背")) return {key:"back",label:"背"};
+  if(parts.has("腿")) return {key:"leg",label:"腿"};
+  return {key:"other",label:"其他"};
+}
+function calcWorkoutVolume(workout){
+  if(Number.isFinite(Number(workout.totalVolume))) return Number(workout.totalVolume);
+  return (workout.exercises||[]).reduce((sum,e)=>{
+    return sum+(e.sets||[]).reduce((s,st)=>s+(Number(st.weight)||0)*(Number(st.reps)||0),0);
+  },0);
+}
+function calcWorkoutSets(workout){
+  if(Number.isFinite(Number(workout.totalSets))) return Number(workout.totalSets);
+  return (workout.exercises||[]).reduce((sum,e)=>sum+(e.sets||[]).length,0);
+}
+function bestE1RM(exercise){
+  let best=null;
+  for(const st of (exercise.sets||[])){
+    const w=Number(st.weight),r=Number(st.reps);
+    if(!Number.isFinite(w)||!Number.isFinite(r)||w<=0||r<=0) continue;
+    const est=w*(1+r/30);
+    if(best===null||est>best) best=est;
+  }
+  return best;
+}
+function strengthComparison(current,previous){
+  const prevMap=new Map((previous.exercises||[]).map(e=>[e.name,e]));
+  const changes=[];
+  let improved=0;
+  let compared=0;
+  for(const ex of (current.exercises||[])){
+    const old=prevMap.get(ex.name);
+    if(!old) continue;
+    const a=bestE1RM(ex), b=bestE1RM(old);
+    if(a===null||b===null||b<=0) continue;
+    const pct=(a-b)/b*100;
+    changes.push(pct);
+    compared++;
+    if(pct>0.5) improved++;
+  }
+  if(!changes.length) return null;
+  return {
+    pct:changes.reduce((a,b)=>a+b,0)/changes.length,
+    improved,compared
+  };
+}
+function pctText(v){
+  if(v===null || !Number.isFinite(v)) return "—";
+  const sign=v>0?"+":"";
+  return `${sign}${v.toFixed(1)}%`;
+}
+function deltaClass(v){
+  if(v===null || !Number.isFinite(v) || Math.abs(v)<0.1) return "metricFlat";
+  return v>0?"metricUp":"metricDown";
+}
+function findPreviousSameType(history,index){
+  const type=workoutDayType(history[index]).key;
+  for(let j=index+1;j<history.length;j++){
+    if(workoutDayType(history[j]).key===type) return history[j];
+  }
+  return null;
+}
+function renderWorkoutAnalysis(current,previous){
+  const type=workoutDayType(current);
+  if(!previous){
+    return `<div class="workoutAnalysis">
+      <div class="analysisTitle"><span class="analysisBadgeMini">${type.label}</span>本次分析</div>
+      <div class="analysisNote">这是目前记录中的首个${type.label==="其他"?"其他训练日":type.label+"日"}，还没有同类型历史训练可对比。再完成一次后，这里会自动比较容量、同动作估算力量和完成组数。</div>
+    </div>`;
+  }
+
+  const curVol=calcWorkoutVolume(current), prevVol=calcWorkoutVolume(previous);
+  const volPct=prevVol>0?(curVol-prevVol)/prevVol*100:null;
+
+  const curSets=calcWorkoutSets(current), prevSets=calcWorkoutSets(previous);
+  const setDiff=curSets-prevSets;
+
+  const strength=strengthComparison(current,previous);
+  const strengthPct=strength?strength.pct:null;
+
+  return `<div class="workoutAnalysis">
+    <div class="analysisTitle"><span class="analysisBadgeMini">${type.label}</span>与上一次同类训练对比</div>
+    <div class="analysisGrid">
+      <div class="analysisMetric">
+        <div class="analysisMetricLabel">总容量</div>
+        <div class="analysisMetricValue ${deltaClass(volPct)}">${pctText(volPct)}</div>
+        <div class="analysisMetricSub">${Math.round(prevVol)} → ${Math.round(curVol)}</div>
+      </div>
+
+      <div class="analysisMetric">
+        <div class="analysisMetricLabel">同动作估算力量</div>
+        <div class="analysisMetricValue ${deltaClass(strengthPct)}">${pctText(strengthPct)}</div>
+        <div class="analysisMetricSub">${strength ? `${strength.improved}/${strength.compared} 个可比动作提升` : "无共同可比动作"}</div>
+      </div>
+
+      <div class="analysisMetric">
+        <div class="analysisMetricLabel">完成组数</div>
+        <div class="analysisMetricValue ${setDiff>0?"metricUp":setDiff<0?"metricDown":"metricFlat"}">${setDiff>0?"+":""}${setDiff}</div>
+        <div class="analysisMetricSub">${prevSets} → ${curSets} 组</div>
+      </div>
+    </div>
+    <div class="tiny" style="margin-top:9px">“估算力量”只比较两次训练中名称相同的动作，并用每个动作表现最好的一组估算，不代表真实 1RM。</div>
+  </div>`;
+}
+
+function renderHistory(){
+  const h=getHistory();
+  if(!h.length){
+    $("historyList").innerHTML='<div class="card empty">暂无训练记录</div>';
+    return;
+  }
+
+  $("historyList").innerHTML=h.slice(0,20).map((w,index)=>{
+    const exercises=(w.exercises||[]);
+    const type=workoutDayType(w);
+    const previous=findPreviousSameType(h,index);
+
+    const detailExercises=exercises.map(e=>{
+      const sets=(e.sets||[]).map((st,si)=>`
+        <div class="setDetail">
+          <div class="setIndex">${si+1}</div>
+          <div><b>${st.weight ?? "-"} kg × ${st.reps ?? "-"} 次</b></div>
+          <div class="setRest">${st.restAfterSec!=null ? `休 ${fmtMMSS(st.restAfterSec)}` : "最后一组"}</div>
+        </div>`).join("");
+
+      return `<div class="detailExercise">
+        <div class="detailExerciseName">${e.name}</div>
+        <div class="detailExerciseMeta">${e.part} · ${e.muscle}</div>
+        ${sets || '<div class="tiny">无组数据</div>'}
+      </div>`;
+    }).join("");
+
+    return `<details class="historyCard">
+      <summary>
+        <div class="historySummaryBadge">
+          <div class="dayTypeBadge ${type.key}">${type.label}</div>
+        </div>
+        <div>
+          <div class="historyDate">${new Date(w.date).toLocaleDateString()}</div>
+          <div class="historyExercises">${exercises.map(e=>e.name).join(" · ") || "无动作"}</div>
+        </div>
+        <div class="historyRight">
+          <div class="historySets">${w.totalSets || 0} 组 <span class="expandHint">⌄</span></div>
+          <div class="historyMeta">${fmtClock(w.duration||0)} · 休息 ${fmtMMSS(w.totalRest||0)}</div>
+        </div>
+      </summary>
+
+      <div class="historyDetail">
+        <div class="sessionOverview">
+          <div class="miniStat">
+            <div class="tiny">部位</div>
+            <div class="miniVal">${uniqueParts(w) || "-"}</div>
+          </div>
+          <div class="miniStat">
+            <div class="tiny">训练容量</div>
+            <div class="miniVal">${Math.round(calcWorkoutVolume(w))}</div>
+          </div>
+          <div class="miniStat">
+            <div class="tiny">总休息</div>
+            <div class="miniVal">${fmtMMSS(w.totalRest||0)}</div>
+          </div>
+        </div>
+
+        ${detailExercises}
+        <button class="historyEditBtn" onclick="event.preventDefault();event.stopPropagation();openHistoryEditor(${index})">编辑本次记录</button>
+        ${renderWorkoutAnalysis(w,previous)}
+      </div>
+    </details>`;
+  }).join("");
+}
+function dateKeyFromDate(d){
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function workoutsByDateKey(key){
+  return getHistory().filter(w=>dateKeyFromDate(new Date(w.date))===key);
+}
+function trainingDateSet(){
+  return new Set(getHistory().map(w=>dateKeyFromDate(new Date(w.date))));
+}
+function changeMonth(delta){
+  calMonth+=delta;
+  if(calMonth<0){calMonth=11;calYear--}
+  if(calMonth>11){calMonth=0;calYear++}
+  renderCalendar();
+}
+function selectDate(key){
+  selectedDateKey=key;
+  renderCalendar();
+}
+function renderCalendar(){
+  if(!$("calGrid")) return;
+  $("calTitle").textContent=`${calYear}年 ${calMonth+1}月`;
+  const first=new Date(calYear,calMonth,1);
+  const last=new Date(calYear,calMonth+1,0);
+  const startOffset=first.getDay();
+  const daysInMonth=last.getDate();
+  const prevLast=new Date(calYear,calMonth,0).getDate();
+  const marked=trainingDateSet();
+  const todayKey=dateKeyFromDate(new Date());
+  let cells=[];
+
+  for(let i=0;i<42;i++){
+    let day,cellDate,other=false;
+    if(i<startOffset){
+      day=prevLast-startOffset+i+1;
+      cellDate=new Date(calYear,calMonth-1,day);
+      other=true;
+    }else if(i>=startOffset+daysInMonth){
+      day=i-(startOffset+daysInMonth)+1;
+      cellDate=new Date(calYear,calMonth+1,day);
+      other=true;
+    }else{
+      day=i-startOffset+1;
+      cellDate=new Date(calYear,calMonth,day);
+    }
+
+    const key=dateKeyFromDate(cellDate);
+    const classes=[
+      "dayCell",other?"other":"",key===todayKey?"today":"",key===selectedDateKey?"selected":""
+    ].filter(Boolean).join(" ");
+
+    cells.push(`<button class="${classes}" onclick="selectDate('${key}')">
+      <div class="dayNum">${day}</div>
+      ${marked.has(key)?'<div class="trainMark"></div>':''}
+    </button>`);
+  }
+  $("calGrid").innerHTML=cells.join("");
+
+  if(!selectedDateKey){
+    $("selectedDateText").textContent="尚未选择日期";
+    $("selectedCount").textContent="";
+  }else{
+    $("selectedDateText").textContent=selectedDateKey;
+    const count=workoutsByDateKey(selectedDateKey).length;
+    $("selectedCount").textContent=count?`${count} 次训练`:"无训练记录";
+  }
+}
+function exportSelectedDate(){
+  if(!selectedDateKey){alert("请先在日历中选择一个日期");return}
+  const data=workoutsByDateKey(selectedDateKey);
+  const payload={date:selectedDateKey,workout_count:data.length,workouts:data};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=`A-OS_Body_${selectedDateKey}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function exportData(){
+  const blob=new Blob([JSON.stringify(getHistory(),null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="A-OS_Body_V06_Data.json";
+  a.click();
+  URL.revokeObjectURL(a.href)
+}
+
+window.addEventListener("pagehide",persistActiveSession);
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="hidden") persistActiveSession();
+});
+
+renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();
+if($("templateWheel")){
+  $("templateWheel").addEventListener("scroll",()=>{
+    clearTimeout(window.__wheelTimer);
+    window.__wheelTimer=setTimeout(updateWheelActive,50);
+  },{passive:true});
+}
+setTimeout(showRestorePromptIfNeeded,120);
+</script>
+
+<script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
