@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V1.7</title>
+<title>A-OS Body V2.4</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -1116,11 +1116,240 @@ html[data-theme="dark"] .restClock{
   .supplementName{font-size:8.5px}
 }
 
+
+/* ===== V1.8 Body data + nutrition linkage ===== */
+.bodyDataCard{padding:0;overflow:hidden;margin-top:12px}
+.bodyDataToggle{
+  width:100%;border:0;background:transparent;color:var(--text);
+  display:flex;justify-content:space-between;align-items:center;text-align:left;
+  padding:15px 16px
+}
+.bodyDataSummary{font-size:12px;font-weight:900;margin-top:4px}
+.bodyDataChevron{font-size:18px;color:var(--muted)}
+.bodyDataPanel{display:none;padding:0 16px 16px;border-top:1px solid var(--line)}
+.bodyDataPanel.open{display:block}
+.bodyInputGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.bodyField{background:var(--ui-card2);border:1px solid var(--line);border-radius:13px;padding:9px}
+.bodyField>span{display:block;font-size:9px;color:var(--muted);margin-bottom:4px}
+.bodyField>div{display:flex;align-items:baseline;gap:4px}
+.bodyField input{width:100%;min-width:0;border:0;background:transparent;color:var(--text);outline:0;font-size:18px;font-weight:900}
+.bodyField b{font-size:9px;color:var(--muted)}
+.bodyGoalLabel{font-size:10px;color:var(--muted);font-weight:800;margin:14px 2px 7px}
+.bodyGoalSegment{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.bodyGoalSegment button{border:1px solid var(--line);background:var(--ui-card2);color:var(--muted);border-radius:12px;padding:10px 5px;font-weight:900}
+.bodyGoalSegment button.active{background:var(--text);color:var(--bg2);border-color:var(--text)}
+.bodyGoalNotice{font-size:10px;color:var(--muted);line-height:1.55;margin:10px 2px 12px}
+.bodyGoalNotice b{color:var(--text)}
+.bodyTargetBox{margin-top:12px;background:var(--ui-card2);border:1px solid var(--line);border-radius:14px;padding:12px}
+.bodyTargetTop{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}
+.bodyTargetTop b{color:var(--text)}
+.bodyTargetCalories{font-size:28px;font-weight:950;margin-top:9px}
+.bodyTargetCalories small{font-size:10px;color:var(--muted)}
+.bodyTargetMacros{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.bodyTargetMacros span{font-size:9px;color:var(--muted)}
+.bodyTargetMacros b{display:block;color:var(--text);font-size:13px;margin-top:2px}
+
+.foodTargetCard{margin-bottom:12px}
+.foodTargetTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.foodTargetTitle{font-size:13px;font-weight:900;margin-top:4px;line-height:1.4}
+.foodTargetDayType{font-size:9px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 8px;white-space:nowrap}
+.foodTargetProgress{display:grid;gap:9px;margin-top:13px}
+.foodTargetRow>div:first-child{display:flex;justify-content:space-between;gap:10px;font-size:9px;color:var(--muted)}
+.foodTargetRow b{color:var(--text);font-size:9px}
+.foodTargetBar{height:5px;border-radius:999px;background:var(--ui-card2);overflow:hidden;margin-top:5px}
+.foodTargetBar i{display:block;height:100%;background:var(--text);border-radius:999px}
+.foodTargetHint{margin-top:10px;line-height:1.45}
+.calendarGoalSummary{margin-top:12px;padding:10px;border:1px solid var(--line);background:var(--ui-card2);border-radius:12px}
+.calendarGoalSummary b{display:block;font-size:16px;margin-top:3px}
+.calendarGoalSummary span{display:block;font-size:9px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+
+/* ===== V1.9 working HTML refinements ===== */
+.bodyInputGrid.two{grid-template-columns:repeat(2,1fr)}
+
+/* Bottom navigation is intentionally attached to the viewport, not floating. */
+.bottom{
+  left:0 !important;
+  right:0 !important;
+  transform:none !important;
+  bottom:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  border:0 !important;
+  border-top:1px solid var(--line) !important;
+  border-radius:0 !important;
+  padding:7px 9px calc(7px + env(safe-area-inset-bottom)) !important;
+  background:var(--bg2) !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.bottom::before,.bottom::after,
+.navBtn,.navBtn.active{
+  box-shadow:none !important;
+  filter:none !important;
+  text-shadow:none !important;
+}
+
+
+/* ===== V2.0 profile drawer ===== */
+.top{position:relative;display:grid !important;grid-template-columns:42px 1fr 42px;align-items:center}
+.brand{text-align:center}
+.menuBtn{
+  width:38px;height:38px;border-radius:11px;border:1px solid var(--line);
+  background:var(--ui-card);color:var(--text);font-size:20px;display:grid;place-items:center;
+  box-shadow:none !important
+}
+.profileDrawerBackdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.36);opacity:0;pointer-events:none;
+  transition:.22s;z-index:79
+}
+.profileDrawerBackdrop.open{opacity:1;pointer-events:auto}
+.profileDrawer{
+  position:fixed;left:0;top:0;bottom:0;width:min(390px,88vw);
+  background:var(--bg2);border-right:1px solid var(--line);
+  transform:translateX(-102%);transition:transform .26s cubic-bezier(.2,.8,.2,1);
+  z-index:80;box-shadow:none !important;overflow:auto
+}
+.profileDrawer.open{transform:translateX(0)}
+.profileDrawerTop{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+  padding:18px 16px 12px;border-bottom:1px solid var(--line)
+}
+.profileDrawerTitle{font-size:22px;font-weight:950;margin-top:3px}
+.profileDrawerBody{padding:14px 16px 28px}
+.profileSummary{
+  background:var(--ui-card);border:1px solid var(--line);border-radius:14px;
+  padding:12px;font-size:12px;font-weight:900;margin-bottom:12px
+}
+.bodyInputGrid.one{grid-template-columns:1fr}
+.dualBaseline{display:grid;gap:8px;margin-top:10px}
+.dualBaseline>div{background:var(--ui-card);border:1px solid var(--line);border-radius:11px;padding:9px}
+.dualBaseline span{display:block;font-size:9px;color:var(--muted)}
+.dualBaseline b{display:block;font-size:10px;line-height:1.45;margin-top:3px}
+
+/* hard reset for the bottom nav: flat, attached, no floating shadow */
+.bottom{
+  left:0 !important;right:0 !important;bottom:0 !important;
+  width:100% !important;max-width:none !important;
+  transform:none !important;
+  border:0 !important;border-top:1px solid var(--line) !important;
+  border-radius:0 !important;
+  background:var(--bg2) !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.bottom *, .bottom::before, .bottom::after{
+  box-shadow:none !important;
+  filter:none !important;
+  text-shadow:none !important;
+}
+
+
+/* ===== V2.1 SongSong formula correction ===== */
+.bodyGoalSegment.two{grid-template-columns:repeat(2,1fr)}
+.songFormulaGrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}
+.songFormulaGrid>div{background:var(--ui-card);border:1px solid var(--line);border-radius:10px;padding:8px}
+.songFormulaGrid span{display:block;font-size:8px;color:var(--muted);line-height:1.3}
+.songFormulaGrid b{display:block;font-size:11px;margin-top:3px}
+.songMacroBox{margin-top:12px;padding-top:11px;border-top:1px solid var(--line)}
+.songMacroGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:7px}
+.songMacroGrid>span{background:var(--ui-card);border:1px solid var(--line);border-radius:10px;padding:8px;font-size:8px;color:var(--muted)}
+.songMacroGrid b{display:block;font-size:12px;color:var(--text);margin:3px 0}
+.songMacroGrid small{font-size:7.5px;color:var(--muted);line-height:1.2}
+.songWarning{margin-top:10px;line-height:1.55;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--ui-card)}
+@media(max-width:430px){
+  .songMacroGrid{grid-template-columns:1fr 1fr}
+}
+
+
+.cutPhaseWrap{
+  margin-top:10px;padding:10px;border:1px solid var(--line);
+  border-radius:12px;background:var(--ui-card2)
+}
+
+
+/* ===== V2.3 calendar export ===== */
+.calendarExportBar{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px
+}
+.calendarExportBtn{
+  border:1px solid var(--line);background:var(--ui-card2);color:var(--text);
+  border-radius:12px;padding:10px 9px;display:flex;align-items:center;justify-content:center;
+  gap:6px;font-size:10px;font-weight:900;box-shadow:none !important
+}
+.calendarExportBtn span{font-size:13px;color:var(--muted)}
+.calendarExportBtn:disabled{opacity:.38}
+
+
+/* ===== V2.4 guide + changelog ===== */
+.homeInfoLinks{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin:15px 0 2px;color:var(--muted);font-size:10px
+}
+.homeInfoLinks button{
+  border:0;background:transparent;color:var(--muted);
+  padding:6px 2px;font-size:10px;font-weight:800
+}
+.homeInfoLinks button:active{opacity:.55}
+
+.infoSheetBackdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.34);
+  opacity:0;pointer-events:none;transition:.2s;z-index:88
+}
+.infoSheetBackdrop.open{opacity:1;pointer-events:auto}
+.infoSheet{
+  position:fixed;left:50%;bottom:0;transform:translate(-50%,102%);
+  width:min(730px,100%);max-height:82vh;background:var(--bg2);
+  border:1px solid var(--line);border-bottom:0;border-radius:22px 22px 0 0;
+  z-index:89;transition:transform .25s cubic-bezier(.2,.8,.2,1);
+  box-shadow:none!important;overflow:hidden
+}
+.infoSheet.open{transform:translate(-50%,0)}
+.infoSheetHandle{
+  width:38px;height:4px;border-radius:99px;background:var(--line);
+  margin:8px auto 2px
+}
+.infoSheetTop{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:8px 16px 12px;border-bottom:1px solid var(--line)
+}
+.infoSheetTitle{font-size:21px;font-weight:950;margin-top:2px}
+.infoSheetBody{
+  padding:14px 16px calc(24px + env(safe-area-inset-bottom));
+  overflow:auto;max-height:calc(82vh - 70px)
+}
+.infoIntro{
+  font-size:12px;font-weight:800;line-height:1.65;
+  padding:12px;background:var(--ui-card);border:1px solid var(--line);border-radius:13px
+}
+.infoSection{padding:14px 2px;border-bottom:1px solid var(--line)}
+.infoSection:last-child{border-bottom:0}
+.infoSection h4{margin:0 0 6px;font-size:13px}
+.infoSection p{margin:5px 0;color:var(--muted);font-size:10px;line-height:1.65}
+
+.changeVersion{
+  padding:13px 2px;border-bottom:1px solid var(--line)
+}
+.changeVersion:last-child{border-bottom:0}
+.changeVersion b{font-size:13px}
+.changeVersion span{
+  margin-left:7px;font-size:9px;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:3px 6px
+}
+.changeVersion p{
+  margin:7px 0 0;color:var(--muted);font-size:10px;line-height:1.6
+}
+
 </style>
 </head>
 <body>
 <div class="app">
   <div class="top">
+    <button class="menuBtn" onclick="openProfileDrawer()" aria-label="打开身体数据">☰</button>
     <div class="brand">A-OS BODY</div>
     <button id="themeBtn" class="themeBtn" aria-label="切换日夜模式">☀️</button>
   </div>
@@ -1162,6 +1391,12 @@ html[data-theme="dark"] .restClock{
       <div class="card stat"><div class="muted">训练</div><div class="statVal" id="weekSessions">0</div><div class="tiny">次</div></div>
       <div class="card stat"><div class="muted">完成组</div><div class="statVal" id="weekSets">0</div><div class="tiny">组</div></div>
       <div class="card stat"><div class="muted">容量</div><div class="statVal" id="weekVolume">0</div><div class="tiny">kg·次</div></div>
+    </div>
+
+    <div class="homeInfoLinks">
+      <button onclick="openInfoSheet('guide')">使用说明</button>
+      <span>·</span>
+      <button onclick="openInfoSheet('changelog')">版本更新说明</button>
     </div>
   </section>
 
@@ -1273,20 +1508,6 @@ html[data-theme="dark"] .restClock{
       <div class="foodHeaderHint">三大营养素手动记录</div>
     </div>
 
-    <div id="foodMeals" class="foodMeals"></div>
-
-    <div class="card supplementCard">
-      <div class="supplementTop">
-        <div>
-          <div class="muted">今日补剂 / 药物</div>
-          <div class="supplementSub">点一下记录今天是否摄入</div>
-        </div>
-        <div id="supplementCount" class="supplementCount">0 / 9</div>
-      </div>
-      <div id="supplementGrid" class="supplementGrid"></div>
-      <div class="supplementLegend"><span><b>Rx</b> = 药物</span><span>其余为补剂</span></div>
-    </div>
-
     <div class="card foodTotalCard">
       <div class="foodTotalTop">
         <div>
@@ -1300,7 +1521,32 @@ html[data-theme="dark"] .restClock{
         <div><span>蛋白质</span><b id="foodTotalProtein">0 g</b></div>
         <div><span>脂肪</span><b id="foodTotalFat">0 g</b></div>
       </div>
-      <div class="tiny foodNote">这里只做记录与汇总，不设置热量或体重目标。</div>
+      <div class="tiny foodNote">顶部先看实际摄入；下方“今日参考”来自你的长期个人基线，用于趋势观察。</div>
+    </div>
+
+    <div class="card foodTargetCard" id="foodTargetCard">
+      <div class="foodTargetTop">
+        <div>
+          <div class="muted">今日参考</div>
+          <div class="foodTargetTitle" id="foodTargetTitle">等待身体数据与个人基线</div>
+        </div>
+        <div class="foodTargetDayType" id="foodTargetDayType">—</div>
+      </div>
+      <div id="foodTargetProgress" class="foodTargetProgress"></div>
+    </div>
+
+    <div id="foodMeals" class="foodMeals"></div>
+
+    <div class="card supplementCard">
+      <div class="supplementTop">
+        <div>
+          <div class="muted">今日补剂 / 药物</div>
+          <div class="supplementSub">点一下记录今天是否摄入</div>
+        </div>
+        <div id="supplementCount" class="supplementCount">0 / 9</div>
+      </div>
+      <div id="supplementGrid" class="supplementGrid"></div>
+      <div class="supplementLegend"><span><b>Rx</b> = 药物</span><span>其余为补剂</span></div>
     </div>
 
     <div id="historyList" style="display:none"></div>
@@ -1338,7 +1584,16 @@ html[data-theme="dark"] .restClock{
         </button>
       </div>
 
-      <div class="version">A-OS BODY · V1.7 TRACK</div>
+      <div class="calendarExportBar">
+        <button id="exportSelectedBtn" class="calendarExportBtn" onclick="exportSelectedDate()" disabled>
+          <span>⇩</span><b>导出选中日期</b>
+        </button>
+        <button class="calendarExportBtn" onclick="exportAllData()">
+          <span>⇩</span><b>全部导出</b>
+        </button>
+      </div>
+
+      <div class="version">A-OS BODY · V2.4 INFO</div>
     </div>
 
     <div id="calendarDayDetail" class="calendarDayDetail" style="display:none"></div>
@@ -1346,6 +1601,86 @@ html[data-theme="dark"] .restClock{
 </div>
 
 
+
+
+
+<div id="infoSheetBackdrop" class="infoSheetBackdrop" onclick="closeInfoSheet()"></div>
+<section id="infoSheet" class="infoSheet" aria-hidden="true">
+  <div class="infoSheetHandle"></div>
+  <div class="infoSheetTop">
+    <div>
+      <div class="tiny">A-OS BODY</div>
+      <div id="infoSheetTitle" class="infoSheetTitle">使用说明</div>
+    </div>
+    <button class="pickerClose" onclick="closeInfoSheet()">✕</button>
+  </div>
+  <div id="infoSheetBody" class="infoSheetBody"></div>
+</section>
+
+<div id="profileDrawerBackdrop" class="profileDrawerBackdrop" onclick="closeProfileDrawer()"></div>
+<aside id="profileDrawer" class="profileDrawer">
+  <div class="profileDrawerTop">
+    <div>
+      <div class="tiny">A-OS BODY</div>
+      <div class="profileDrawerTitle">身体数据</div>
+    </div>
+    <button class="pickerClose" onclick="closeProfileDrawer()">✕</button>
+  </div>
+
+  <div class="profileDrawerBody">
+    <div class="profileSummary" id="bodyDataSummary">尚未录入</div>
+
+    <div class="bodyInputGrid">
+      <label class="bodyField"><span>身高</span><div><input id="bodyHeight" inputmode="decimal" placeholder="180"><b>cm</b></div></label>
+      <label class="bodyField"><span>体重</span><div><input id="bodyWeight" inputmode="decimal" placeholder="69"><b>kg</b></div></label>
+      <label class="bodyField"><span>腰围</span><div><input id="bodyWaist" inputmode="decimal" placeholder="80"><b>cm</b></div></label>
+    </div>
+
+    <div class="bodyInputGrid one">
+      <label class="bodyField"><span>年龄</span><div><input id="bodyAge" inputmode="numeric" placeholder="16"><b>岁</b></div></label>
+    </div>
+
+    <div class="bodyGoalLabel">性别</div>
+    <div class="bodyGoalSegment two">
+      <button id="sexMale" onclick="setBodySex('male')">男</button>
+      <button id="sexFemale" onclick="setBodySex('female')">女</button>
+    </div>
+
+    <div class="bodyGoalLabel">力量训练水平</div>
+    <div class="bodyGoalSegment">
+      <button id="levelNew" onclick="setTrainingLevel('new')">新手</button>
+      <button id="levelIntermediate" onclick="setTrainingLevel('intermediate')">有基础</button>
+      <button id="levelVeteran" onclick="setTrainingLevel('veteran')">老手</button>
+    </div>
+
+    <div class="bodyInputGrid one">
+      <label class="bodyField"><span>日均有氧消耗（可选）</span><div><input id="bodyAerobic" inputmode="decimal" placeholder="0"><b>kcal</b></div></label>
+    </div>
+
+    <div class="bodyGoalLabel">当前阶段</div>
+    <div class="bodyGoalSegment">
+      <button id="goalMaintain" onclick="setBodyGoal('maintain')">维持</button>
+      <button id="goalGain" onclick="setBodyGoal('gain')">增肌</button>
+      <button id="goalCut" onclick="setBodyGoal('cut')">减脂</button>
+    </div>
+
+    <div id="cutPhaseWrap" class="cutPhaseWrap" style="display:none">
+      <div class="bodyGoalLabel">减脂阶段</div>
+      <div class="bodyGoalSegment two">
+        <button id="cutPhaseEarly" onclick="setCutPhase('early')">初期</button>
+        <button id="cutPhaseLate" onclick="setCutPhase('late')">末期</button>
+      </div>
+    </div>
+
+    <div id="bodyGoalNotice" class="bodyGoalNotice"></div>
+    <button class="primary" onclick="saveBodyData()">保存身体数据</button>
+
+    <div class="bodyTargetBox" id="bodyTargetBox">
+      <div class="bodyTargetTop"><span>理论参考 + 个人基线</span><b id="bodyTargetState">等待数据</b></div>
+      <div id="bodyTargetContent" class="bodyTargetContent"></div>
+    </div>
+  </div>
+</aside>
 
 <div id="finishModalBackdrop" class="appModalBackdrop" onclick="closeFinishModal()"></div>
 <div id="finishModal" class="appModal" role="dialog" aria-modal="true">
@@ -1544,6 +1879,8 @@ const ACTIVE_SESSION_STORE="aos_body_active_session_v11";
 const TEMPLATE_STORE="aos_body_templates_v12";
 const DAILY_STATUS_STORE="aos_body_daily_status_v15";
 const NUTRITION_STORE="aos_body_nutrition_v16";
+const BODY_PROFILE_STORE="aos_body_body_profile_v18";
+const BODY_LOG_STORE="aos_body_body_log_v18";
 let selectedTemplateId="none";
 let pendingTemplateId="none";
 const $=id=>document.getElementById(id);
@@ -1708,6 +2045,426 @@ function renderDailyStatus(){
 
 
 
+
+function getBodyProfile(){
+  try{return JSON.parse(localStorage.getItem(BODY_PROFILE_STORE)||"null")}catch{return null}
+}
+function setBodyProfile(v){localStorage.setItem(BODY_PROFILE_STORE,JSON.stringify(v))}
+function getBodyLogs(){
+  try{return JSON.parse(localStorage.getItem(BODY_LOG_STORE)||"{}")}catch{return{}}
+}
+function setBodyLogs(v){localStorage.setItem(BODY_LOG_STORE,JSON.stringify(v))}
+let pendingBodyGoal="maintain";
+let pendingBodySex="male";
+let pendingTrainingLevel="new";
+let pendingCutPhase="early";
+
+
+
+const AOS_GUIDE_HTML=`
+  <div class="infoIntro">A-OS Body 用来记录训练、饮食、身体状态，并把这些数据串起来看趋势。</div>
+
+  <div class="infoSection">
+    <h4>身体数据</h4>
+    <p>点击左上角三横线打开身体数据。录入身高、体重、腰围、年龄、性别、训练水平和阶段。</p>
+    <p>阶段分为维持、增肌、减脂；系统按当前身体数据计算理论应吃热量与三大营养素参考。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>今日状态</h4>
+    <p>首页“今日状态”记录睡眠、睡眠评分、静息心率、昨日训练负荷和主观精神状态，用于观察恢复趋势。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>训练</h4>
+    <p>可从模板快速开始，也可临时添加动作。每组记录重量与次数，组间自动计时；结束训练后仍可回看和编辑历史记录。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>饮食</h4>
+    <p>按早餐、午餐、晚餐、训前、训后、其他餐记录碳水、蛋白质和脂肪。热量按碳水×4 + 蛋白质×4 + 脂肪×9计算。</p>
+    <p>当前记账方式以食物的主要营养属性为主，与松松表的记账口径保持一致。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>补剂 / 药物</h4>
+    <p>饮食页可快速标记当天是否摄入各项补剂或药物。这里只做记录，不替代医生或药师建议。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>日历</h4>
+    <p>训练日会用胸、背、腿、其他四色圆点标记。点某一天可查看饮食记录或训练分析，再点同一天可取消选中。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>导出数据</h4>
+    <p>日历页可导出“选中日期”或“全部数据”的 JSON，便于后续在 Personal OS 中继续分析和处理。</p>
+  </div>
+
+  <div class="infoSection">
+    <h4>数据存储</h4>
+    <p>当前数据主要保存在浏览器本地。清除网站数据、更换浏览器或更换设备前，建议先导出全部数据。</p>
+  </div>
+`;
+
+const AOS_CHANGELOG_HTML=`
+  <div class="changeVersion">
+    <b>V2.4</b><span>说明入口</span>
+    <p>首页新增“使用说明”和“版本更新说明”两个轻量入口。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V2.3</b><span>配额与导出优化</span>
+    <p>维持热量改为平衡热量×0.8；蛋白质固定1.5g/kg；增肌脂肪1.0g/kg、减脂脂肪0.8g/kg；碳水由总热量倒推。日历恢复选中日期导出与全部导出，并支持再次点击取消选中。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V2.2</b><span>增肌 / 减脂完整算法</span>
+    <p>加入松松减脂热量×0.64、减脂初期/末期和相应营养配额。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V2.1</b><span>松松公式核对</span>
+    <p>依据最新版 Excel 重新核对基础代谢、无运动消耗、力训消耗和增肌×0.84记账逻辑。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V2.0</b><span>身体数据抽屉</span>
+    <p>身体数据移入左侧抽屉；阶段改为维持 / 增肌 / 减脂；理论线和个人记录线并行。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.9</b><span>身体数据完善</span>
+    <p>加入年龄等身体档案字段，饮食总热量移到页面顶部，底部导航进一步扁平化。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.8</b><span>身体数据联动</span>
+    <p>加入身体数据、阶段目标，并开始与饮食页和日历饮食总结联动。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.7</b><span>训练色标与补剂</span>
+    <p>日历增加胸 / 背 / 腿 / 其他四色训练标记；饮食新增其他餐和补剂 / 药物记录。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.6</b><span>饮食与日历整合</span>
+    <p>底部“分析”改为“饮食”；分析内容移入日历；加入六餐宏量营养素记录和自动热量计算。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.5</b><span>今日状态</span>
+    <p>首页加入睡眠、静息心率、训练负荷和主观状态记录。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.4</b><span>PWA 部署版</span>
+    <p>加入 manifest、Service Worker 与图标，可通过 GitHub Pages 安装到桌面。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.3</b><span>模板滚轮</span>
+    <p>训练模板改成快速开始里的滚轮选择器，减少首页占用。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.2</b><span>模板与历史编辑</span>
+    <p>加入浅色主题、训练模板、重复动作保护、历史训练编辑等功能。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.1</b><span>训练可靠性</span>
+    <p>加入自然周统计、未完成训练恢复、已完成组撤销与编辑。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V1.0</b><span>基础训练版</span>
+    <p>完成训练流程、确认结束和基础训练分析。</p>
+  </div>
+`;
+
+function openInfoSheet(type){
+  const title=$("infoSheetTitle"), body=$("infoSheetBody");
+  if(!title||!body)return;
+  const isGuide=type==="guide";
+  title.textContent=isGuide?"使用说明":"版本更新说明";
+  body.innerHTML=isGuide?AOS_GUIDE_HTML:AOS_CHANGELOG_HTML;
+  $("infoSheetBackdrop")?.classList.add("open");
+  $("infoSheet")?.classList.add("open");
+  $("infoSheet")?.setAttribute("aria-hidden","false");
+}
+function closeInfoSheet(){
+  $("infoSheetBackdrop")?.classList.remove("open");
+  $("infoSheet")?.classList.remove("open");
+  $("infoSheet")?.setAttribute("aria-hidden","true");
+}
+
+function openProfileDrawer(){
+  $("profileDrawerBackdrop").classList.add("open");
+  $("profileDrawer").classList.add("open");
+  renderBodyData();
+}
+function closeProfileDrawer(){
+  $("profileDrawerBackdrop").classList.remove("open");
+  $("profileDrawer").classList.remove("open");
+}
+
+function toggleBodyData(){}
+
+
+
+function setBodySex(sex){
+  pendingBodySex=sex;
+  $("sexMale")?.classList.toggle("active",sex==="male");
+  $("sexFemale")?.classList.toggle("active",sex==="female");
+}
+function setTrainingLevel(level){
+  pendingTrainingLevel=level;
+  [["new","levelNew"],["intermediate","levelIntermediate"],["veteran","levelVeteran"]].forEach(([v,id])=>{
+    $(id)?.classList.toggle("active",v===level);
+  });
+}
+
+
+function setCutPhase(phase){
+  pendingCutPhase=phase;
+  $("cutPhaseEarly")?.classList.toggle("active",phase==="early");
+  $("cutPhaseLate")?.classList.toggle("active",phase==="late");
+}
+
+function setBodyGoal(goal){
+  pendingBodyGoal=goal;
+  ["maintain","gain","cut"].forEach(g=>{
+    const id=g==="maintain"?"goalMaintain":g==="gain"?"goalGain":"goalCut";
+    $(id)?.classList.toggle("active",g===goal);
+  });
+  if($("cutPhaseWrap")) $("cutPhaseWrap").style.display=goal==="cut"?"block":"none";
+  renderBodyGoalNotice();
+}
+function renderBodyGoalNotice(){
+  const box=$("bodyGoalNotice"); if(!box)return;
+  if(pendingBodyGoal==="cut"){
+    box.innerHTML=`<b>减脂</b>：热量按松松表格的“平衡热量 × 0.64”记账口径；碳水按${pendingCutPhase==="early"?"初期":"末期"}配额，休息日再比力训日低约 0.5 g/kg。`;
+  }else if(pendingBodyGoal==="gain"){
+    box.innerHTML="<b>增肌</b>：热量按松松表格的“平衡热量 × 0.84”记账口径；力训日碳水高于休息日。";
+  }else{
+    box.innerHTML="<b>维持</b>：显示理论平衡热量，不额外制造增肌盈余或减脂缺口。";
+  }
+}
+function saveBodyData(){
+  const height=Number($("bodyHeight").value), weight=Number($("bodyWeight").value), waist=Number($("bodyWaist").value);
+  const age=Number($("bodyAge").value);
+  const aerobicRaw=$("bodyAerobic").value.trim();
+  const aerobic=aerobicRaw===""?0:Number(aerobicRaw);
+  if(!Number.isFinite(height)||height<100||height>230){showToast("请检查身高");return}
+  if(!Number.isFinite(weight)||weight<25||weight>200){showToast("请检查体重");return}
+  if(!Number.isFinite(waist)||waist<40||waist>180){showToast("请检查腰围");return}
+  if(!Number.isFinite(age)||age<10||age>100){showToast("请检查年龄");return}
+  if(!Number.isFinite(aerobic)||aerobic<0||aerobic>2000){showToast("请检查有氧消耗");return}
+  const profile={
+    height,weight,waist,age,
+    sex:pendingBodySex,
+    trainingLevel:pendingTrainingLevel,
+    aerobic,
+    goal:pendingBodyGoal,
+    cutPhase:pendingCutPhase,
+    updatedAt:new Date().toISOString()
+  };
+  setBodyProfile(profile);
+  const logs=getBodyLogs();
+  logs[localDateKey()]={weight,waist,height,age,date:localDateKey()};
+  setBodyLogs(logs);
+  renderBodyData();
+  renderNutritionView();
+  if(selectedDateKey && calendarDayPanel==="food") renderCalendarDayDetail();
+  showToast("身体数据已保存");
+}
+
+function songSongTheory(profile){
+  if(!profile) return {ready:false,reason:"先录入身体数据"};
+  const age=Number(profile.age), weight=Number(profile.weight), height=Number(profile.height);
+  if(!Number.isFinite(age)||!Number.isFinite(weight)||!Number.isFinite(height)) return {ready:false,reason:"身体数据不完整"};
+
+  // 好人松松 Excel 25年9月版：
+  // 男：BMR = 体重×9.99 + 身高×6.25 - 年龄×4.92 + 5
+  // 女：BMR = 体重×9.99 + 身高×6.25 - 年龄×4.92 - 161
+  const bmr=weight*9.99 + height*6.25 - age*4.92 + (profile.sex==="female"?-161:5);
+  const noExercise=bmr/0.7;
+
+  const male={new:150,intermediate:200,veteran:250};
+  const female={new:100,intermediate:150,veteran:200};
+  const strength=(profile.sex==="female"?female:male)[profile.trainingLevel||"new"];
+  const aerobic=Math.max(0,Number(profile.aerobic)||0);
+
+  const balanceTraining=noExercise+strength+aerobic;
+  const balanceRest=noExercise+aerobic;
+
+  // 增肌表的“应吃热量”口径：理论平衡热量 × 1.05 × 0.8 = ×0.84
+  const eatingTraining=balanceTraining*0.84;
+  const eatingRest=balanceRest*0.84;
+
+  return {
+    ready:true,bmr,noExercise,strength,aerobic,
+    balanceTraining,balanceRest,
+    eatingTraining,eatingRest
+  };
+}
+function theoreticalMaintenance(profile){
+  const x=songSongTheory(profile);
+  if(!x.ready)return x;
+  return {ready:true,low:Math.round(x.balanceRest),high:Math.round(x.balanceTraining),detail:x};
+}
+
+function recentNutritionDays(limit=7){
+  const all=getNutritionStore();
+  return Object.keys(all).sort().reverse().slice(0,limit).map(k=>({key:k,totals:nutritionTotals(getNutritionDay(k))})).filter(x=>x.totals.kcal>0);
+}
+function estimatePersonalBaseline(){
+  const profile=getBodyProfile();
+  if(!profile) return {ready:false,reason:"先录入身体数据"};
+  const days=recentNutritionDays(14);
+  const logs=getBodyLogs();
+  const weights=Object.keys(logs).sort().reverse().slice(0,7).map(k=>({k,w:Number(logs[k].weight)})).filter(x=>Number.isFinite(x.w));
+  if(days.length<5 || weights.length<2){
+    return {ready:false,reason:`个人基线需要至少 5 天饮食记录和 2 次体重记录（当前 ${days.length} 天饮食 / ${weights.length} 次体重）`};
+  }
+  const avg=days.reduce((a,x)=>a+x.totals.kcal,0)/days.length;
+  const newest=weights[0], oldest=weights[weights.length-1];
+  const changePct=(newest.w-oldest.w)/oldest.w*100;
+  if(Math.abs(changePct)>1.0){
+    return {ready:false,reason:"近期体重仍在明显变化，继续记录一段时间再把平均摄入当作个人维持基线。",avg,changePct};
+  }
+  return {ready:true,maintenance:Math.round(avg),days:days.length,changePct};
+}
+function isTrainingDay(key){
+  return workoutsByDateKey(key).length>0;
+}
+
+function songSongMacroRange(profile,key,targetKcal){
+  if(!profile || !Number.isFinite(Number(targetKcal))) return null;
+  const w=Number(profile.weight);
+  const goal=profile.goal;
+
+  if(goal!=="gain" && goal!=="cut") return null;
+
+  const proteinG=Math.round(w*1.5);
+  const fatPerKg=goal==="gain"?1.0:0.8;
+  const fatG=Math.round(w*fatPerKg);
+  const carbG=Math.max(0,Math.round((Number(targetKcal)-proteinG*4-fatG*9)/4));
+
+  let carbLowPerKg,carbHighPerKg,modeNote;
+  if(goal==="gain"){
+    carbLowPerKg=3.5;
+    carbHighPerKg=4.5;
+    modeNote="增肌配额";
+  }else{
+    const phase=profile.cutPhase||"early";
+    carbLowPerKg=phase==="late"?2.0:2.5;
+    carbHighPerKg=phase==="late"?2.5:3.0;
+    modeNote=`减脂${phase==="late"?"末期":"初期"}配额`;
+  }
+
+  return {
+    proteinG,
+    fatG,
+    carbG,
+    proteinPerKg:1.5,
+    fatPerKg,
+    carbLowPerKg,
+    carbHighPerKg,
+    carbLowG:Math.round(w*carbLowPerKg),
+    carbHighG:Math.round(w*carbHighPerKg),
+    modeNote
+  };
+}
+
+function targetForDate(key){
+  const profile=getBodyProfile();
+  if(!profile) return {ready:false,reason:"先录入身体数据"};
+
+  const theory=songSongTheory(profile);
+  const personal=estimatePersonalBaseline();
+  const training=isTrainingDay(key);
+  const balance=training?theory.balanceTraining:theory.balanceRest;
+
+  let kcal=null, coefficient=1;
+  if(profile.goal==="gain"){
+    coefficient=0.84; // 1.05 × 0.8
+  }else if(profile.goal==="cut"){
+    coefficient=0.64; // 0.8 × 0.8
+  }else{
+    coefficient=0.8;  // 维持：无盈余，只保留记账修正
+  }
+  kcal=balance*coefficient;
+
+  const macros=songSongMacroRange(profile,key,kcal);
+  return {
+    ready:true,
+    kcal:Math.round(kcal),
+    coefficient,
+    training,
+    goal:profile.goal,
+    source:"songsong",
+    theory,
+    personal,
+    macros
+  };
+}
+function renderBodyData(){
+  const p=getBodyProfile();
+  if(!p){
+    if($("bodyDataSummary")) $("bodyDataSummary").textContent="尚未录入";
+    pendingBodySex="male"; setBodySex("male");
+    pendingTrainingLevel="new"; setTrainingLevel("new");
+    pendingCutPhase="early"; setCutPhase("early");
+    pendingBodyGoal="maintain"; setBodyGoal("maintain");
+    if($("bodyAerobic")) $("bodyAerobic").value="0";
+    renderBodyTarget();
+    return;
+  }
+  if($("bodyHeight")) $("bodyHeight").value=p.height;
+  if($("bodyWeight")) $("bodyWeight").value=p.weight;
+  if($("bodyWaist")) $("bodyWaist").value=p.waist;
+  if($("bodyAge")) $("bodyAge").value=p.age ?? "";
+  if($("bodyAerobic")) $("bodyAerobic").value=p.aerobic ?? 0;
+  pendingBodySex=p.sex||"male"; setBodySex(pendingBodySex);
+  pendingTrainingLevel=p.trainingLevel||"new"; setTrainingLevel(pendingTrainingLevel);
+  pendingCutPhase=p.cutPhase||"early"; setCutPhase(pendingCutPhase);
+  pendingBodyGoal=p.goal||"maintain"; setBodyGoal(pendingBodyGoal);
+  if($("bodyDataSummary")) $("bodyDataSummary").textContent=`${p.height} cm · ${p.weight} kg · 腰围 ${p.waist} cm${p.age?` · ${p.age}岁`:""}`;
+  renderBodyTarget();
+}
+function renderBodyTarget(){
+  const state=$("bodyTargetState"), content=$("bodyTargetContent"); if(!state||!content)return;
+  const p=getBodyProfile();
+  if(!p){
+    state.textContent="等待身体数据";
+    content.innerHTML='<div class="tiny">录入身高、体重、腰围、年龄、性别和训练水平后显示松松表格口径。</div>';
+    return;
+  }
+  const x=songSongTheory(p);
+  const t=targetForDate(localDateKey());
+  state.textContent=t.training?"力训日":"休息日";
+
+  const formulaRows=`
+    <div class="songFormulaGrid">
+      <div><span>基础代谢 a</span><b>${Math.round(x.bmr)} kcal</b></div>
+      <div><span>无运动总消耗 b=a÷0.7</span><b>${Math.round(x.noExercise)} kcal</b></div>
+      <div><span>力训消耗 c</span><b>${Math.round(x.strength)} kcal</b></div>
+      <div><span>日均有氧 d</span><b>${Math.round(x.aerobic)} kcal</b></div>
+      <div><span>力训日平衡 e1</span><b>${Math.round(x.balanceTraining)} kcal</b></div>
+      <div><span>休息日平衡 e2</span><b>${Math.round(x.balanceRest)} kcal</b></div>
+    </div>`;
+
+  const macro=t.macros?`
+    <div class="songMacroBox">
+      <div class="tiny">${t.macros.modeNote} · ${t.training?"力训日":"休息日"}</div>
+      <div class="songMacroGrid">
+        <span>碳水 <b>${t.macros.carbG}g</b><small>由总热量倒推 · 参考 ${t.macros.carbLowG}–${t.macros.carbHighG}g</small></span>
+        <span>蛋白质 <b>${t.macros.proteinG}g</b><small>固定 ${t.macros.proteinPerKg} g/kg</small></span>
+        <span>脂肪 <b>${t.macros.fatG}g</b><small>固定 ${t.macros.fatPerKg} g/kg</small></span>
+      </div>
+    </div>`:"";
+
+  content.innerHTML=`
+    ${formulaRows}
+    <div class="bodyTargetCalories">${t.kcal} <small>kcal</small></div>
+    <div class="tiny" style="margin-top:4px">${
+      p.goal==="gain"?"增肌“应吃热量” = 平衡热量 ×0.84":
+      p.goal==="cut"?"减脂“应吃热量” = 平衡热量 ×0.64":
+      "维持“应吃热量” = 平衡热量 ×0.8"
+    }</div>
+    ${macro}
+    <div class="tiny songWarning">碳水为倒推值：应吃热量 − 蛋白质热量 − 脂肪热量，再 ÷4。</div>`;
+}
+
 const MEAL_KEYS=[
   ["breakfast","早餐"],
   ["lunch","午餐"],
@@ -1766,6 +2523,38 @@ function nutritionTotals(day){
   return {carbs,protein,fat,kcal,recorded};
 }
 function fmtMacro(v){return Number.isInteger(v)?String(v):Number(v).toFixed(1)}
+
+function renderFoodTarget(){
+  const title=$("foodTargetTitle"), dayType=$("foodTargetDayType"), prog=$("foodTargetProgress");
+  if(!title||!prog)return;
+  const key=localDateKey(), t=targetForDate(key), actual=nutritionTotals(getNutritionDay(key));
+  if(!t.ready){
+    title.textContent="暂无自动目标";
+    dayType.textContent="—";
+    prog.innerHTML="";
+    return;
+  }
+  const m=t.macros;
+  title.textContent=m
+    ? `${t.kcal} kcal · 碳 ${m.carbG}g / 蛋 ${m.proteinG}g / 脂 ${m.fatG}g`
+    : `${t.kcal} kcal · 维持参考`;
+  dayType.textContent=t.training?"力训日":"休息日";
+
+  const rows=[["热量",actual.kcal,t.kcal,"kcal"]];
+  if(m){
+    rows.push(["碳水",actual.carbs,m.carbG,"g"]);
+    rows.push(["蛋白质",actual.protein,m.proteinG,"g"]);
+    rows.push(["脂肪",actual.fat,m.fatG,"g"]);
+  }
+  prog.innerHTML=rows.map(([name,val,goal,unit])=>{
+    const pct=Math.max(0,Math.min(100,goal?val/goal*100:0));
+    return `<div class="foodTargetRow">
+      <div><span>${name}</span><b>${Math.round(val)} / ${goal} ${unit}</b></div>
+      <div class="foodTargetBar"><i style="width:${pct}%"></i></div>
+    </div>`;
+  }).join("");
+}
+
 function renderNutritionView(){
   if(!$("foodMeals"))return;
   const key=localDateKey();
@@ -1788,6 +2577,7 @@ function renderNutritionView(){
   }).join("");
   renderSupplementTracker();
   updateNutritionTotals();
+  renderFoodTarget();
 }
 function nutritionInputHtml(meal,macro,label,value){
   return `<label class="macroField">
@@ -1818,6 +2608,7 @@ function updateNutritionTotals(){
   if($("foodTotalCarbs"))$("foodTotalCarbs").textContent=`${fmtMacro(t.carbs)} g`;
   if($("foodTotalProtein"))$("foodTotalProtein").textContent=`${fmtMacro(t.protein)} g`;
   if($("foodTotalFat"))$("foodTotalFat").textContent=`${fmtMacro(t.fat)} g`;
+  renderFoodTarget();
 }
 
 function renderSupplementTracker(){
@@ -1873,6 +2664,11 @@ function calendarFoodHtml(key){
         <div><span>蛋白质</span><b>${fmtMacro(t.protein)} g</b></div>
         <div><span>脂肪</span><b>${fmtMacro(t.fat)} g</b></div>
       </div>
+      ${(()=>{const goal=targetForDate(key);return goal.ready?`<div class="calendarGoalSummary">
+        <div class="tiny">当日参考 · ${goal.training?"训练日":"休息日"}</div>
+        <b>${goal.kcal} kcal</b>
+        <span>${goal.macros?`碳水 ${goal.macros.carbG}g · 蛋白质 ${goal.macros.proteinG}g · 脂肪 ${goal.macros.fatG}g`:"维持热量参考"}</span>
+      </div>`:`<div class="calendarGoalSummary"><div class="tiny">当日参考</div><span>${goal.reason||"暂无目标"}</span></div>`})()}
       <div class="calendarMealList">${rows}</div>
       <div class="calendarSupplements">
         <div class="tiny" style="margin-bottom:7px">补剂 / 药物</div>
@@ -2952,8 +3748,13 @@ function changeMonth(delta){
   renderCalendar();
 }
 function selectDate(key){
-  selectedDateKey=key;
-  calendarDayPanel=null;
+  if(selectedDateKey===key){
+    selectedDateKey=null;
+    calendarDayPanel=null;
+  }else{
+    selectedDateKey=key;
+    calendarDayPanel=null;
+  }
   renderCalendar();
   renderCalendarDayDetail();
 }
@@ -3000,34 +3801,68 @@ function renderCalendar(){
   $("calGrid").innerHTML=cells.join("");
 
   const actions=$("selectedDateActions");
+  const exportSelectedBtn=$("exportSelectedBtn");
   if(!selectedDateKey){
     if(actions) actions.style.display="none";
+    if(exportSelectedBtn) exportSelectedBtn.disabled=true;
     if($("calendarDayDetail")) $("calendarDayDetail").style.display="none";
   }else{
     if(actions) actions.style.display="grid";
+    if(exportSelectedBtn) exportSelectedBtn.disabled=false;
     $("calendarFoodBtn")?.classList.toggle("active",calendarDayPanel==="food");
     $("calendarWorkoutBtn")?.classList.toggle("active",calendarDayPanel==="workout");
   }
 }
-function exportSelectedDate(){
-  if(!selectedDateKey){alert("请先在日历中选择一个日期");return}
-  const data=workoutsByDateKey(selectedDateKey);
-  const payload={date:selectedDateKey,workout_count:data.length,workouts:data};
+function downloadJson(filename,payload){
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
   const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);
-  a.download=`A-OS_Body_${selectedDateKey}.json`;
+  a.download=filename;
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(a.href);
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),0);
 }
-
+function exportSelectedDate(){
+  if(!selectedDateKey){alert("请先在日历中选择一个日期");return}
+  const nutrition=getNutritionDay(selectedDateKey);
+  const nutritionTotal=nutritionTotals(nutrition);
+  const statuses=getDailyStatuses();
+  const bodyLogs=getBodyLogs();
+  const target=targetForDate(selectedDateKey);
+  const payload={
+    schema_version:"A-OS_BODY_EXPORT_V2.3",
+    export_type:"selected_date",
+    exported_at:new Date().toISOString(),
+    date:selectedDateKey,
+    body_profile:getBodyProfile(),
+    body_log:bodyLogs[selectedDateKey]||null,
+    daily_status:statuses[selectedDateKey]||null,
+    nutrition:{
+      ...nutrition,
+      totals:nutritionTotal,
+      target:target.ready?target:null
+    },
+    workouts:workoutsByDateKey(selectedDateKey)
+  };
+  downloadJson(`A-OS_Body_${selectedDateKey}.json`,payload);
+}
+function exportAllData(){
+  const payload={
+    schema_version:"A-OS_BODY_EXPORT_V2.3",
+    export_type:"all",
+    exported_at:new Date().toISOString(),
+    body_profile:getBodyProfile(),
+    body_logs:getBodyLogs(),
+    daily_statuses:getDailyStatuses(),
+    nutrition:getNutritionStore(),
+    workouts:getHistory(),
+    templates:getTemplates()
+  };
+  downloadJson(`A-OS_Body_All_${localDateKey()}.json`,payload);
+}
 function exportData(){
-  const blob=new Blob([JSON.stringify(getHistory(),null,2)],{type:"application/json"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="A-OS_Body_V06_Data.json";
-  a.click();
-  URL.revokeObjectURL(a.href)
+  exportAllData();
 }
 
 window.addEventListener("pagehide",persistActiveSession);
@@ -3035,7 +3870,7 @@ document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="hidden") persistActiveSession();
 });
 
-renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();renderDailyStatus();renderNutritionView();
+renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();renderDailyStatus();renderNutritionView();renderBodyData();
 if($("templateWheel")){
   $("templateWheel").addEventListener("scroll",()=>{
     clearTimeout(window.__wheelTimer);
