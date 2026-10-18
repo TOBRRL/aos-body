@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V3.1.2</title>
+<title>A-OS Body V3.1.3</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -1640,6 +1640,41 @@ html[data-theme="dark"] .restClock{
 .weightDateQuick{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px}
 .weightDateQuick button{min-height:38px;border:1px solid var(--line);background:var(--ui-card2);color:var(--text);border-radius:11px;font-size:10px;font-weight:900}
 
+
+/* ===== V3.1.3 hydration ===== */
+.hydrationBar{
+  padding:9px 10px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:10px
+}
+.hydrationMain{
+  min-width:0;display:flex;align-items:center;gap:9px;border:0;background:transparent;color:var(--text);padding:0;text-align:left
+}
+.hydrationMark{
+  width:31px;height:31px;flex:0 0 auto;border:1px solid var(--line);border-radius:10px;background:var(--ui-card2);
+  display:grid;place-items:center;font-size:10px;font-weight:950
+}
+.hydrationText{display:grid;gap:1px;min-width:0}
+.hydrationText small{font-size:8px;color:var(--muted);font-weight:800}
+.hydrationText b{display:flex;align-items:baseline;gap:3px;font-size:17px;line-height:1;font-weight:950}
+.hydrationText i{font-style:normal;font-size:8px;color:var(--muted);font-weight:850}
+.hydrationQuick{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+.hydrationQuick button{
+  height:31px;min-width:48px;padding:0 8px;border:1px solid var(--line);border-radius:9px;background:var(--ui-card2);color:var(--text);
+  font-size:9px;font-weight:900
+}
+.waterAdjustValue{
+  display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--ui-card);border-radius:13px;padding:0 13px
+}
+.waterAdjustValue input{
+  width:100%;min-width:0;border:0;background:transparent;color:var(--text);outline:0;padding:15px 0;font-size:24px;font-weight:950
+}
+.waterAdjustValue span{font-size:10px;color:var(--muted);font-weight:900}
+.waterPresetRow{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 12px}
+.waterPresetRow button{height:36px;border:1px solid var(--line);border-radius:10px;background:var(--ui-card2);color:var(--text);font-size:9px;font-weight:900}
+.waterSaveBtn{width:100%}
+.calendarWaterSummary{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;font-size:9px;color:var(--muted)}
+.calendarWaterSummary b{color:var(--text);font-size:11px}
+@media(max-width:380px){.hydrationQuick button{min-width:43px;padding:0 6px}.hydrationBar{gap:7px}}
+
 </style>
 </head>
 <body>
@@ -1891,6 +1926,16 @@ html[data-theme="dark"] .restClock{
       </div>
       <div class="foodHeaderHint">三大营养素手动记录</div>
     </div>
+    <div class="card hydrationBar">
+      <button class="hydrationMain" onclick="openWaterAdjust()" aria-label="调整今日饮水量">
+        <span class="hydrationMark">水</span>
+        <span class="hydrationText"><small>今日饮水</small><b><span id="hydrationMl">0</span><i>ml</i></b></span>
+      </button>
+      <div class="hydrationQuick">
+        <button onclick="addWater(250)">+250</button>
+        <button onclick="addWater(500)">+500</button>
+      </div>
+    </div>
 
     <div class="card foodTotalCard">
       <div class="foodTotalTop">
@@ -1983,7 +2028,7 @@ html[data-theme="dark"] .restClock{
         <input id="backupFileInput" type="file" accept=".json,application/json" style="display:none" onchange="handleBackupFile(event)">
       </div>
 
-      <div class="version">A-OS BODY · V3.1.2 POLISH</div>
+      <div class="version">A-OS BODY · V3.1.3 HYDRATION</div>
     </div>
 
     <div id="calendarDayDetail" class="calendarDayDetail" style="display:none"></div>
@@ -2035,6 +2080,31 @@ html[data-theme="dark"] .restClock{
       <button onclick="pickWeightDateQuick(-1)">昨天</button>
       <button onclick="pickWeightDateQuick(-2)">前天</button>
     </div>
+  </div>
+</section>
+
+<div id="waterAdjustBackdrop" class="infoSheetBackdrop" onclick="closeWaterAdjust()"></div>
+<section id="waterAdjustSheet" class="infoSheet waterAdjustSheet" aria-hidden="true">
+  <div class="infoSheetHandle"></div>
+  <div class="infoSheetTop">
+    <div>
+      <div class="tiny">今日饮水</div>
+      <div class="infoSheetTitle">调整饮水量</div>
+    </div>
+    <button class="pickerClose" onclick="closeWaterAdjust()">✕</button>
+  </div>
+  <div class="infoSheetBody">
+    <div class="waterAdjustValue">
+      <input id="waterAdjustInput" type="number" inputmode="numeric" min="0" max="15000" step="50" placeholder="0">
+      <span>ml</span>
+    </div>
+    <div class="waterPresetRow">
+      <button onclick="setWaterPreset(1000)">1000</button>
+      <button onclick="setWaterPreset(1500)">1500</button>
+      <button onclick="setWaterPreset(2000)">2000</button>
+      <button onclick="setWaterPreset(2500)">2500</button>
+    </div>
+    <button class="primary waterSaveBtn" onclick="saveWaterAdjust()">保存</button>
   </div>
 </section>
 
@@ -2433,6 +2503,7 @@ const ACTIVE_SESSION_STORE="aos_body_active_session_v11";
 const TEMPLATE_STORE="aos_body_templates_v12";
 const DAILY_STATUS_STORE="aos_body_daily_status_v15";
 const NUTRITION_STORE="aos_body_nutrition_v16";
+const WATER_STORE="aos_body_water_v313";
 const BODY_PROFILE_STORE="aos_body_body_profile_v18";
 const BODY_LOG_STORE="aos_body_body_log_v18";
 const CUSTOM_EXERCISE_STORE="aos_body_custom_exercises_v25";
@@ -3012,8 +3083,8 @@ const AOS_GUIDE_HTML=`
   </div>
 
   <div class="infoSection">
-    <h4>补剂 / 药物</h4>
-    <p>饮食页可快速标记当天是否摄入各项补剂或药物。这里只做记录，不替代医生或药师建议。</p>
+    <h4>饮水 / 补剂 / 药物</h4>
+    <p>饮食页顶部可快速记录今日饮水量，并可标记当天是否摄入各项补剂或药物。这里只做记录，不替代医生或药师建议。</p>
   </div>
 
   <div class="infoSection">
@@ -3033,6 +3104,10 @@ const AOS_GUIDE_HTML=`
 `;
 
 const AOS_CHANGELOG_HTML=`
+  <div class="changeVersion">
+    <b>V3.1.3</b><span>今日饮水</span>
+    <p>饮食页加入紧凑型今日饮水栏，可一眼查看当天总量，支持 +250 ml、+500 ml 快速记录和手动调整；饮水按日期保存，并进入日历饮食摘要与完整备份。</p>
+  </div>
   <div class="changeVersion">
     <b>V3.1.2</b><span>体重日期选择器重做</span>
     <p>移除手机系统原生日历弹窗，改为与 A-OS 风格一致的底部月历；支持月份切换、今天/昨天/前天快捷选择，并标记已有体重记录的日期。</p>
@@ -3509,7 +3584,53 @@ function renderFoodTarget(){
   }).join("");
 }
 
+function getWaterStore(){
+  try{return JSON.parse(localStorage.getItem(WATER_STORE)||"{}")}catch{return{}}
+}
+function setWaterStore(v){localStorage.setItem(WATER_STORE,JSON.stringify(v))}
+function getWaterForDate(key=localDateKey()){
+  return Math.max(0,Number(getWaterStore()?.[key]?.ml)||0);
+}
+function setWaterForDate(key,ml){
+  const store=getWaterStore();
+  store[key]={ml:Math.max(0,Math.round(Number(ml)||0)),updatedAt:new Date().toISOString()};
+  setWaterStore(store);
+}
+function renderHydration(){
+  const el=$("hydrationMl");
+  if(el)el.textContent=getWaterForDate(localDateKey());
+}
+function addWater(ml){
+  const amount=Math.max(0,Number(ml)||0),key=localDateKey();
+  setWaterForDate(key,getWaterForDate(key)+amount);
+  renderHydration();
+  if(selectedDateKey===key&&calendarDayPanel==="food")renderCalendarDayDetail();
+  showToast(`+${amount} ml`);
+}
+function openWaterAdjust(){
+  const input=$("waterAdjustInput");
+  if(input)input.value=getWaterForDate(localDateKey())||"";
+  $("waterAdjustBackdrop")?.classList.add("open");
+  $("waterAdjustSheet")?.classList.add("open");
+  $("waterAdjustSheet")?.setAttribute("aria-hidden","false");
+}
+function closeWaterAdjust(){
+  $("waterAdjustBackdrop")?.classList.remove("open");
+  $("waterAdjustSheet")?.classList.remove("open");
+  $("waterAdjustSheet")?.setAttribute("aria-hidden","true");
+}
+function setWaterPreset(v){
+  const input=$("waterAdjustInput");if(input)input.value=String(v);
+}
+function saveWaterAdjust(){
+  const v=Number($("waterAdjustInput")?.value);
+  if(!Number.isFinite(v)||v<0||v>15000){showToast("请检查饮水量");return}
+  setWaterForDate(localDateKey(),v);
+  renderHydration();closeWaterAdjust();showToast("饮水量已保存");
+}
+
 function renderNutritionView(){
+  renderHydration();
   if(!$("foodMeals"))return;
   const key=localDateKey();
   const day=getNutritionDay(key);
@@ -3659,7 +3780,7 @@ function saveFoodHistoryEditor(){
 }
 
 function calendarFoodHtml(key){
-  const day=getNutritionDay(key),t=nutritionTotals(day);
+  const day=getNutritionDay(key),t=nutritionTotals(day),waterMl=getWaterForDate(key);
   const recordedMeals=MEAL_KEYS.filter(([id])=>macroKcal(day.meals[id])>0);
   const rows=MEAL_KEYS.map(([id,label])=>{
     const m=day.meals[id],k=Math.round(macroKcal(m));
@@ -3683,6 +3804,7 @@ function calendarFoodHtml(key){
         <div><span>蛋白质</span><b>${fmtMacro(t.protein)} g</b></div>
         <div><span>脂肪</span><b>${fmtMacro(t.fat)} g</b></div>
       </div>
+      <div class="calendarWaterSummary"><span>饮水</span><b>${waterMl} ml</b></div>
       ${(()=>{const goal=targetForDate(key);return goal.ready?`<div class="calendarGoalSummary">
         <div class="tiny">当日参考 · ${goal.dayLabel||"休息日"}${goal.cardioKcal?` · 有氧 ${goal.cardioKcal}kcal`:""}${goal.targetWeight?` · 目标 ${Number(goal.targetWeight).toFixed(1)}kg`:""}</div>
         <b>${goal.kcal} kcal</b>
@@ -4997,6 +5119,7 @@ function confirmBackupRestore(){
     localStorage.setItem(BODY_LOG_STORE,JSON.stringify(d.body_logs||{}));
     localStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(d.daily_statuses||{}));
     localStorage.setItem(NUTRITION_STORE,JSON.stringify(d.nutrition||{}));
+    localStorage.setItem(WATER_STORE,JSON.stringify(d.water||{}));
     localStorage.setItem(STORE,JSON.stringify(d.workouts||[]));
     localStorage.setItem(CARDIO_STORE,JSON.stringify(d.cardio_sessions||[]));
     localStorage.setItem(TEMPLATE_STORE,JSON.stringify(d.templates||[]));
@@ -5027,7 +5150,7 @@ function exportSelectedDate(){
   const bodyLogs=getBodyLogs();
   const target=targetForDate(selectedDateKey);
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V3.0",
+    schema_version:"A-OS_BODY_EXPORT_V3.1.3",
     export_type:"selected_date",
     exported_at:new Date().toISOString(),
     date:selectedDateKey,
@@ -5046,13 +5169,14 @@ function exportSelectedDate(){
 }
 function exportAllData(){
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V3.0",
+    schema_version:"A-OS_BODY_EXPORT_V3.1.3",
     export_type:"all",
     exported_at:new Date().toISOString(),
     body_profile:getBodyProfile(),
     body_logs:getBodyLogs(),
     daily_statuses:getDailyStatuses(),
     nutrition:getNutritionStore(),
+    water:getWaterStore(),
     workouts:getHistory(),
     cardio_sessions:getCardioHistory(),
     templates:getTemplates(),

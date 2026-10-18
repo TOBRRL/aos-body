@@ -1,4 +1,4 @@
-const CACHE = 'aos-body-v3.1.2-20261018';
+const CACHE = 'aos-body-v3.1.3-20261018';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', event => {
@@ -23,10 +23,10 @@ self.addEventListener('fetch', event => {
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
-        .then(resp => {
-          const copy = resp.clone();
+        .then(response => {
+          const copy = response.clone();
           caches.open(CACHE).then(cache => cache.put('./index.html', copy));
-          return resp;
+          return response;
         })
         .catch(() => caches.match('./index.html'))
     );
@@ -35,10 +35,10 @@ self.addEventListener('fetch', event => {
 
   event.respondWith(
     caches.match(event.request).then(cached =>
-      cached || fetch(event.request).then(resp => {
-        const copy = resp.clone();
+      cached || fetch(event.request).then(response => {
+        const copy = response.clone();
         caches.open(CACHE).then(cache => cache.put(event.request, copy));
-        return resp;
+        return response;
       })
     )
   );
