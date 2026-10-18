@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V3.1.3</title>
+<title>A-OS Body V3.2.4</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -1675,6 +1675,55 @@ html[data-theme="dark"] .restClock{
 .calendarWaterSummary b{color:var(--text);font-size:11px}
 @media(max-width:380px){.hydrationQuick button{min-width:43px;padding:0 6px}.hydrationBar{gap:7px}}
 
+
+/* ===== V3.2 compact meal workspace ===== */
+.aosMealTabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.aosMealTab{background:none;border:0;color:var(--muted);padding:11px 0 10px;font-size:12px;position:relative;white-space:nowrap}
+.aosMealTab.active{font-weight:850;color:var(--text)}
+.aosMealTab.active:after{content:"";position:absolute;height:2px;background:var(--text);bottom:0;left:20%;right:20%;border-radius:2px}
+.aosMealTab.hasData:before{content:"";position:absolute;width:4px;height:4px;border-radius:50%;background:#55aa8c;top:4px;left:calc(50% - 2px)}
+.aosMealWorkspace{padding:13px}.aosMealWorkspace .foodMealTop{margin-bottom:11px}
+.aosModeRow{display:flex;gap:4px;border:1px solid var(--line);border-radius:11px;padding:3px;margin-bottom:12px;background:var(--ui-card2)}
+.aosModeRow button{flex:1;background:transparent;border:0;border-radius:8px;color:var(--muted);padding:8px 4px;font-size:12px}.aosModeRow button.active{background:var(--ui-card);color:var(--text);font-weight:800}
+.aosFoodLine{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:8px 0;font-size:12px}
+.aosFoodLine:last-child{border-bottom:0}.aosFoodLine small{color:var(--muted);font-size:10px}
+.aosFoodControls{display:grid;grid-template-columns:minmax(0,1fr) 86px;gap:7px;margin:9px 0}.aosFoodControls input,.aosCustomInputs input{min-width:0;width:100%;background:var(--ui-card2);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:13px}
+.aosFoodList{max-height:180px;overflow:auto;border:1px solid var(--line);border-radius:11px;margin-top:6px}.aosFoodPick{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:9px 11px;font-size:12px;border-bottom:1px solid var(--line)}.aosFoodPick:last-child{border-bottom:0}.aosFoodPick.active{background:var(--ui-card2);font-weight:800}
+.aosTinyAction{padding:7px 10px;border-radius:9px;border:1px solid var(--line);background:var(--ui-card2);color:var(--text);font-size:12px;white-space:nowrap}.aosTinyAction:disabled{opacity:.35}.aosFoodActions{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}.aosFoodNote{font-size:10px;color:var(--muted);line-height:1.6;margin-top:8px}
+.aosCustomInputs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}.aosCustomInputs label{font-size:10px;color:var(--muted)}
+.aosDelta{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:12px}.aosDelta strong{font-size:14px}.aosDelta.ok{color:#3b9c76}.aosDelta.under,.aosDelta.over{color:#d19945}
+.aosCalendarKcal{font-size:22px!important}.aosOrder{display:inline-flex;gap:5px;margin-left:8px}.aosOrder button{padding:5px 9px;font-size:12px;border-radius:8px;border:1px solid var(--line);background:var(--ui-card2);color:var(--text)}
+.aosPaceBar{margin:12px 0 5px;border-top:1px solid var(--line);padding-top:12px}.aosPaceOptions{display:flex;gap:5px;overflow-x:auto;padding:7px 0}.aosPaceOptions button{flex:0 0 auto;border:1px solid var(--line);background:var(--ui-card2);border-radius:9px;color:var(--text);padding:8px 10px;font-size:11px}.aosPaceOptions button.active{background:var(--accent);color:var(--ui-accentText)}
+@media(max-width:400px){.aosMealTab{font-size:11px}.aosMealWorkspace{padding:11px}}
+
+
+/* V3.2.1 compact home and split nutrition */
+.aosHomeDuo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.aosBodyTile,.aosQuickTile{min-width:0;aspect-ratio:1/1;margin:0!important;border-radius:16px;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.aosBodyTile{text-align:left;color:var(--text);background:var(--ui-card);border:1px solid var(--line)}
+.aosTileHead{font-size:13px;font-weight:850;display:flex;justify-content:space-between;align-items:center}
+.aosTileHead span{color:var(--muted)}
+.aosBodyTile strong{font-size:18px;line-height:1.25;overflow-wrap:anywhere}
+.aosTileDetails,.aosTileFoot{font-size:10px;color:var(--muted);line-height:1.5}
+.aosQuickTile .sectionTitle h3{font-size:13px}
+.aosQuickTile .quickTemplatePicker{min-height:0;padding:8px!important;margin-top:4px}
+.aosQuickTile .quickTemplateLabel{font-size:10px}
+.aosQuickTile .quickTemplateValue{font-size:13px}
+.aosQuickTile .primary{margin-top:7px!important;font-size:12px;padding:9px 5px;border-radius:10px}
+.aosFoodSections{display:grid;grid-template-columns:1fr 1fr;background:var(--ui-card2);padding:4px;border-radius:12px;border:1px solid var(--line);gap:4px;margin:10px 0 12px}
+.aosFoodSections button{border:0;background:transparent;color:var(--muted);padding:9px;border-radius:9px;font-weight:750;font-size:13px}
+.aosFoodSections button.active{background:var(--ui-card);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.aosWaterOverview{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;padding:7px 3px 13px}
+.aosWaterOverview b{font-size:14px;color:var(--text)}
+.aosHealthFormTitle{border-top:1px solid var(--line);padding-top:15px;margin-top:15px;font-size:12px;font-weight:800}
+.aosHealthInputs{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:10px 0}
+.aosHealthInputs label{font-size:10px;color:var(--muted)}
+.aosHealthInputs input{width:100%;border:1px solid var(--line);color:var(--text);background:var(--ui-card2);padding:10px 8px;margin-top:5px;border-radius:10px;font-size:14px}
+.aosSaveHealth{padding:11px;font-size:12px}
+@media(max-width:370px){.aosBodyTile,.aosQuickTile{padding:10px}.aosBodyTile strong{font-size:15px}.aosTileDetails,.aosTileFoot{font-size:9px}}
+
+/* V3.2.2 compact food favorites and collapsed search */
+.aosFoodList:empty{display:none}.aosFavoritesBox{margin:9px 0;border:1px solid var(--line);border-radius:11px;background:var(--ui-card2);overflow:hidden}.aosFavoritesBox summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:8px}.aosFavoritesBox summary::-webkit-details-marker{display:none}.aosFavoritesBox summary small{font-size:10px;font-weight:500;color:var(--muted)}.aosFavoritesInside{padding:0 12px 12px}.aosFavoritesLabel{font-size:11px;font-weight:800;color:var(--muted);padding:10px 0 5px}.aosFavoritesInside .aosFoodLine{flex-wrap:wrap}.aosFavoritesInside .aosTinyAction{padding:5px 7px}.aosFavNameInput{min-width:0;flex:1;background:var(--ui-card);border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:12px;padding:8px 9px}
 </style>
 </head>
 <body>
@@ -1686,16 +1735,28 @@ html[data-theme="dark"] .restClock{
   </div>
 
   <section id="homeView" class="view active">
-    <button class="card hero statusHero" onclick="openDailyStatusModal()">
-      <div class="statusHeroTop">
-        <div class="muted">今日状态</div>
-        <div class="statusEditHint">更新 ›</div>
-      </div>
-      <div class="statusBig" id="dailyStatusScore">--</div>
-      <div class="statusLabel" id="dailyStatusLabel">点击录入今天状态</div>
-      <div class="statusSummary" id="dailyStatusSummary">睡眠、静息心率、昨日训练与主观精神状态</div>
-    </button>
+    <div class="aosHomeDuo">
+      <button class="card aosBodyTile" onclick="openDailyStatusModal()">
+        <span class="aosTileHead">身体状态 <span>›</span></span>
+        <strong id="aosHealthHeadline">待记录</strong>
+        <span class="aosTileDetails" id="aosHealthDetails">HRV · 心率 · 睡眠</span>
+        <span class="aosTileFoot" id="aosHealthFoot">长期趋势观察</span>
+      </button>
+    <div id="homeStartCard" class="card homeStartCard aosQuickTile">
+      <div class="sectionTitle" style="margin-top:0"><h3>快速开始</h3></div>
 
+      <button class="quickTemplatePicker" onclick="openTemplateWheel()">
+        <div>
+          <div class="quickTemplateLabel">训练模板</div>
+          <div class="quickTemplateValue" id="quickTemplateValue">无</div>
+        </div>
+        <div class="quickTemplateArrow">›</div>
+      </button>
+
+      <button class="primary" style="margin-top:10px" onclick="startSelectedTraining()">开始训练</button>
+    </div>
+
+    </div>
     <div class="card weightCard">
       <div class="weightCardTop">
         <div>
@@ -1743,20 +1804,6 @@ html[data-theme="dark"] .restClock{
         <span><i class="raw"></i>每日体重</span>
         <span><i class="avg"></i>7日均线</span>
       </div>
-    </div>
-
-    <div id="homeStartCard" class="card homeStartCard">
-      <div class="sectionTitle" style="margin-top:0"><h3>快速开始</h3></div>
-
-      <button class="quickTemplatePicker" onclick="openTemplateWheel()">
-        <div>
-          <div class="quickTemplateLabel">训练模板</div>
-          <div class="quickTemplateValue" id="quickTemplateValue">无</div>
-        </div>
-        <div class="quickTemplateArrow">›</div>
-      </button>
-
-      <button class="primary" style="margin-top:10px" onclick="startSelectedTraining()">开始今天的训练</button>
     </div>
 
     <div id="homeActiveCard" class="card" style="display:none">
@@ -1812,8 +1859,8 @@ html[data-theme="dark"] .restClock{
           <div><span>暂停休息</span><b id="cardioRestTime">00:00</b></div>
           <div><span>预计消耗</span><b id="cardioLiveKcal">0 kcal</b></div>
         </div>
-        <div class="cardioControls">
-          <button id="cardioPauseBtn" class="secondary" onclick="toggleCardioPause()">暂停休息</button>
+        <div id="aosPaceBar" class="aosPaceBar" style="display:none"></div><div class="cardioControls">
+          <button id="cardioPauseBtn" class="secondary" onclick="toggleCardioPause()">休息一下</button>
           <button class="danger" onclick="finishCardioSession()">结束有氧</button>
         </div>
       </div>
@@ -1829,7 +1876,7 @@ html[data-theme="dark"] .restClock{
     </div>
 
     <div id="focusCard" class="card currentExercise" style="display:none">
-      <div class="muted">当前动作</div>
+      <div class="muted">当前动作 <span class="aosOrder"><button onclick="aosMoveExercise(-1)" aria-label="动作上移">↑ 上移</button><button onclick="aosMoveExercise(1)" aria-label="动作下移">↓ 下移</button></span></div>
       <div class="exerciseName" id="currentExerciseName">杠铃卧推</div>
       <div class="exerciseMeta" id="currentExerciseMeta">胸 · 中胸</div>
       <div class="flagsLine">
@@ -1924,8 +1971,10 @@ html[data-theme="dark"] .restClock{
         <div class="tiny">今日饮食</div>
         <h3 id="foodDateTitle"></h3>
       </div>
-      <div class="foodHeaderHint">三大营养素手动记录</div>
+      <div class="foodHeaderHint">食物重量 / 营养直录</div>
     </div>
+    <div class="aosFoodSections"><button class="active" id="aosFoodOverviewBtn" onclick="aosSwitchFoodPanel('overview')">营养总览</button><button id="aosFoodEntryBtn" onclick="aosSwitchFoodPanel('entry')">饮食录入</button></div>
+    <div id="aosFoodEntry" style="display:none">
     <div class="card hydrationBar">
       <button class="hydrationMain" onclick="openWaterAdjust()" aria-label="调整今日饮水量">
         <span class="hydrationMark">水</span>
@@ -1937,6 +1986,9 @@ html[data-theme="dark"] .restClock{
       </div>
     </div>
 
+    </div>
+    <div id="aosFoodOverview">
+      <div class="aosWaterOverview">今日饮水 <b id="aosOverviewWater">0 ml</b></div>
     <div class="card foodTotalCard">
       <div class="foodTotalTop">
         <div>
@@ -1953,7 +2005,7 @@ html[data-theme="dark"] .restClock{
       <div class="tiny foodNote">顶部先看实际摄入；下方“今日参考”来自你的长期个人基线，用于趋势观察。</div>
     </div>
 
-    <div class="card foodTargetCard" id="foodTargetCard">
+    <div class="card foodTargetCard" id="foodTargetCard" style="margin-top:15px">
       <div class="foodTargetTop">
         <div>
           <div class="muted">今日参考</div>
@@ -1965,6 +2017,8 @@ html[data-theme="dark"] .restClock{
       <div id="foodTargetProgress" class="foodTargetProgress"></div>
     </div>
 
+    </div>
+    <div id="aosFoodEntryArea">
     <div id="foodMeals" class="foodMeals"></div>
 
     <div class="card supplementCard">
@@ -1979,6 +2033,7 @@ html[data-theme="dark"] .restClock{
       <div class="supplementLegend"><span><b>Rx</b> = 药物</span><span>其余为补剂</span></div>
     </div>
 
+    </div>
     <div id="historyList" style="display:none"></div>
   </section>
 
@@ -2028,7 +2083,7 @@ html[data-theme="dark"] .restClock{
         <input id="backupFileInput" type="file" accept=".json,application/json" style="display:none" onchange="handleBackupFile(event)">
       </div>
 
-      <div class="version">A-OS BODY · V3.1.3 HYDRATION</div>
+      <div class="version">A-OS BODY · V3.2.4</div>
     </div>
 
     <div id="calendarDayDetail" class="calendarDayDetail" style="display:none"></div>
@@ -2345,7 +2400,7 @@ html[data-theme="dark"] .restClock{
     </label>
 
     <label class="statusField">
-      <span>小米睡眠评分</span>
+      <span>睡眠评分</span>
       <div class="statusInputWrap"><input id="statusSleepScore" class="statusInput" inputmode="numeric" placeholder="85"><b>/100</b></div>
     </label>
 
@@ -2376,8 +2431,17 @@ html[data-theme="dark"] .restClock{
       <div class="statusScaleHint"><span>很疲惫</span><span>精神很好</span></div>
     </div>
 
+    <div class="aosHealthFormTitle">长期趋势指标 · Garmin 255（目前手动填写）</div>
+    <div class="aosHealthInputs">
+      <label>昨夜 HRV <input id="aosHrvOvernight" inputmode="decimal" type="number" placeholder="ms"></label>
+      <label>7 日 HRV <input id="aosHrv7" inputmode="decimal" type="number" placeholder="ms"></label>
+      <label>HRV 基线下限 <input id="aosHrvLow" inputmode="decimal" type="number" placeholder="ms"></label>
+      <label>HRV 基线上限 <input id="aosHrvHigh" inputmode="decimal" type="number" placeholder="ms"></label>
+      <label>晨起 Body Battery <input id="aosBattery" inputmode="numeric" type="number" placeholder="0–100"></label>
+    </div>
+    <button class="secondary aosSaveHealth" onclick="aosSaveHealthData()">保存长期监测数据</button>
     <div id="statusBaselineNote" class="statusBaselineNote"></div>
-    <button class="primary" onclick="saveDailyStatus()">计算并保存今日状态</button>
+    <button class="primary" onclick="saveDailyStatus()">保存原有状态记录</button>
     <div class="statusDisclaimer">状态分用于观察个人趋势，不用于诊断疾病或决定是否必须训练。</div>
   </div>
 </div>
@@ -2460,6 +2524,66 @@ html[data-theme="dark"] .restClock{
 </nav>
 
 <script>
+// V3.2.4: storage adapter for sandboxed/opaque-origin previews.
+// Browser localStorage and all previous keys remain unchanged when accessible.
+const aosStorage = (() => {
+  const volatile = new Map();
+  let backing = null;
+  let temporary = false;
+  try {
+    backing = window.localStorage;
+    const probe = '__aos_storage_probe__';
+    backing.setItem(probe, '1');
+    backing.removeItem(probe);
+  } catch (error) {
+    backing = null;
+    temporary = true;
+  }
+  const announce = () => {
+    if (!temporary || document.getElementById('aosPreviewTemporaryStorage')) return;
+    const bar = document.createElement('div');
+    bar.id = 'aosPreviewTemporaryStorage';
+    bar.setAttribute('role', 'status');
+    bar.textContent = '预览模式：此环境无法持久保存数据。请在正常浏览器中使用并定期导出备份。';
+    bar.style.cssText = 'max-width:760px;margin:8px auto 0;padding:9px 12px;border:1px solid #ca8a04;border-radius:12px;background:#422006;color:#fef3c7;font:12px/1.5 system-ui,sans-serif';
+    (document.querySelector('.app') || document.body).prepend(bar);
+  };
+  const markTemporary = () => {
+    if (!temporary) {
+      temporary = true;
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', announce, {once:true});
+      else announce();
+    }
+  };
+  if (temporary) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', announce, {once:true});
+    else announce();
+  }
+  return {
+    getItem(key) {
+      if (volatile.has(key)) return volatile.get(key);
+      if (!backing) return null;
+      try { return backing.getItem(key); }
+      catch { backing = null; markTemporary(); return null; }
+    },
+    setItem(key, value) {
+      const serialized = String(value);
+      if (backing) {
+        try { backing.setItem(key, serialized); volatile.delete(key); return; }
+        catch { backing = null; markTemporary(); }
+      }
+      volatile.set(key, serialized);
+    },
+    removeItem(key) {
+      volatile.delete(key);
+      if (backing) {
+        try { backing.removeItem(key); }
+        catch { backing = null; markTemporary(); }
+      }
+    }
+  };
+})();
+
 const LIB={
   "胸":{
     "上胸":["上斜哑铃卧推","上斜杠铃卧推","上斜器械推胸"],
@@ -2503,6 +2627,10 @@ const ACTIVE_SESSION_STORE="aos_body_active_session_v11";
 const TEMPLATE_STORE="aos_body_templates_v12";
 const DAILY_STATUS_STORE="aos_body_daily_status_v15";
 const NUTRITION_STORE="aos_body_nutrition_v16";
+const AOS_FOOD_DETAIL_STORE="aos_body_food_details_v32";
+const AOS_CUSTOM_FOODS_STORE="aos_body_custom_foods_v32";
+const AOS_FAVORITE_FOODS_STORE="aos_body_favorite_foods_v322";
+const AOS_FAVORITE_MEALS_STORE="aos_body_favorite_meals_v322";
 const WATER_STORE="aos_body_water_v313";
 const BODY_PROFILE_STORE="aos_body_body_profile_v18";
 const BODY_LOG_STORE="aos_body_body_log_v18";
@@ -2521,9 +2649,9 @@ function localDateKey(d=new Date()){
   return `${y}-${m}-${day}`;
 }
 function getDailyStatuses(){
-  try{return JSON.parse(localStorage.getItem(DAILY_STATUS_STORE)||"{}")}catch{return{}}
+  try{return JSON.parse(aosStorage.getItem(DAILY_STATUS_STORE)||"{}")}catch{return{}}
 }
-function setDailyStatuses(v){localStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(v))}
+function setDailyStatuses(v){aosStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(v))}
 function median(nums){
   const a=[...nums].sort((x,y)=>x-y);
   if(!a.length)return null;
@@ -2611,7 +2739,7 @@ function openDailyStatusModal(){
   pendingStatusMood=Number(today?.mood ?? 3);
   pickStatusLoad(pendingStatusLoad);
   pickStatusMood(pendingStatusMood);
-  updateStatusBaselineNote();
+  updateStatusBaselineNote();aosLoadHealthInputs();
   $("dailyStatusBackdrop").classList.add("open");
   $("dailyStatusSheet").classList.add("open");
 }
@@ -2652,37 +2780,30 @@ function saveDailyStatus(){
   renderDailyStatus();
   showToast(`今日状态 ${result.score}`);
 }
+const AOS_HEALTH_STORE='aos_body_health_daily_v321';
+function aosHealthHistory(){try{return JSON.parse(aosStorage.getItem(AOS_HEALTH_STORE)||'{}')}catch{return {}}}
+function aosLoadHealthInputs(){const h=aosHealthHistory()[localDateKey()]||{};const fields={aosHrvOvernight:h.hrvOvernight,aosHrv7:h.hrv7,aosHrvLow:h.baselineLow,aosHrvHigh:h.baselineHigh,aosBattery:h.bodyBattery};Object.entries(fields).forEach(([id,value])=>{if($(id))$(id).value=value??''})}
+function aosSaveHealthData(){const vals={};for(const [key,id,min,max] of [['hrvOvernight','aosHrvOvernight',1,300],['hrv7','aosHrv7',1,300],['baselineLow','aosHrvLow',1,300],['baselineHigh','aosHrvHigh',1,300],['bodyBattery','aosBattery',0,100]]){const raw=$(id)?.value?.trim()||'';if(raw===''){vals[key]=null;continue}const n=Number(raw);if(!Number.isFinite(n)||n<min||n>max){showToast('请检查 '+id+' 的数值');return}vals[key]=n}if(vals.baselineLow!==null&&vals.baselineHigh!==null&&vals.baselineLow>vals.baselineHigh){showToast('HRV 基线范围不正确');return}const a=aosHealthHistory();a[localDateKey()]={...vals,date:localDateKey(),source:'manual',updatedAt:new Date().toISOString()};aosStorage.setItem(AOS_HEALTH_STORE,JSON.stringify(a));renderDailyStatus();closeDailyStatusModal();showToast('身体监测数据已保存')}
+function aosRenderHealthTile(){const h=aosHealthHistory()[localDateKey()],old=getDailyStatuses()[localDateKey()];const title=$('aosHealthHeadline'),details=$('aosHealthDetails'),foot=$('aosHealthFoot');if(!title)return;if(!h&&!old){title.textContent='待记录';details.textContent='HRV · 心率 · 睡眠';foot.textContent='点击录入 / 查看';return}const hrv=h?.hrv7;const low=h?.baselineLow,high=h?.baselineHigh;const balanced=hrv!=null&&low!=null&&high!=null;title.textContent=balanced?(hrv<low?'HRV 偏低':hrv>high?'HRV 偏高':'HRV 平衡'):hrv!=null?`HRV ${hrv} ms`:'趋势待建立';details.textContent=[hrv!=null?`HRV ${hrv} ms`:null,old?.rhr!=null?`心率 ${old.rhr}`:null,old?.sleepHours!=null?`睡眠 ${old.sleepHours}h`:null].filter(Boolean).join(' · ')||'数据待录入';foot.textContent=h?.bodyBattery!=null?`Body Battery ${h.bodyBattery} · 手动数据`:'非医疗诊断 · 点击查看'}
 function renderDailyStatus(){
-  const rec=getDailyStatuses()[localDateKey()];
-  if(!rec){
-    $("dailyStatusScore").textContent="--";
-    $("dailyStatusLabel").textContent="点击录入今天状态";
-    $("dailyStatusSummary").textContent="睡眠、静息心率、昨日训练与主观精神状态";
-    return;
-  }
-  $("dailyStatusScore").textContent=rec.score;
-  $("dailyStatusLabel").textContent=statusLabelFor(rec.score);
-  const pieces=[
-    `睡眠 ${Number(rec.sleepHours).toFixed(1)}h`,
-    `睡眠分 ${rec.sleepScore}`,
-    rec.rhr?`静息 ${rec.rhr} bpm`:"静息心率未填",
-    `精神 ${rec.mood}/5`
-  ];
-  $("dailyStatusSummary").textContent=pieces.join(" · ");
+  // V3.2.4: The legacy daily status summary nodes were replaced by the
+  // compact body status tile in V3.2.1. Keep historical records intact;
+  // only render into the elements that exist in the current layout.
+  aosRenderHealthTile();
 }
 
 
 
 
 function getBodyProfile(){
-  try{return JSON.parse(localStorage.getItem(BODY_PROFILE_STORE)||"null")}catch{return null}
+  try{return JSON.parse(aosStorage.getItem(BODY_PROFILE_STORE)||"null")}catch{return null}
 }
-function setBodyProfile(v){localStorage.setItem(BODY_PROFILE_STORE,JSON.stringify(v))}
+function setBodyProfile(v){aosStorage.setItem(BODY_PROFILE_STORE,JSON.stringify(v))}
 function getBodyLogs(){
-  try{return JSON.parse(localStorage.getItem(BODY_LOG_STORE)||"{}")}catch{return{}}
+  try{return JSON.parse(aosStorage.getItem(BODY_LOG_STORE)||"{}")}catch{return{}}
 }
 
-function setBodyLogs(v){localStorage.setItem(BODY_LOG_STORE,JSON.stringify(v))}
+function setBodyLogs(v){aosStorage.setItem(BODY_LOG_STORE,JSON.stringify(v))}
 
 let weightRangeDays=7;
 
@@ -2984,22 +3105,22 @@ function migrateLegacyMuscleLabels(){
 
   // Active unfinished session.
   try{
-    const active=JSON.parse(localStorage.getItem(ACTIVE_SESSION_STORE)||"null");
+    const active=JSON.parse(aosStorage.getItem(ACTIVE_SESSION_STORE)||"null");
     if(active?.session?.exercises){
       let activeChanged=false;
       active.session.exercises.forEach(e=>{
         const next=normalizeMuscleName(e.part,e.muscle);
         if(next!==e.muscle){e.muscle=next;activeChanged=true}
       });
-      if(activeChanged)localStorage.setItem(ACTIVE_SESSION_STORE,JSON.stringify(active));
+      if(activeChanged)aosStorage.setItem(ACTIVE_SESSION_STORE,JSON.stringify(active));
     }
   }catch(e){}
 }
 
 function getCustomExercises(){
-  try{return JSON.parse(localStorage.getItem(CUSTOM_EXERCISE_STORE)||"{}")}catch{return{}}
+  try{return JSON.parse(aosStorage.getItem(CUSTOM_EXERCISE_STORE)||"{}")}catch{return{}}
 }
-function setCustomExercises(v){localStorage.setItem(CUSTOM_EXERCISE_STORE,JSON.stringify(v))}
+function setCustomExercises(v){aosStorage.setItem(CUSTOM_EXERCISE_STORE,JSON.stringify(v))}
 function exerciseNamesFor(part,muscle){
   const base=LIB?.[part]?.[muscle]||[];
   const custom=getCustomExercises()?.[part]?.[muscle]||[];
@@ -3347,8 +3468,8 @@ function estimatePersonalBaseline(){
   }
   return {ready:true,maintenance:Math.round(avg),days:days.length,changePct};
 }
-function getCardioHistory(){try{return JSON.parse(localStorage.getItem(CARDIO_STORE)||"[]")}catch{return[]}}
-function setCardioHistory(v){localStorage.setItem(CARDIO_STORE,JSON.stringify(v))}
+function getCardioHistory(){try{return JSON.parse(aosStorage.getItem(CARDIO_STORE)||"[]")}catch{return[]}}
+function setCardioHistory(v){aosStorage.setItem(CARDIO_STORE,JSON.stringify(v))}
 function cardioByDateKey(key){return getCardioHistory().filter(x=>dateKeyFromDate(new Date(x.date))===key)}
 function cardioCaloriesForDate(key){return cardioByDateKey(key).reduce((sum,x)=>sum+(Number(x.kcal)||0),0)}
 function hasStrengthWorkout(key){return workoutsByDateKey(key).length>0}
@@ -3367,17 +3488,21 @@ function openCardioSetup(type){if(session){showToast("请先结束当前力量�
 function closeCardioSetup(){$("cardioSetupBackdrop")?.classList.remove("open");$("cardioSetupModal")?.classList.remove("open")}
 function renderCardioSetup(){const cfg=CARDIO_OPTIONS[pendingCardioType],p=getBodyProfile();$("cardioSetupTitle").textContent=`开始${cfg.label}`;$("cardioSetupOptions").innerHTML=cfg.options.map((o,i)=>`<button class="${i===pendingCardioOptionIndex?"active":""}" onclick="selectCardioOption(${i})"><span>${o.label}</span><b>${i===pendingCardioOptionIndex?"✓":""}</b></button>`).join("");const opt=cfg.options[pendingCardioOptionIndex];if(p&&opt)$("cardioSetupEstimate").innerHTML=`按当前 ${Number(p.weight).toFixed(1)} kg 估算：<b>${Math.round(cardioHourlyCalories(opt.rate,p.weight))} kcal / 小时</b>`}
 function selectCardioOption(i){pendingCardioOptionIndex=Number(i)||0;renderCardioSetup()}
-function startCardioSession(){if(session){showToast("请先结束当前力量训练");return}trainingMode="cardio";const p=getBodyProfile();if(!p)return;const cfg=CARDIO_OPTIONS[pendingCardioType],opt=cfg.options[pendingCardioOptionIndex];const now=Date.now();cardioSession={type:pendingCardioType,typeLabel:cfg.label,modeLabel:opt.label,ratePerKg:opt.rate,weight:Number(p.weight),startedAt:now,lastResumeAt:now,activeAccumMs:0,restAccumMs:0,paused:false,pauseStartedAt:null};persistCardioSession();closeCardioSetup();renderCardioState();clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500);switchView("trainView")}
+function startCardioSession(){if(session){showToast("请先结束当前力量训练");return}trainingMode="cardio";const p=getBodyProfile();if(!p)return;const cfg=CARDIO_OPTIONS[pendingCardioType],opt=cfg.options[pendingCardioOptionIndex];const now=Date.now();cardioSession={type:pendingCardioType,typeLabel:cfg.label,modeLabel:opt.label,ratePerKg:opt.rate,weight:Number(p.weight),startedAt:now,lastResumeAt:now,activeAccumMs:0,restAccumMs:0,paused:false,pauseStartedAt:null,segments:[],segmentStartAt:now,segmentRate:opt.rate,segmentLabel:opt.label};persistCardioSession();closeCardioSetup();aosRenderPaceBar();renderCardioState();clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500);switchView("trainView")}
 function cardioElapsed(){if(!cardioSession)return {activeMs:0,restMs:0,totalMs:0};const now=Date.now();return {activeMs:cardioSession.activeAccumMs+(cardioSession.paused?0:Math.max(0,now-cardioSession.lastResumeAt)),restMs:cardioSession.restAccumMs+(cardioSession.paused?Math.max(0,now-cardioSession.pauseStartedAt):0),totalMs:Math.max(0,now-cardioSession.startedAt)}}
-function persistCardioSession(){if(cardioSession)localStorage.setItem(CARDIO_ACTIVE_STORE,JSON.stringify(cardioSession));else localStorage.removeItem(CARDIO_ACTIVE_STORE)}
-function restoreCardioSession(){try{const x=JSON.parse(localStorage.getItem(CARDIO_ACTIVE_STORE)||"null");if(x?.startedAt&&CARDIO_OPTIONS[x.type]){cardioSession=x;clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500)}}catch(e){}renderCardioState()}
+function persistCardioSession(){if(cardioSession)aosStorage.setItem(CARDIO_ACTIVE_STORE,JSON.stringify(cardioSession));else aosStorage.removeItem(CARDIO_ACTIVE_STORE)}
+function restoreCardioSession(){try{const x=JSON.parse(aosStorage.getItem(CARDIO_ACTIVE_STORE)||"null");if(x?.startedAt&&CARDIO_OPTIONS[x.type]){cardioSession=x;if(!Array.isArray(cardioSession.segments)){cardioSession.segments=[{modeLabel:cardioSession.modeLabel,ratePerKg:cardioSession.ratePerKg,durationSec:(cardioSession.activeAccumMs||0)/1000}];cardioSession.segmentStartAt=cardioSession.lastResumeAt;cardioSession.segmentRate=cardioSession.ratePerKg;cardioSession.segmentLabel=cardioSession.modeLabel;}clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500)}}catch(e){}aosRenderPaceBar();renderCardioState()}
+function aosCloseCardioSegment(now){if(!cardioSession||cardioSession.paused)return;const ms=Math.max(0,now-(cardioSession.segmentStartAt||cardioSession.lastResumeAt||now));if(ms>0){cardioSession.segments??=[];cardioSession.segments.push({modeLabel:cardioSession.segmentLabel||cardioSession.modeLabel,ratePerKg:cardioSession.segmentRate??cardioSession.ratePerKg,durationSec:ms/1000});}cardioSession.segmentStartAt=now}
+function aosCardioCalories(now=Date.now()){if(!cardioSession)return 0;const done=(cardioSession.segments||[]).reduce((n,x)=>n+cardioSessionCalories(x.ratePerKg,cardioSession.weight,x.durationSec),0);const live=cardioSession.paused?0:cardioSessionCalories(cardioSession.segmentRate??cardioSession.ratePerKg,cardioSession.weight,Math.max(0,now-(cardioSession.segmentStartAt||cardioSession.lastResumeAt||now))/1000);return done+live}
+function aosSetCardioPace(i){if(!cardioSession)return;const opt=CARDIO_OPTIONS[cardioSession.type]?.options[i];if(!opt)return;const now=Date.now();if(!cardioSession.paused)aosCloseCardioSegment(now);cardioSession.ratePerKg=opt.rate;cardioSession.modeLabel=opt.label;cardioSession.segmentRate=opt.rate;cardioSession.segmentLabel=opt.label;cardioSession.segmentStartAt=now;persistCardioSession();renderCardioState();aosRenderPaceBar();}
+function aosRenderPaceBar(){const bar=$("aosPaceBar");if(!bar)return;if(!cardioSession){bar.style.display='none';return}bar.style.display='block';const cfg=CARDIO_OPTIONS[cardioSession.type];bar.innerHTML=`<div class="tiny">当前档位 · 点击切换，自动分段计算</div><div class="aosPaceOptions">${cfg.options.map((o,i)=>`<button class="${cardioSession.modeLabel===o.label?'active':''}" onclick="aosSetCardioPace(${i})">${o.label}</button>`).join('')}</div>`}
 function renderCardioState(){
   const launcher=$("cardioLauncher"),active=$("cardioActive");
   if(!launcher||!active)return;
   if(!cardioSession){
     launcher.style.display="grid";
     active.style.display="none";
-    renderTrainingMode();
+    renderTrainingMode();aosRenderPaceBar();
     return;
   }
   trainingMode="cardio";
@@ -3389,14 +3514,15 @@ function renderCardioState(){
   $("cardioActiveClock").textContent=fmtClock(t.totalMs/1000);
   $("cardioActiveTime").textContent=fmtMMSS(t.activeMs/1000);
   $("cardioRestTime").textContent=fmtMMSS(t.restMs/1000);
-  $("cardioLiveKcal").textContent=`${Math.round(cardioSessionCalories(cardioSession.ratePerKg,cardioSession.weight,t.activeMs/1000))} kcal`;
-  $("cardioPauseBtn").textContent=cardioSession.paused?"继续训练":"暂停休息";
+  $("cardioLiveKcal").textContent=`${Math.round(aosCardioCalories())} kcal`;
+  $("cardioPauseBtn").textContent=cardioSession.paused?"继续训练":"休息一下";
   $("cardioStateBadge").textContent=cardioSession.paused?"休息中":"进行中";
   $("cardioStateBadge").classList.toggle("paused",!!cardioSession.paused);
   renderTrainingMode();
+  if(!$("aosPaceBar")?.firstChild)aosRenderPaceBar();
 }
-function toggleCardioPause(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused){cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);cardioSession.pauseStartedAt=null;cardioSession.paused=false;cardioSession.lastResumeAt=now}else{cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt);cardioSession.paused=true;cardioSession.pauseStartedAt=now}persistCardioSession();renderCardioState()}
-function finishCardioSession(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused)cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);else cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt);const activeSec=Math.round(cardioSession.activeAccumMs/1000),restSec=Math.round(cardioSession.restAccumMs/1000);if(activeSec<10){showToast("有效有氧时间太短");return}const kcal=Math.round(cardioSessionCalories(cardioSession.ratePerKg,cardioSession.weight,activeSec));const rec={id:`cardio_${Date.now()}`,date:new Date(cardioSession.startedAt).toISOString(),endedAt:new Date().toISOString(),kind:"cardio",type:cardioSession.type,typeLabel:cardioSession.typeLabel,modeLabel:cardioSession.modeLabel,ratePerKg:cardioSession.ratePerKg,weight:cardioSession.weight,activeSec,restSec,kcal};const h=getCardioHistory();h.unshift(rec);setCardioHistory(h);cardioSession=null;clearInterval(cardioTicker);persistCardioSession();renderCardioState();renderNutritionView();renderBodyTarget();renderCalendar();updateStats();showToast(`已记录 ${rec.typeLabel} · ${kcal} kcal`)}
+function toggleCardioPause(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused){cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);cardioSession.pauseStartedAt=null;cardioSession.paused=false;cardioSession.lastResumeAt=now;cardioSession.segmentStartAt=now}else{aosCloseCardioSegment(now);cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt);cardioSession.paused=true;cardioSession.pauseStartedAt=now}persistCardioSession();renderCardioState()}
+function finishCardioSession(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused)cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);else{aosCloseCardioSegment(now);cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt)}const activeSec=Math.round(cardioSession.activeAccumMs/1000),restSec=Math.round(cardioSession.restAccumMs/1000);if(activeSec<10){cardioSession.activeAccumMs=activeSec*1000;cardioSession.lastResumeAt=now;cardioSession.segmentStartAt=now;persistCardioSession();showToast('有效有氧时间太短');return}const segments=cardioSession.segments||[];const kcal=Math.round(segments.reduce((sum,x)=>sum+cardioSessionCalories(x.ratePerKg,cardioSession.weight,x.durationSec),0));const rec={id:`cardio_${Date.now()}`,date:new Date(cardioSession.startedAt).toISOString(),endedAt:new Date().toISOString(),kind:'cardio',type:cardioSession.type,typeLabel:cardioSession.typeLabel,modeLabel:segments.length>1?'变速分段':cardioSession.modeLabel,ratePerKg:cardioSession.ratePerKg,weight:cardioSession.weight,activeSec,restSec,kcal,segments};const h=getCardioHistory();h.unshift(rec);setCardioHistory(h);cardioSession=null;clearInterval(cardioTicker);persistCardioSession();renderCardioState();aosRenderPaceBar();renderNutritionView();renderBodyTarget();renderCalendar();updateStats();showToast(`已记录 ${rec.typeLabel} · ${kcal} kcal`)}
 function deleteCardioRecord(id){setCardioHistory(getCardioHistory().filter(x=>x.id!==id));renderCalendar();renderNutritionView();renderBodyTarget();updateStats();if(selectedDateKey&&calendarDayPanel==="workout")renderCalendarDayDetail();showToast("有氧记录已删除")}
 
 function isTrainingDay(key){
@@ -3512,9 +3638,9 @@ let calendarDayPanel=null;
 
 function blankMeal(){return {carbs:0,protein:0,fat:0}}
 function getNutritionStore(){
-  try{return JSON.parse(localStorage.getItem(NUTRITION_STORE)||"{}")}catch{return{}}
+  try{return JSON.parse(aosStorage.getItem(NUTRITION_STORE)||"{}")}catch{return{}}
 }
-function setNutritionStore(v){localStorage.setItem(NUTRITION_STORE,JSON.stringify(v))}
+function setNutritionStore(v){aosStorage.setItem(NUTRITION_STORE,JSON.stringify(v))}
 function getNutritionDay(key){
   const all=getNutritionStore();
   const saved=all[key]||{};
@@ -3585,9 +3711,9 @@ function renderFoodTarget(){
 }
 
 function getWaterStore(){
-  try{return JSON.parse(localStorage.getItem(WATER_STORE)||"{}")}catch{return{}}
+  try{return JSON.parse(aosStorage.getItem(WATER_STORE)||"{}")}catch{return{}}
 }
-function setWaterStore(v){localStorage.setItem(WATER_STORE,JSON.stringify(v))}
+function setWaterStore(v){aosStorage.setItem(WATER_STORE,JSON.stringify(v))}
 function getWaterForDate(key=localDateKey()){
   return Math.max(0,Number(getWaterStore()?.[key]?.ml)||0);
 }
@@ -3599,6 +3725,7 @@ function setWaterForDate(key,ml){
 function renderHydration(){
   const el=$("hydrationMl");
   if(el)el.textContent=getWaterForDate(localDateKey());
+  const overview=$("aosOverviewWater");if(overview)overview.textContent=getWaterForDate(localDateKey())+" ml";
 }
 function addWater(ml){
   const amount=Math.max(0,Number(ml)||0),key=localDateKey();
@@ -3629,30 +3756,55 @@ function saveWaterAdjust(){
   renderHydration();closeWaterAdjust();showToast("饮水量已保存");
 }
 
-function renderNutritionView(){
-  renderHydration();
-  if(!$("foodMeals"))return;
-  const key=localDateKey();
-  const day=getNutritionDay(key);
-  $("foodDateTitle").textContent=key;
 
-  $("foodMeals").innerHTML=MEAL_KEYS.map(([id,label])=>{
-    const m=day.meals[id];
-    return `<div class="card foodMealCard">
-      <div class="foodMealTop">
-        <div class="foodMealName">${label}</div>
-        <div class="foodMealKcal" id="mealKcal_${id}">${Math.round(macroKcal(m))} kcal</div>
-      </div>
-      <div class="macroInputGrid">
-        ${nutritionInputHtml(id,"carbs","碳水",m.carbs)}
-        ${nutritionInputHtml(id,"protein","蛋白质",m.protein)}
-        ${nutritionInputHtml(id,"fat","脂肪",m.fat)}
-      </div>
-    </div>`;
-  }).join("");
-  renderSupplementTracker();
-  updateNutritionTotals();
-  renderFoodTarget();
+// ===== V3.2 meal workspace: extra stores, old nutrition store stays untouched =====
+const AOS_BASE_FOODS=[{"name":"生米","carbs":75.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米饭（很软）","carbs":25.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米饭（一般）","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米饭（偏硬）","carbs":35.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米粥（稀）","carbs":10.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米粥（一般）","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米线（熟）","carbs":33.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"肠粉（熟）","carbs":20.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"粽子","carbs":50.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"切片面包","carbs":50.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"馒头/花卷/馍/馕","carbs":50.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"挂面（生）","carbs":75.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"意面（生）","carbs":75.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"鲜面（生）","carbs":60.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"凉面（熟）","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"粗面（熟）","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"意面（熟）","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"细面（熟）","carbs":23.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"卷饼/烙饼/馕（熟）","carbs":50.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"红薯（生/蒸煮）","carbs":18.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"红薯（烤）","carbs":23.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"土豆（生/蒸煮）","carbs":18.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"土豆（烤）","carbs":23.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"红薯/土豆粉丝（生）","carbs":84.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"甜玉米（生/蒸煮）","carbs":20.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"糯玉米（生/蒸煮）","carbs":35.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"贝贝南瓜","carbs":21.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"传统南瓜","carbs":5.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"山药（生/蒸煮）","carbs":12.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"藕粉（生）","carbs":90.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"燕麦麸皮（生）","carbs":45.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"速食燕麦片（生）","carbs":60.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"速食黑麦片（生）","carbs":60.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"五谷道场方便面","carbs":65.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"辛拉面（普通版）","carbs":65.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"辛拉面（空空面版）","carbs":65.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"康力快熟意大利面","carbs":32.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"白家陈记酸辣粉丝","carbs":60.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"旺仔小馒头（46g装）","carbs":88.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"旺仔QQ糖","carbs":72.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"南方黑芝麻糊（无蔗糖版）","carbs":70.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"南方高山玉米糊（无蔗糖版）","carbs":70.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"营养米粉","carbs":75.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"十月稻田饭团","carbs":25.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"红螺牌驴打滚","carbs":86.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"山西烤馍","carbs":70.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"非油炸干脆面","carbs":75.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"非油炸锅巴","carbs":65.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"BHB熟板栗","carbs":35.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"沈大成豆沙青团","carbs":65.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"云片糕/桃片","carbs":80.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"米花糖","carbs":85.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"娃哈哈八宝粥（木糖醇版）","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"宝矿力运动饮料","carbs":6.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"脉动运动饮料","carbs":5.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"干枣","carbs":50.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"鲜枣","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"椰肉","carbs":30.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"榴莲","carbs":28.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"菠萝蜜","carbs":26.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"香蕉","carbs":22.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"提子","carbs":17.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"荔枝","carbs":17.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"桂圆","carbs":17.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"猕猴桃","carbs":15.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"苹果","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"梨","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"车厘子","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"火龙果","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"芒果","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"桑葚","carbs":13.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"葡萄","carbs":12.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"橘子","carbs":12.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"橙子","carbs":11.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"桃","carbs":10.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"柚子","carbs":10.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"樱桃","carbs":10.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"西梅","carbs":10.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"枇杷","carbs":9.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"李子","carbs":9.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"杏","carbs":9.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"哈密瓜","carbs":8.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"西瓜","carbs":7.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"木瓜","carbs":7.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"圣女果（小番茄）","carbs":6.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"西红柿（大番茄）","carbs":3.0,"protein":0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉（鱼虾生肉）","carbs":0,"protein":15.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉（三文鱼/金枪鱼）","carbs":0,"protein":20.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉（家禽家畜生肉）","carbs":0,"protein":20.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉（一般的熟肉）","carbs":0,"protein":25.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉（柴感的熟肉）","carbs":0,"protein":30.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"瘦肉干","carbs":0,"protein":40.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"蛋白粉","carbs":0,"protein":75.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"干黄豆","carbs":0,"protein":35.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"鲜黄豆/毛豆/青豆","carbs":0,"protein":13.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"豆皮/千张","carbs":0,"protein":35.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"豆腐","carbs":0,"protein":7.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"豆浆","carbs":0,"protein":3.0,"fat":0,"majorOnly":true,"source":"松松表·主要营养属性"},{"name":"纯牛奶（套表参考）","carbs":4.8,"protein":4,"fat":3.6,"majorOnly":false,"source":"松松表·250ml参考值","unit":"ml"}];
+let aosSelectedMeal="breakfast",aosMealMode="food",aosFoodSearch="",aosFoodSelected="",aosShowCustom=false;
+function aosEscape(v){return String(v??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function aosReadStore(k){try{const v=JSON.parse(aosStorage.getItem(k)||"{}");return v&&typeof v==="object"?v:{}}catch{return {}}}
+function aosFoodItems(key,meal){return aosReadStore(AOS_FOOD_DETAIL_STORE)?.[key]?.[meal]||[]}
+function aosCustomFoods(){return Object.values(aosReadStore(AOS_CUSTOM_FOODS_STORE))}
+function aosFoodCatalog(){return [...aosCustomFoods(),...AOS_BASE_FOODS]}
+function aosSetMeal(id){aosSelectedMeal=id;aosFoodSearch="";aosFoodSelected="";renderNutritionView()}
+function aosSetMode(mode){aosMealMode=mode;renderNutritionView()}
+function aosFindFood(name){return aosFoodCatalog().find(x=>x.name===name)}
+function aosSearchFood(value){aosFoodSearch=value.trim();aosFoodSelected="";aosDrawFoodSearch()}
+function aosDrawFoodSearch(){const list=$("aosFoodResults");if(!list)return;if(!aosFoodSearch.trim()){list.innerHTML="";list.style.display="none";return}list.style.display="block";const matches=aosFoodCatalog().filter(x=>x.name.toLowerCase().includes(aosFoodSearch.toLowerCase())).slice(0,28);list.innerHTML=matches.length?matches.map(x=>`<button class="aosFoodPick ${aosFoodSelected===x.name?'active':''}" onclick="aosChooseFood('${encodeURIComponent(x.name)}')">${aosEscape(x.name)} <small>· ${x.majorOnly?'主要营养属性':'完整'} · ${aosEscape(x.source||'自定义')}</small></button>`).join(''):'<div class="tiny" style="padding:10px">无匹配食物，可创建自定义食物</div>'}
+function aosChooseFood(encoded){aosFoodSelected=decodeURIComponent(encoded);const fav=aosReadStore(AOS_FAVORITE_FOODS_STORE)[aosFoodSelected];if(fav&&$("aosFoodWeight"))$("aosFoodWeight").value=fav.weight;aosDrawFoodSearch()}
+function aosPersistMealItems(items){const key=localDateKey(),all=aosReadStore(AOS_FOOD_DETAIL_STORE);all[key]??={};all[key][aosSelectedMeal]=items;aosStorage.setItem(AOS_FOOD_DETAIL_STORE,JSON.stringify(all))}
+function aosSaveMacroDelta(dc,dp,df){const key=localDateKey(),all=getNutritionStore(),day=getNutritionDay(key),m=day.meals[aosSelectedMeal];m.carbs=Math.max(0,Math.round((Number(m.carbs)+dc)*100)/100);m.protein=Math.max(0,Math.round((Number(m.protein)+dp)*100)/100);m.fat=Math.max(0,Math.round((Number(m.fat)+df)*100)/100);all[key]={...(all[key]||{}),date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};setNutritionStore(all)}
+function aosAddFood(){const food=aosFindFood(aosFoodSelected),weight=Number($("aosFoodWeight")?.value);if(!food){showToast('先选择食物');return}if(!Number.isFinite(weight)||weight<=0||weight>10000){showToast('请检查重量');return}const ratio=weight/100;const item={id:'f_'+Date.now()+'_'+Math.random().toString(36).slice(2,6),name:food.name,weight,unit:food.unit||'g',carbs:Math.round(food.carbs*ratio*100)/100,protein:Math.round(food.protein*ratio*100)/100,fat:Math.round(food.fat*ratio*100)/100,source:food.source,majorOnly:!!food.majorOnly};const items=aosFoodItems(localDateKey(),aosSelectedMeal).slice();items.push(item);aosPersistMealItems(items);aosSaveMacroDelta(item.carbs,item.protein,item.fat);aosFoodSelected='';aosFoodSearch='';renderNutritionView();showToast('食物已加入')}
+function aosRemoveFood(id){const items=aosFoodItems(localDateKey(),aosSelectedMeal).slice(),item=items.find(x=>x.id===id);if(!item)return;aosPersistMealItems(items.filter(x=>x.id!==id));aosSaveMacroDelta(-item.carbs,-item.protein,-item.fat);renderNutritionView()}
+function aosToggleCustom(){aosShowCustom=!aosShowCustom;renderNutritionView()}
+function aosSaveCustomFood(){const name=$("aosCustomName")?.value.trim(),c=Number($("aosCustomC")?.value),p=Number($("aosCustomP")?.value),f=Number($("aosCustomF")?.value);if(!name||name.length>70||[c,p,f].some(n=>!Number.isFinite(n)||n<0||n>100)){showToast('请填写每100g/ml营养数据');return}const unit=$("aosCustomUnit")?.value||'g',all=aosReadStore(AOS_CUSTOM_FOODS_STORE);all[name]={name,carbs:c,protein:p,fat:f,unit,majorOnly:false,source:'我的食物库·包装/自定义'};aosStorage.setItem(AOS_CUSTOM_FOODS_STORE,JSON.stringify(all));aosShowCustom=false;aosFoodSelected=name;aosFoodSearch=name;renderNutritionView();showToast('已保存到我的食物库')}
+function aosFavoriteFood(){const name=aosFoodSelected,food=aosFindFood(name),weight=Number($("aosFoodWeight")?.value);if(!food){showToast("先从搜索结果选择食物");return}if(!Number.isFinite(weight)||weight<=0||weight>10000){showToast("请填写常用份量");return}const all=aosReadStore(AOS_FAVORITE_FOODS_STORE);all[name]={name,weight,unit:food.unit||"g"};aosStorage.setItem(AOS_FAVORITE_FOODS_STORE,JSON.stringify(all));renderNutritionView();showToast("已收藏常吃食物与份量")}
+function aosUseFavoriteFood(encoded){const name=decodeURIComponent(encoded),fav=aosReadStore(AOS_FAVORITE_FOODS_STORE)[name],food=aosFindFood(name);if(!fav||!food){showToast("食物资料已不存在");return}aosFoodSelected=name;aosFoodSearch=name;aosMealMode="food";renderNutritionView();if($("aosFoodWeight"))$("aosFoodWeight").value=fav.weight;showToast("已选中，可修改份量或加入本餐")}
+function aosDeleteFavoriteFood(encoded){const name=decodeURIComponent(encoded),all=aosReadStore(AOS_FAVORITE_FOODS_STORE);delete all[name];aosStorage.setItem(AOS_FAVORITE_FOODS_STORE,JSON.stringify(all));renderNutritionView()}
+function aosSaveFavoriteMeal(){const items=aosFoodItems(localDateKey(),aosSelectedMeal);if(!items.length){showToast("当前餐次没有可保存的食物明细");return}const title=($("aosFavoriteMealName")?.value||"").trim();if(!title||title.length>60){showToast("套餐名称需为1–60字");return}const store=aosReadStore(AOS_FAVORITE_MEALS_STORE);store[title]={name:title,items:items.map(x=>({name:x.name,weight:x.weight,unit:x.unit,carbs:x.carbs,protein:x.protein,fat:x.fat,source:x.source,majorOnly:x.majorOnly}))};aosStorage.setItem(AOS_FAVORITE_MEALS_STORE,JSON.stringify(store));renderNutritionView();showToast("套餐已收藏")}
+function aosUseFavoriteMeal(encoded){const name=decodeURIComponent(encoded),plan=aosReadStore(AOS_FAVORITE_MEALS_STORE)[name];if(!plan||!Array.isArray(plan.items)||!plan.items.length)return;const items=aosFoodItems(localDateKey(),aosSelectedMeal).slice();let c=0,p=0,f=0;for(const x of plan.items){const item={...x,id:'f_'+Date.now()+'_'+Math.random().toString(36).slice(2,9)};items.push(item);c+=Number(item.carbs)||0;p+=Number(item.protein)||0;f+=Number(item.fat)||0}aosPersistMealItems(items);aosSaveMacroDelta(c,p,f);renderNutritionView();showToast("套餐已加入本餐")}
+function aosDeleteFavoriteMeal(encoded){const name=decodeURIComponent(encoded),all=aosReadStore(AOS_FAVORITE_MEALS_STORE);delete all[name];aosStorage.setItem(AOS_FAVORITE_MEALS_STORE,JSON.stringify(all));renderNutritionView()}
+function aosFavoritesHtml(){const favorites=Object.values(aosReadStore(AOS_FAVORITE_FOODS_STORE)),meals=Object.values(aosReadStore(AOS_FAVORITE_MEALS_STORE));return `<details class="aosFavoritesBox"><summary>☆ 我的收藏 <small>常吃食物 ${favorites.length} · 常用套餐 ${meals.length}</small></summary><div class="aosFavoritesInside"><div class="aosFavoritesLabel">常吃食物 · 收藏后记住默认份量</div>${favorites.length?favorites.map(x=>`<div class="aosFoodLine"><span>${aosEscape(x.name)} <small>${aosEscape(x.weight)}${aosEscape(x.unit)}</small></span><span><button class="aosTinyAction" onclick="aosUseFavoriteFood('${encodeURIComponent(x.name)}')">选择</button> <button class="aosTinyAction" onclick="aosDeleteFavoriteFood('${encodeURIComponent(x.name)}')">移除</button></span></div>`).join(''):'<div class="tiny">暂无收藏，可搜索食物并填写常用份量后收藏。</div>'}<div class="aosFavoritesLabel" style="margin-top:14px">常用套餐 · 一键加入本餐</div>${meals.length?meals.map(x=>`<div class="aosFoodLine"><span>${aosEscape(x.name)} <small>${x.items.length} 种食物</small></span><span><button class="aosTinyAction" onclick="aosUseFavoriteMeal('${encodeURIComponent(x.name)}')">加入</button> <button class="aosTinyAction" onclick="aosDeleteFavoriteMeal('${encodeURIComponent(x.name)}')">移除</button></span></div>`).join(''):'<div class="tiny">暂无套餐，可将当前餐次食物明细保存为套餐。</div>'}<div class="aosFoodActions"><input id="aosFavoriteMealName" class="aosFavNameInput" maxlength="60" placeholder="套餐名称，如咖喱牛肉盖浇饭"><button class="aosTinyAction" onclick="aosSaveFavoriteMeal()">收藏当前餐次</button></div></div></details>`}
+function aosFoodWorkspaceHtml(){const m=getNutritionDay(localDateKey()).meals[aosSelectedMeal],items=aosFoodItems(localDateKey(),aosSelectedMeal);return `<div class="aosModeRow"><button class="${aosMealMode==='food'?'active':''}" onclick="aosSetMode('food')">食物重量</button><button class="${aosMealMode==='macro'?'active':''}" onclick="aosSetMode('macro')">营养直录</button></div>${aosMealMode==='macro'?`<div class="macroInputGrid">${nutritionInputHtml(aosSelectedMeal,'carbs','碳水',m.carbs)}${nutritionInputHtml(aosSelectedMeal,'protein','蛋白质',m.protein)}${nutritionInputHtml(aosSelectedMeal,'fat','脂肪',m.fat)}</div><div class="aosFoodNote">手动编辑的是本餐总量，食物明细不会自动跟随调整；建议食物明细增减使用删除/重新加入。</div>`:`<div>${items.length?items.map(x=>`<div class="aosFoodLine"><span>${aosEscape(x.name)} <small>· ${x.weight}${aosEscape(x.unit||'g')}</small></span><span><small>${Math.round(macroKcal(x))} kcal</small> <button class="aosTinyAction" onclick="aosRemoveFood('${x.id}')">删除</button></span></div>`).join(''):'<div class="tiny" style="padding:5px 0 9px">暂无食物明细，旧版营养数据仍保留在本餐总量中。</div>'}</div>${aosFavoritesHtml()}<div class="aosFoodControls"><input id="aosFoodQuery" placeholder="搜索食物，如米饭、牛肉" value="${aosEscape(aosFoodSearch)}" oninput="aosSearchFood(this.value)"><input id="aosFoodWeight" type="number" inputmode="decimal" min="0" step="1" placeholder="重量 g/ml"></div><div id="aosFoodResults" class="aosFoodList"></div><div class="aosFoodActions"><button class="aosTinyAction" onclick="aosAddFood()">＋ 加入本餐</button><button class="aosTinyAction" onclick="aosFavoriteFood()">☆ 收藏食物及份量</button><button class="aosTinyAction" onclick="aosToggleCustom()">${aosShowCustom?'收起':'＋ 自定义食品'}</button></div>${aosShowCustom?`<div style="margin-top:10px"><input id="aosCustomName" class="macroInput" style="width:100%" placeholder="食品名称 / 品牌"><div class="aosCustomInputs"><label>碳水 /100<input id="aosCustomC" inputmode="decimal" type="number" placeholder="g"></label><label>蛋白 /100<input id="aosCustomP" inputmode="decimal" type="number" placeholder="g"></label><label>脂肪 /100<input id="aosCustomF" inputmode="decimal" type="number" placeholder="g"></label></div><div class="aosFoodActions"><select id="aosCustomUnit" style="width:auto;padding:8px"><option value="g">每100g</option><option value="ml">每100ml</option></select><button class="aosTinyAction" onclick="aosSaveCustomFood()">保存到我的食物库</button></div></div>`:''}<div class="aosFoodNote">套表多数食品只提供主要营养属性率，未提供的次要营养素不补造；如要完整计算，请按包装数据自定义。当前仍沿用旧版记录口径与目标，不混用新的完整热量目标。</div>`}`}
+function aosMealDeltaHtml(key){const goal=targetForDate(key),t=nutritionTotals(getNutritionDay(key));if(!goal.ready)return '';const diff=Math.round(t.kcal-goal.kcal),tol=Math.max(100,Math.round(goal.kcal*.05)),st=Math.abs(diff)<=tol?'ok':diff<0?'under':'over',label=st==='ok'?'处于参考范围':st==='under'?'低于参考范围':'高于参考范围';return `<div class="aosDelta ${st}"><span>${label} · 容差 ±${tol} kcal</span><strong>${diff>0?'+':''}${diff} kcal</strong></div>`}
+
+let aosFoodPanel='overview';
+function aosSwitchFoodPanel(mode){
+  aosFoodPanel=mode==='entry'?'entry':'overview';
+  const show=aosFoodPanel==='entry';
+  for(const id of ['aosFoodEntry','aosFoodEntryArea']){const el=$(id);if(el)el.style.display=show?'block':'none'}
+  if($('aosFoodOverview'))$('aosFoodOverview').style.display=show?'none':'block';
+  $('aosFoodEntryBtn')?.classList.toggle('active',show);
+  $('aosFoodOverviewBtn')?.classList.toggle('active',!show);
+}
+function renderNutritionView(){
+  renderHydration();if(!$("foodMeals"))return;
+  const key=localDateKey(),day=getNutritionDay(key);
+  if(!MEAL_KEYS.some(([id])=>id===aosSelectedMeal))aosSelectedMeal='breakfast';
+  $("foodDateTitle").textContent=key;
+  const meal=day.meals[aosSelectedMeal],label=MEAL_KEYS.find(([id])=>id===aosSelectedMeal)?.[1]||'早餐';
+  $("foodMeals").innerHTML=`<div class="aosMealTabs">${MEAL_KEYS.map(([id,name])=>`<button class="aosMealTab ${id===aosSelectedMeal?'active':''} ${macroKcal(day.meals[id])>0?'hasData':''}" onclick="aosSetMeal('${id}')">${name==='其他餐'?'其他':name}</button>`).join('')}</div><div class="card aosMealWorkspace"><div class="foodMealTop"><div class="foodMealName">${label}</div><div class="foodMealKcal" id="mealKcal_${aosSelectedMeal}">${Math.round(macroKcal(meal))} kcal</div></div>${aosFoodWorkspaceHtml()}</div>`;
+  if(aosMealMode==='food')aosDrawFoodSearch();
+  renderSupplementTracker();updateNutritionTotals();renderFoodTarget();aosSwitchFoodPanel(aosFoodPanel);
 }
 function nutritionInputHtml(meal,macro,label,value){
   return `<label class="macroField">
@@ -3670,7 +3822,7 @@ function updateNutritionValue(meal,macro,value){
   const day=getNutritionDay(key);
   const n=Math.max(0,Number(value)||0);
   day.meals[meal][macro]=n;
-  all[key]={date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
+  all[key]={...(all[key]||{}),date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
   setNutritionStore(all);
   const kcalEl=$(`mealKcal_${meal}`);
   if(kcalEl)kcalEl.textContent=`${Math.round(macroKcal(day.meals[meal]))} kcal`;
@@ -3704,7 +3856,7 @@ function toggleSupplement(id){
   const all=getNutritionStore();
   const day=getNutritionDay(key);
   day.supplements[id]=!day.supplements[id];
-  all[key]={date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
+  all[key]={...(all[key]||{}),date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
   setNutritionStore(all);
   renderSupplementTracker();
   if(selectedDateKey===key && calendarDayPanel==="food") renderCalendarDayDetail();
@@ -3771,7 +3923,7 @@ function saveFoodHistoryEditor(){
   document.querySelectorAll("#foodHistoryEditContent button[data-supp]").forEach(btn=>{
     day.supplements[btn.dataset.supp]=btn.dataset.taken==="1";
   });
-  all[key]={date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
+  all[key]={...(all[key]||{}),date:key,updatedAt:new Date().toISOString(),meals:day.meals,supplements:day.supplements};
   setNutritionStore(all);
   closeFoodHistoryEditor();
   renderNutritionView();
@@ -3799,11 +3951,12 @@ function calendarFoodHtml(key){
     </div>
     <div class="card">
       <div class="calendarFoodSummary">
-        <div><span>总热量</span><b>${Math.round(t.kcal)} kcal</b></div>
+        <div><span>当日摄入</span><b class="aosCalendarKcal">${Math.round(t.kcal)} kcal</b></div>
         <div><span>碳水</span><b>${fmtMacro(t.carbs)} g</b></div>
         <div><span>蛋白质</span><b>${fmtMacro(t.protein)} g</b></div>
         <div><span>脂肪</span><b>${fmtMacro(t.fat)} g</b></div>
       </div>
+      ${aosMealDeltaHtml(key)}
       <div class="calendarWaterSummary"><span>饮水</span><b>${waterMl} ml</b></div>
       ${(()=>{const goal=targetForDate(key);return goal.ready?`<div class="calendarGoalSummary">
         <div class="tiny">当日参考 · ${goal.dayLabel||"休息日"}${goal.cardioKcal?` · 有氧 ${goal.cardioKcal}kcal`:""}${goal.targetWeight?` · 目标 ${Number(goal.targetWeight).toFixed(1)}kg`:""}</div>
@@ -3968,10 +4121,10 @@ let selectedDateKey=null;
 
 function applyTheme(theme){
   document.documentElement.dataset.theme=theme;
-  localStorage.setItem(THEME_KEY,theme);
+  aosStorage.setItem(THEME_KEY,theme);
   $("themeBtn").textContent=theme==="light"?"🌙":"☀️";
 }
-applyTheme(localStorage.getItem(THEME_KEY)||"light");
+applyTheme(aosStorage.getItem(THEME_KEY)||"light");
 $("themeBtn").onclick=()=>applyTheme(document.documentElement.dataset.theme==="light"?"dark":"light");
 
 let selectedParts=new Set(["胸","臂"]);
@@ -4015,11 +4168,11 @@ function fmtMMSS(sec){
   const m=Math.floor(sec/60),s=sec%60;
   return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 }
-function getHistory(){try{return JSON.parse(localStorage.getItem(STORE)||"[]")}catch{return[]}}
-function setHistory(v){localStorage.setItem(STORE,JSON.stringify(v))}
+function getHistory(){try{return JSON.parse(aosStorage.getItem(STORE)||"[]")}catch{return[]}}
+function setHistory(v){aosStorage.setItem(STORE,JSON.stringify(v))}
 
-function getTemplates(){try{return JSON.parse(localStorage.getItem(TEMPLATE_STORE)||"[]")}catch{return[]}}
-function setTemplates(v){localStorage.setItem(TEMPLATE_STORE,JSON.stringify(v))}
+function getTemplates(){try{return JSON.parse(aosStorage.getItem(TEMPLATE_STORE)||"[]")}catch{return[]}}
+function setTemplates(v){aosStorage.setItem(TEMPLATE_STORE,JSON.stringify(v))}
 let toastTimer=null;
 function showToast(msg){
   const t=$("toast"); if(!t)return;
@@ -4140,18 +4293,18 @@ function serializeActiveSession(){
 }
 function persistActiveSession(){
   if(!session){
-    localStorage.removeItem(ACTIVE_SESSION_STORE);
+    aosStorage.removeItem(ACTIVE_SESSION_STORE);
     return;
   }
   try{
-    localStorage.setItem(ACTIVE_SESSION_STORE,JSON.stringify(serializeActiveSession()));
+    aosStorage.setItem(ACTIVE_SESSION_STORE,JSON.stringify(serializeActiveSession()));
   }catch(e){}
 }
 function clearPersistedSession(){
-  localStorage.removeItem(ACTIVE_SESSION_STORE);
+  aosStorage.removeItem(ACTIVE_SESSION_STORE);
 }
 function readPersistedSession(){
-  try{return JSON.parse(localStorage.getItem(ACTIVE_SESSION_STORE)||"null")}catch{return null}
+  try{return JSON.parse(aosStorage.getItem(ACTIVE_SESSION_STORE)||"null")}catch{return null}
 }
 function showRestorePromptIfNeeded(){
   const saved=readPersistedSession();
@@ -4385,6 +4538,7 @@ function pickExercise(name){
   closePicker();
 }
 
+function aosMoveExercise(delta){if(!session||restState)return;const next=currentIndex+delta;if(next<0||next>=session.exercises.length)return;const v=session.exercises;[v[currentIndex],v[next]]=[v[next],v[currentIndex]];currentIndex=next;persistActiveSession();renderFocus();showToast("动作顺序已更新")}
 function addExercise(){
   if(!$("muscleSelect").value || !$("exerciseSelect").value){
     openPicker(!$("muscleSelect").value ? "muscle" : "exercise");
@@ -5114,23 +5268,28 @@ function confirmBackupRestore(){
   const d=pendingBackupRestore;
   if(!d)return;
   try{
-    if(d.body_profile) localStorage.setItem(BODY_PROFILE_STORE,JSON.stringify(d.body_profile));
-    else localStorage.removeItem(BODY_PROFILE_STORE);
-    localStorage.setItem(BODY_LOG_STORE,JSON.stringify(d.body_logs||{}));
-    localStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(d.daily_statuses||{}));
-    localStorage.setItem(NUTRITION_STORE,JSON.stringify(d.nutrition||{}));
-    localStorage.setItem(WATER_STORE,JSON.stringify(d.water||{}));
-    localStorage.setItem(STORE,JSON.stringify(d.workouts||[]));
-    localStorage.setItem(CARDIO_STORE,JSON.stringify(d.cardio_sessions||[]));
-    localStorage.setItem(TEMPLATE_STORE,JSON.stringify(d.templates||[]));
-    localStorage.setItem(CUSTOM_EXERCISE_STORE,JSON.stringify(d.custom_exercises||{}));
-    if(d.theme==="dark"||d.theme==="light")localStorage.setItem(THEME_KEY,d.theme);
-    localStorage.removeItem(ACTIVE_SESSION_STORE);
-    localStorage.removeItem(CARDIO_ACTIVE_STORE);
+    if(d.body_profile) aosStorage.setItem(BODY_PROFILE_STORE,JSON.stringify(d.body_profile));
+    else aosStorage.removeItem(BODY_PROFILE_STORE);
+    aosStorage.setItem(BODY_LOG_STORE,JSON.stringify(d.body_logs||{}));
+    aosStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(d.daily_statuses||{}));
+    if(d.health_daily) aosStorage.setItem(AOS_HEALTH_STORE,JSON.stringify(d.health_daily));
+    aosStorage.setItem(NUTRITION_STORE,JSON.stringify(d.nutrition||{}));
+    aosStorage.setItem(AOS_FOOD_DETAIL_STORE,JSON.stringify(d.food_details||{}));
+    aosStorage.setItem(AOS_CUSTOM_FOODS_STORE,JSON.stringify(d.custom_foods||{}));
+    aosStorage.setItem(AOS_FAVORITE_FOODS_STORE,JSON.stringify(d.favorite_foods||{}));
+    aosStorage.setItem(AOS_FAVORITE_MEALS_STORE,JSON.stringify(d.favorite_meals||{}));
+    aosStorage.setItem(WATER_STORE,JSON.stringify(d.water||{}));
+    aosStorage.setItem(STORE,JSON.stringify(d.workouts||[]));
+    aosStorage.setItem(CARDIO_STORE,JSON.stringify(d.cardio_sessions||[]));
+    aosStorage.setItem(TEMPLATE_STORE,JSON.stringify(d.templates||[]));
+    aosStorage.setItem(CUSTOM_EXERCISE_STORE,JSON.stringify(d.custom_exercises||{}));
+    if(d.theme==="dark"||d.theme==="light")aosStorage.setItem(THEME_KEY,d.theme);
+    aosStorage.removeItem(ACTIVE_SESSION_STORE);
+    aosStorage.removeItem(CARDIO_ACTIVE_STORE);
     cardioSession=null;
     closeBackupRestore();
     migrateLegacyMuscleLabels();
-    applyTheme(localStorage.getItem(THEME_KEY)||"light");
+    applyTheme(aosStorage.getItem(THEME_KEY)||"light");
     selectedTemplateId="none";
     selectedDateKey=null;
     calendarDayPanel=null;
@@ -5150,13 +5309,15 @@ function exportSelectedDate(){
   const bodyLogs=getBodyLogs();
   const target=targetForDate(selectedDateKey);
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V3.1.3",
+    schema_version:"A-OS_BODY_EXPORT_V3.2.3",
     export_type:"selected_date",
     exported_at:new Date().toISOString(),
     date:selectedDateKey,
     body_profile:getBodyProfile(),
     body_log:bodyLogs[selectedDateKey]||null,
     daily_status:statuses[selectedDateKey]||null,
+    health_daily:aosHealthHistory()[selectedDateKey]||null,
+    food_details:aosReadStore(AOS_FOOD_DETAIL_STORE)[selectedDateKey]||{},
     nutrition:{
       ...nutrition,
       totals:nutritionTotal,
@@ -5169,19 +5330,24 @@ function exportSelectedDate(){
 }
 function exportAllData(){
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V3.1.3",
+    schema_version:"A-OS_BODY_EXPORT_V3.2.3",
     export_type:"all",
     exported_at:new Date().toISOString(),
     body_profile:getBodyProfile(),
     body_logs:getBodyLogs(),
     daily_statuses:getDailyStatuses(),
+    health_daily:aosHealthHistory(),
     nutrition:getNutritionStore(),
+    food_details:aosReadStore(AOS_FOOD_DETAIL_STORE),
+    custom_foods:aosReadStore(AOS_CUSTOM_FOODS_STORE),
+    favorite_foods:aosReadStore(AOS_FAVORITE_FOODS_STORE),
+    favorite_meals:aosReadStore(AOS_FAVORITE_MEALS_STORE),
     water:getWaterStore(),
     workouts:getHistory(),
     cardio_sessions:getCardioHistory(),
     templates:getTemplates(),
     custom_exercises:getCustomExercises(),
-    theme:localStorage.getItem(THEME_KEY)||"light"
+    theme:aosStorage.getItem(THEME_KEY)||"light"
   };
   downloadJson(`A-OS_Body_All_${localDateKey()}.json`,payload);
 }
