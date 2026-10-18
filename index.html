@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V2.9</title>
+<title>A-OS Body V3.1.2</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -1551,6 +1551,95 @@ html[data-theme="dark"] .restClock{
 }
 .exerciseTrendNote{margin-top:7px;line-height:1.5}
 
+
+/* ===== V3.0 target-weight fix + cardio ===== */
+.targetWeightWrap{margin-top:10px;padding:12px;border:1px solid var(--line);background:var(--ui-card2);border-radius:15px}
+.targetWeightLabel{font-size:10px;color:var(--muted);margin-bottom:6px}
+.targetWeightInputRow{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--ui-card);border-radius:12px;padding:0 12px;min-height:48px}
+.targetWeightInputRow input{appearance:none;-webkit-appearance:none;width:100%;min-width:0;border:0!important;background:transparent!important;color:var(--text);outline:0;box-shadow:none!important;font-size:21px;font-weight:950;line-height:1;padding:12px 0;border-radius:0!important}
+.targetWeightInputRow span{font-size:10px;font-weight:900;color:var(--muted)}
+.targetWeightMini{font-size:9px;color:var(--muted);line-height:1.45;margin:7px 2px 0}
+.cardioModuleCard{margin-bottom:16px}.cardioModuleTop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.cardioModuleTitle{font-size:13px;font-weight:900;margin-top:4px}.cardioModuleHint{font-size:8px;color:var(--muted);text-align:right;max-width:120px;line-height:1.4}
+.cardioLauncher{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.cardioLauncher button{border:1px solid var(--line);background:var(--ui-card2);color:var(--text);border-radius:13px;padding:12px 6px;display:grid;gap:3px}.cardioLauncher b{font-size:14px}.cardioLauncher span{font-size:8px;color:var(--muted)}
+.cardioActive{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}.cardioActiveHead{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.cardioActiveType{font-size:18px;font-weight:950}.cardioStateBadge{border:1px solid var(--line);border-radius:999px;padding:5px 9px;font-size:9px;font-weight:900}.cardioStateBadge.paused{color:var(--muted)}.cardioTimer{text-align:center;font-size:36px;font-weight:950;letter-spacing:-1px;margin:14px 0}.cardioStats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.cardioStats>div{border:1px solid var(--line);background:var(--ui-card2);border-radius:11px;padding:9px}.cardioStats span{display:block;font-size:8px;color:var(--muted)}.cardioStats b{display:block;font-size:12px;margin-top:3px}.cardioControls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.cardioControls button{min-height:44px}
+.cardioSetupOptions{display:grid;gap:7px;margin-top:14px;max-height:44vh;overflow:auto}.cardioSetupOptions button{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;border:1px solid var(--line);background:var(--ui-card);color:var(--text);border-radius:11px;padding:11px 12px;text-align:left;font-size:11px;font-weight:850}.cardioSetupOptions button.active{background:var(--text);color:var(--bg2);border-color:var(--text)}.cardioSetupEstimate{margin-top:10px;padding:10px;border:1px solid var(--line);background:var(--ui-card2);border-radius:11px;font-size:10px;color:var(--muted)}.cardioSetupEstimate b{color:var(--text)}.cardioStartBtn{margin-top:12px}
+.trainTypeDot.cardio,.calendarLegend i.cardio{background:#e09a50}.dayTypeBadge.cardio{border-color:#e09a50;color:#b8732c}.songFormulaGrid .wide{grid-column:1/-1}.songCardioNote{margin-top:8px;padding:8px 9px;border:1px solid var(--line);border-radius:10px;background:var(--ui-card2)}
+
+\n/* ===== V3.1 training switch + weight backfill ===== */\n.trainingModeSwitch{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border:1px solid var(--line);background:var(--ui-card2);border-radius:15px;margin-bottom:14px}\n.trainingModeSwitch button{border:0;background:transparent;color:var(--muted);border-radius:11px;padding:10px 8px;display:grid;gap:2px;text-align:center}\n.trainingModeSwitch button b{font-size:13px}\n.trainingModeSwitch button span{font-size:7.5px}\n.trainingModeSwitch button.active{background:var(--text);color:var(--bg2)}\n.weightEntryDateRow{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:11px}\n.weightEntryDateRow button{border:1px solid var(--line);background:var(--ui-card2);color:var(--muted);border-radius:9px;padding:7px 4px;font-size:8.5px;font-weight:900}\n.weightEntryDateRow button.active{background:var(--text);color:var(--bg2);border-color:var(--text)}\n.weightEntryLabel{font-size:8.5px;color:var(--muted);margin:7px 2px -3px}\n.weightQuickEntry{margin-top:7px}\n
+
+/* ===== V3.1.1 compact polish ===== */
+.trainingModeBar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin:0 2px 14px;padding:0 2px
+}
+.trainingModeLabel{font-size:10px;color:var(--muted);font-weight:850}
+.trainingModeSwitch{
+  display:grid!important;grid-template-columns:1fr 1fr!important;gap:2px!important;
+  width:148px;padding:3px!important;margin:0!important;border:1px solid var(--line)!important;
+  background:var(--ui-card2)!important;border-radius:11px!important
+}
+.trainingModeSwitch button{
+  min-height:30px!important;padding:0 12px!important;border:0!important;border-radius:8px!important;
+  background:transparent!important;color:var(--muted)!important;display:block!important;
+  font-size:10px!important;font-weight:900!important;line-height:30px!important;text-align:center!important
+}
+.trainingModeSwitch button.active{background:var(--text)!important;color:var(--bg2)!important}
+
+.weightEntryDateRow,.weightEntryLabel{display:none!important}
+.weightEntryCompact{
+  display:grid;grid-template-columns:minmax(112px,1.05fr) minmax(108px,1fr) auto;
+  gap:7px;align-items:stretch;margin-top:11px
+}
+.weightDateSelector,.weightValueField,.weightSaveBtn{
+  min-height:48px;border:1px solid var(--line);border-radius:12px
+}
+.weightDateSelector{
+  position:relative;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:8px 28px 8px 11px;background:var(--ui-card2);color:var(--text);text-align:left
+}
+.weightDateSelector span,.weightValueField>span{font-size:7.5px;color:var(--muted);font-weight:750}
+.weightDateSelector b{font-size:10.5px;margin-top:3px;white-space:nowrap}
+.weightDateSelector i{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);font-style:normal;
+  color:var(--muted);font-size:17px;font-weight:500
+}
+.weightValueField{
+  padding:7px 10px;background:var(--ui-card2);display:flex;flex-direction:column;justify-content:center
+}
+.weightValueField>div{display:flex;align-items:baseline;gap:4px;margin-top:1px}
+.weightValueField input{
+  width:100%;min-width:0;border:0;background:transparent;color:var(--text);outline:0;
+  font-size:17px;font-weight:950;padding:0
+}
+.weightValueField b{font-size:8px;color:var(--muted)}
+.weightSaveBtn{
+  padding:0 14px;background:var(--text);color:var(--bg2);font-size:10px;font-weight:900;
+  border-color:var(--text)
+}
+@media(max-width:380px){
+  .weightEntryCompact{grid-template-columns:1.12fr .92fr auto;gap:5px}
+  .weightSaveBtn{padding:0 11px}
+  .trainingModeSwitch{width:132px}
+}
+
+
+/* ===== V3.1.2 harmonious weight-date picker ===== */
+.weightDateSheet{max-height:76vh}
+.weightDateMonthBar{display:grid;grid-template-columns:42px 1fr 42px;align-items:center;gap:8px;margin:2px 0 12px}
+.weightDateMonthBar b{text-align:center;font-size:15px}
+.weightDateMonthBar button{width:38px;height:38px;border:1px solid var(--line);background:var(--ui-card);color:var(--text);border-radius:11px;font-size:22px;line-height:1}
+.weightDateWeek{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;color:var(--muted);font-size:8px;text-align:center;margin-bottom:5px}
+.weightDateGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.weightDateGrid>button,.weightDateGrid>.empty{aspect-ratio:1/1;min-width:0;border-radius:11px}
+.weightDateGrid>.empty{display:block}
+.weightDateGrid>button{position:relative;border:1px solid transparent;background:transparent;color:var(--text);display:grid;place-items:center;font-size:11px;font-weight:850}
+.weightDateGrid>button.today{border-color:var(--line);background:var(--ui-card)}
+.weightDateGrid>button.selected{background:var(--text);color:var(--bg2);border-color:var(--text)}
+.weightDateGrid>button.disabled{opacity:.25}
+.weightDateGrid>button i{position:absolute;bottom:5px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:currentColor}
+.weightDateQuick{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px}
+.weightDateQuick button{min-height:38px;border:1px solid var(--line);background:var(--ui-card2);color:var(--text);border-radius:11px;font-size:10px;font-weight:900}
+
 </style>
 </head>
 <body>
@@ -1585,12 +1674,17 @@ html[data-theme="dark"] .restClock{
         </div>
       </div>
 
-      <div class="weightQuickEntry">
-        <div>
-          <span>今日体重</span>
+      <div class="weightEntryCompact">
+        <button class="weightDateSelector" onclick="openWeightDatePicker()">
+          <span>记录日期</span>
+          <b id="weightEntryDateLabel">今天</b>
+          <i>›</i>
+        </button>
+        <div class="weightValueField">
+          <span>体重</span>
           <div><input id="todayWeightInput" inputmode="decimal" placeholder="69.0"><b>kg</b></div>
         </div>
-        <button onclick="saveTodayWeight()">记录</button>
+        <button class="weightSaveBtn" onclick="saveWeightEntry()">保存</button>
       </div>
 
       <div class="weightTrendMeta">
@@ -1652,6 +1746,44 @@ html[data-theme="dark"] .restClock{
   </section>
 
   <section id="trainView" class="view">
+    <div class="trainingModeBar">
+      <span class="trainingModeLabel">训练模式</span>
+      <div class="trainingModeSwitch">
+        <button id="trainingModeStrength" class="active" onclick="setTrainingMode('strength')">力训</button>
+        <button id="trainingModeCardio" onclick="setTrainingMode('cardio')">有氧</button>
+      </div>
+    </div>
+    <div id="cardioTrainingArea" class="card cardioModuleCard" style="display:none">
+      <div class="cardioModuleTop">
+        <div>
+          <div class="muted">有氧训练</div>
+          <div class="cardioModuleTitle">连续计时 · 暂停单独计休息</div>
+        </div>
+        <div class="cardioModuleHint">按“有氧热量消耗”表计算</div>
+      </div>
+      <div id="cardioLauncher" class="cardioLauncher">
+        <button onclick="openCardioSetup('run')"><b>跑步</b><span>按速度</span></button>
+        <button onclick="openCardioSetup('swim')"><b>游泳</b><span>按速度</span></button>
+        <button onclick="openCardioSetup('cycle')"><b>骑行</b><span>户外 / 室内</span></button>
+      </div>
+      <div id="cardioActive" class="cardioActive" style="display:none">
+        <div class="cardioActiveHead">
+          <div><div id="cardioActiveType" class="cardioActiveType">跑步</div><div id="cardioActiveMode" class="tiny">6 km/h</div></div>
+          <div id="cardioStateBadge" class="cardioStateBadge">进行中</div>
+        </div>
+        <div class="cardioTimer" id="cardioActiveClock">00:00:00</div>
+        <div class="cardioStats">
+          <div><span>有效有氧</span><b id="cardioActiveTime">00:00</b></div>
+          <div><span>暂停休息</span><b id="cardioRestTime">00:00</b></div>
+          <div><span>预计消耗</span><b id="cardioLiveKcal">0 kcal</b></div>
+        </div>
+        <div class="cardioControls">
+          <button id="cardioPauseBtn" class="secondary" onclick="toggleCardioPause()">暂停休息</button>
+          <button class="danger" onclick="finishCardioSession()">结束有氧</button>
+        </div>
+      </div>
+    </div>
+    <div id="strengthTrainingArea">
     <div class="partLine">
       <div class="partName" id="sessionParts">胸</div>
       <div class="progressPill" id="exerciseProgress">0 / 0 动作</div>
@@ -1748,6 +1880,7 @@ html[data-theme="dark"] .restClock{
     <div class="card trainingControlCard finishOnlyCard">
       <button class="danger finishTrainingBtn" onclick="requestFinishSession()">结束今天的训练</button>
     </div>
+    </div>
   </section>
 
   <section id="trendView" class="view">
@@ -1823,6 +1956,7 @@ html[data-theme="dark"] .restClock{
         <span><i class="back"></i>背</span>
         <span><i class="leg"></i>腿</span>
         <span><i class="other"></i>其他</span>
+        <span><i class="cardio"></i>有氧</span>
       </div>
 
       <div id="selectedDateActions" class="selectedDateActions" style="display:none">
@@ -1849,7 +1983,7 @@ html[data-theme="dark"] .restClock{
         <input id="backupFileInput" type="file" accept=".json,application/json" style="display:none" onchange="handleBackupFile(event)">
       </div>
 
-      <div class="version">A-OS BODY · V2.9 RC</div>
+      <div class="version">A-OS BODY · V3.1.2 POLISH</div>
     </div>
 
     <div id="calendarDayDetail" class="calendarDayDetail" style="display:none"></div>
@@ -1862,6 +1996,47 @@ html[data-theme="dark"] .restClock{
 
 
 
+
+<div id="cardioSetupBackdrop" class="customExerciseModalBackdrop" onclick="closeCardioSetup()"></div>
+<section id="cardioSetupModal" class="customExerciseModal cardioSetupModal" aria-hidden="true">
+  <div class="customExerciseModalTop"><div class="tiny">有氧训练</div><button class="pickerClose" onclick="closeCardioSetup()">✕</button></div>
+  <div class="customExerciseModalBody">
+    <h3 id="cardioSetupTitle">开始跑步</h3>
+    <p>选择本次有氧方式。开始后只记录有效运动时间；暂停期间单独累计休息时间。</p>
+    <div id="cardioSetupOptions" class="cardioSetupOptions"></div>
+    <div id="cardioSetupEstimate" class="cardioSetupEstimate"></div>
+    <button class="primary cardioStartBtn" onclick="startCardioSession()">开始有氧训练</button>
+  </div>
+</section>
+
+
+<div id="weightDateBackdrop" class="infoSheetBackdrop" onclick="closeWeightDatePicker()"></div>
+<section id="weightDateSheet" class="infoSheet weightDateSheet" aria-hidden="true">
+  <div class="infoSheetHandle"></div>
+  <div class="infoSheetTop">
+    <div>
+      <div class="tiny">体重记录</div>
+      <div class="infoSheetTitle">选择记录日期</div>
+    </div>
+    <button class="pickerClose" onclick="closeWeightDatePicker()">✕</button>
+  </div>
+  <div class="infoSheetBody">
+    <div class="weightDateMonthBar">
+      <button onclick="shiftWeightDateMonth(-1)">‹</button>
+      <b id="weightDateMonthTitle">2026年10月</b>
+      <button onclick="shiftWeightDateMonth(1)">›</button>
+    </div>
+    <div class="weightDateWeek">
+      <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
+    </div>
+    <div id="weightDateGrid" class="weightDateGrid"></div>
+    <div class="weightDateQuick">
+      <button onclick="pickWeightDateQuick(0)">今天</button>
+      <button onclick="pickWeightDateQuick(-1)">昨天</button>
+      <button onclick="pickWeightDateQuick(-2)">前天</button>
+    </div>
+  </div>
+</section>
 
 <div id="backupRestoreBackdrop" class="customExerciseModalBackdrop" onclick="closeBackupRestore()"></div>
 <section id="backupRestoreModal" class="customExerciseModal backupRestoreModal" aria-hidden="true">
@@ -1998,10 +2173,6 @@ html[data-theme="dark"] .restClock{
       <button id="levelVeteran" onclick="setTrainingLevel('veteran')">老手</button>
     </div>
 
-    <div class="bodyInputGrid one">
-      <label class="bodyField"><span>日均有氧消耗（可选）</span><div><input id="bodyAerobic" inputmode="decimal" placeholder="0"><b>kcal</b></div></label>
-    </div>
-
     <div class="bodyGoalLabel">当前阶段</div>
     <div class="bodyGoalSegment">
       <button id="goalMaintain" onclick="setBodyGoal('maintain')">维持</button>
@@ -2010,10 +2181,11 @@ html[data-theme="dark"] .restClock{
     </div>
 
     <div id="targetWeightWrap" class="targetWeightWrap" style="display:none">
-      <label class="bodyField targetWeightField">
-        <span>目标体重</span>
-        <div><input id="bodyTargetWeight" inputmode="decimal" placeholder="75.0"><b>kg</b></div>
-      </label>
+      <div class="targetWeightLabel">目标体重</div>
+      <div class="targetWeightInputRow">
+        <input id="bodyTargetWeight" type="text" inputmode="decimal" autocomplete="off" placeholder="75.0">
+        <span>kg</span>
+      </div>
       <div class="targetWeightMini" id="targetWeightMini">用于体重趋势、阶段进度和饮食目标联动</div>
     </div>
 
@@ -2264,6 +2436,8 @@ const NUTRITION_STORE="aos_body_nutrition_v16";
 const BODY_PROFILE_STORE="aos_body_body_profile_v18";
 const BODY_LOG_STORE="aos_body_body_log_v18";
 const CUSTOM_EXERCISE_STORE="aos_body_custom_exercises_v25";
+const CARDIO_STORE="aos_body_cardio_v30";
+const CARDIO_ACTIVE_STORE="aos_body_cardio_active_v30";
 let selectedTemplateId="none";
 let pendingTemplateId="none";
 const $=id=>document.getElementById(id);
@@ -2460,11 +2634,97 @@ function weightEntries(days=weightRangeDays){
     .filter(x=>Number.isFinite(x.weight) && new Date(x.date+"T12:00:00")>=start && new Date(x.date+"T12:00:00")<=end)
     .sort((a,b)=>a.date.localeCompare(b.date));
 }
-function saveTodayWeight(){
+let weightEntryDateKey=localDateKey();
+function relativeDateKey(offset){
+  const d=new Date();
+  d.setDate(d.getDate()+Number(offset||0));
+  return localDateKey(d);
+}
+function weightDateLabel(key){
+  if(key===localDateKey())return `今天 · ${key}`;
+  if(key===relativeDateKey(-1))return `昨天 · ${key}`;
+  if(key===relativeDateKey(-2))return `前天 · ${key}`;
+  return key;
+}
+function selectWeightRelativeDate(offset){selectWeightDate(relativeDateKey(offset))}
+let weightDatePickerYear=new Date().getFullYear();
+let weightDatePickerMonth=new Date().getMonth();
+
+function openWeightDatePicker(){
+  const base=new Date((weightEntryDateKey||localDateKey())+"T12:00:00");
+  weightDatePickerYear=base.getFullYear();
+  weightDatePickerMonth=base.getMonth();
+  renderWeightDateCalendar();
+  $("weightDateBackdrop")?.classList.add("open");
+  $("weightDateSheet")?.classList.add("open");
+  $("weightDateSheet")?.setAttribute("aria-hidden","false");
+}
+function closeWeightDatePicker(){
+  $("weightDateBackdrop")?.classList.remove("open");
+  $("weightDateSheet")?.classList.remove("open");
+  $("weightDateSheet")?.setAttribute("aria-hidden","true");
+}
+function shiftWeightDateMonth(delta){
+  const d=new Date(weightDatePickerYear,weightDatePickerMonth+Number(delta||0),1);
+  const today=new Date();
+  const firstFutureMonth=new Date(today.getFullYear(),today.getMonth()+1,1);
+  if(d>=firstFutureMonth){showToast("不能选择未来日期");return}
+  weightDatePickerYear=d.getFullYear();
+  weightDatePickerMonth=d.getMonth();
+  renderWeightDateCalendar();
+}
+function pickWeightDateQuick(offset){
+  selectWeightDate(relativeDateKey(offset));
+  closeWeightDatePicker();
+}
+function pickWeightDateFromCalendar(key){
+  selectWeightDate(key);
+  closeWeightDatePicker();
+}
+function renderWeightDateCalendar(){
+  const title=$("weightDateMonthTitle"),grid=$("weightDateGrid");
+  if(!title||!grid)return;
+  title.textContent=`${weightDatePickerYear}年${weightDatePickerMonth+1}月`;
+  const first=new Date(weightDatePickerYear,weightDatePickerMonth,1);
+  const days=new Date(weightDatePickerYear,weightDatePickerMonth+1,0).getDate();
+  const mondayIndex=(first.getDay()+6)%7;
+  const todayKey=localDateKey();
+  const cells=[];
+  for(let i=0;i<mondayIndex;i++)cells.push('<span class="empty"></span>');
+  for(let day=1;day<=days;day++){
+    const key=`${weightDatePickerYear}-${String(weightDatePickerMonth+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+    const future=key>todayKey;
+    const selected=key===weightEntryDateKey;
+    const hasRecord=Number(getBodyLogs()?.[key]?.weight)>0;
+    const cls=[selected?"selected":"",key===todayKey?"today":"",hasRecord?"recorded":"",future?"disabled":""].filter(Boolean).join(" ");
+    cells.push(`<button class="${cls}" ${future?"disabled":""} onclick="pickWeightDateFromCalendar('${key}')"><span>${day}</span>${hasRecord?'<i></i>':""}</button>`);
+  }
+  grid.innerHTML=cells.join("");
+}
+function selectWeightDate(key){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(key||""))return;
+  if(key>localDateKey()){showToast("不能记录未来体重");return}
+  weightEntryDateKey=key;
+  renderWeightEntrySelector();
+}
+function renderWeightEntrySelector(){
+  const key=weightEntryDateKey||localDateKey();
+  if($("weightEntryDateLabel")){
+    const short=key.slice(5).replace("-","/");
+    const label=key===localDateKey()?`今天 · ${short}`:
+      key===relativeDateKey(-1)?`昨天 · ${short}`:
+      key===relativeDateKey(-2)?`前天 · ${short}`:short;
+    $("weightEntryDateLabel").textContent=label;
+  }
+  const rec=getBodyLogs()[key];
+  if($("todayWeightInput"))$("todayWeightInput").value=Number(rec?.weight)>0?Number(rec.weight).toFixed(1):"";
+}
+function saveWeightEntry(){
   const input=$("todayWeightInput");
   const weight=Number(input?.value);
+  const key=weightEntryDateKey||localDateKey();
   if(!Number.isFinite(weight)||weight<25||weight>250){showToast("请检查体重");return}
-  const key=localDateKey();
+  if(key>localDateKey()){showToast("不能记录未来体重");return}
   const logs=getBodyLogs();
   const old=logs[key]||{};
   logs[key]={...old,date:key,weight};
@@ -2472,7 +2732,11 @@ function saveTodayWeight(){
 
   const profile=getBodyProfile();
   if(profile){
-    profile.weight=weight;
+    const latest=Object.entries(logs)
+      .map(([date,v])=>({date,weight:Number(v?.weight)}))
+      .filter(x=>Number.isFinite(x.weight))
+      .sort((a,b)=>b.date.localeCompare(a.date))[0];
+    if(latest)profile.weight=latest.weight;
     profile.updatedAt=new Date().toISOString();
     setBodyProfile(profile);
     renderBodyData();
@@ -2480,7 +2744,11 @@ function saveTodayWeight(){
     if(selectedDateKey && calendarDayPanel==="food")renderCalendarDayDetail();
   }
   renderWeightModule();
-  showToast("今日体重已记录");
+  showToast(`${weightDateLabel(key)}体重已保存`);
+}
+function saveTodayWeight(){
+  weightEntryDateKey=localDateKey();
+  saveWeightEntry();
 }
 
 function allWeightEntries(){
@@ -2523,12 +2791,11 @@ function renderWeightModule(){
   const entries=weightEntries(weightRangeDays);
   const allEntries=allWeightEntries();
   const latest=entries.length?entries[entries.length-1]:(allEntries.length?allEntries[allEntries.length-1]:null);
-  const today=getBodyLogs()[localDateKey()];
   const profile=getBodyProfile();
   const target=profile && profile.goal!=="maintain" ? Number(profile.targetWeight) : NaN;
   const startWeight=profile ? Number(profile.stageStartWeight) : NaN;
 
-  if($("todayWeightInput")) $("todayWeightInput").value=Number(today?.weight)>0?Number(today.weight).toFixed(1):"";
+  renderWeightEntrySelector();
   if($("weightLatest")) $("weightLatest").textContent=latest?latest.weight.toFixed(1):(Number(profile?.weight)>0?Number(profile.weight).toFixed(1):"--");
   if($("weightTrendCount")) $("weightTrendCount").textContent=`${entries.length} 次记录`;
 
@@ -2730,7 +2997,7 @@ const AOS_GUIDE_HTML=`
 
   <div class="infoSection">
     <h4>体重趋势</h4>
-    <p>首页可记录每日体重，并在同一张图中切换查看最近7日、30日或90日变化；同时显示7日均重、7日移动均线和近14日每周变化速度。当天重复记录会覆盖当天体重。</p>
+    <p>首页体重模块可选择今天、昨天、前天或任意历史日期进行记录和补录；同一天重复保存会覆盖当天体重。趋势图支持7日、30日、90日，并显示7日均重、7日移动均线和近14日每周变化速度。</p>
   </div>
 
   <div class="infoSection">
@@ -2756,7 +3023,7 @@ const AOS_GUIDE_HTML=`
 
   <div class="infoSection">
     <h4>导出数据</h4>
-    <p>日历页可导出“选中日期”或“全部数据”的 JSON。“导入备份”可恢复完整备份，适合换手机、清缓存或迁移设备。</p>
+    <p>日历页可导出“选中日期”或“全部数据”的 JSON。“导入备份”可恢复完整备份，完整备份也包含有氧记录。</p>
   </div>
 
   <div class="infoSection">
@@ -2766,6 +3033,22 @@ const AOS_GUIDE_HTML=`
 `;
 
 const AOS_CHANGELOG_HTML=`
+  <div class="changeVersion">
+    <b>V3.1.2</b><span>体重日期选择器重做</span>
+    <p>移除手机系统原生日历弹窗，改为与 A-OS 风格一致的底部月历；支持月份切换、今天/昨天/前天快捷选择，并标记已有体重记录的日期。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V3.1.1</b><span>训练与体重录入界面重做</span>
+    <p>训练模式切换收敛为轻量分段控件；体重补录改成单行“日期 + 体重 + 保存”，去掉首页四个日期按钮，减少视觉噪音。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V3.1</b><span>训练模式切换与体重补录</span>
+    <p>训练页改为力量 / 有氧双模式切换，避免两套界面同时堆叠；首页体重模块加入今天、昨天、前天和其他日期选择，可直接补录历史体重。</p>
+  </div>
+  <div class="changeVersion">
+    <b>V3.0</b><span>有氧训练与热量联动</span>
+    <p>身体数据移除手填“日均有氧消耗”；训练页加入跑步、游泳、骑行三类有氧，支持连续计时、暂停休息独立计时，并按“有氧热量消耗”Sheet算法自动计算消耗后联动当日理论热量；同时重做目标体重输入框显示。</p>
+  </div>
   <div class="changeVersion">
     <b>V2.9</b><span>封版候选优化</span>
     <p>加入完整 JSON 备份恢复；体重图新增7日移动均线和近14日周变化速度；历史训练可查看单动作30日/90日估算1RM趋势；动作库做最后一轮轻量整理。</p>
@@ -2931,78 +3214,36 @@ function renderBodyGoalNotice(){
 function saveBodyData(){
   const height=Number($("bodyHeight").value), weight=Number($("bodyWeight").value), waist=Number($("bodyWaist").value);
   const age=Number($("bodyAge").value);
-  const aerobicRaw=$("bodyAerobic").value.trim();
-  const aerobic=aerobicRaw===""?0:Number(aerobicRaw);
   const targetRaw=$("bodyTargetWeight")?.value?.trim()||"";
   const targetWeight=pendingBodyGoal==="maintain"?null:Number(targetRaw);
-
   if(!Number.isFinite(height)||height<100||height>230){showToast("请检查身高");return}
   if(!Number.isFinite(weight)||weight<25||weight>200){showToast("请检查体重");return}
   if(!Number.isFinite(waist)||waist<40||waist>180){showToast("请检查腰围");return}
   if(!Number.isFinite(age)||age<10||age>100){showToast("请检查年龄");return}
-  if(!Number.isFinite(aerobic)||aerobic<0||aerobic>2000){showToast("请检查有氧消耗");return}
   if(pendingBodyGoal!=="maintain"){
     if(!Number.isFinite(targetWeight)||targetWeight<25||targetWeight>250){showToast("请填写目标体重");return}
     if(pendingBodyGoal==="gain" && targetWeight<=weight){showToast("增肌目标应高于当前体重");return}
     if(pendingBodyGoal==="cut" && targetWeight>=weight){showToast("减脂目标应低于当前体重");return}
   }
-
   const previous=getBodyProfile();
-  const sameStage=previous &&
-    previous.goal===pendingBodyGoal &&
-    Number(previous.targetWeight)===Number(targetWeight);
-
-  const profile={
-    height,weight,waist,age,
-    sex:pendingBodySex,
-    trainingLevel:pendingTrainingLevel,
-    aerobic,
-    goal:pendingBodyGoal,
-    cutPhase:pendingCutPhase,
-    targetWeight,
-    stageStartWeight:sameStage && Number(previous.stageStartWeight)>0 ? Number(previous.stageStartWeight) : weight,
-    stageStartedAt:sameStage && previous.stageStartedAt ? previous.stageStartedAt : new Date().toISOString(),
-    updatedAt:new Date().toISOString()
-  };
+  const sameStage=previous && previous.goal===pendingBodyGoal && Number(previous.targetWeight)===Number(targetWeight);
+  const profile={height,weight,waist,age,sex:pendingBodySex,trainingLevel:pendingTrainingLevel,goal:pendingBodyGoal,cutPhase:pendingCutPhase,targetWeight,stageStartWeight:sameStage&&Number(previous.stageStartWeight)>0?Number(previous.stageStartWeight):weight,stageStartedAt:sameStage&&previous.stageStartedAt?previous.stageStartedAt:new Date().toISOString(),updatedAt:new Date().toISOString()};
   setBodyProfile(profile);
-  const logs=getBodyLogs();
-  logs[localDateKey()]={weight,waist,height,age,date:localDateKey()};
-  setBodyLogs(logs);
-  renderBodyData();
-  renderWeightModule();
-  renderNutritionView();
-  if(selectedDateKey && calendarDayPanel==="food") renderCalendarDayDetail();
+  const logs=getBodyLogs(); logs[localDateKey()]={weight,waist,height,age,date:localDateKey()}; setBodyLogs(logs);
+  renderBodyData();renderWeightModule();renderNutritionView();
+  if(selectedDateKey&&calendarDayPanel==="food")renderCalendarDayDetail();
   showToast("身体数据已保存");
 }
-
 function songSongTheory(profile){
-  if(!profile) return {ready:false,reason:"先录入身体数据"};
-  const age=Number(profile.age), weight=Number(profile.weight), height=Number(profile.height);
-  if(!Number.isFinite(age)||!Number.isFinite(weight)||!Number.isFinite(height)) return {ready:false,reason:"身体数据不完整"};
-
-  // 好人松松 Excel 25年9月版：
-  // 男：BMR = 体重×9.99 + 身高×6.25 - 年龄×4.92 + 5
-  // 女：BMR = 体重×9.99 + 身高×6.25 - 年龄×4.92 - 161
-  const bmr=weight*9.99 + height*6.25 - age*4.92 + (profile.sex==="female"?-161:5);
+  if(!profile)return {ready:false,reason:"先录入身体数据"};
+  const age=Number(profile.age),weight=Number(profile.weight),height=Number(profile.height);
+  if(!Number.isFinite(age)||!Number.isFinite(weight)||!Number.isFinite(height))return {ready:false,reason:"身体数据不完整"};
+  const bmr=weight*9.99+height*6.25-age*4.92+(profile.sex==="female"?-161:5);
   const noExercise=bmr/0.7;
-
   const male={new:150,intermediate:200,veteran:250};
   const female={new:100,intermediate:150,veteran:200};
   const strength=(profile.sex==="female"?female:male)[profile.trainingLevel||"new"];
-  const aerobic=Math.max(0,Number(profile.aerobic)||0);
-
-  const balanceTraining=noExercise+strength+aerobic;
-  const balanceRest=noExercise+aerobic;
-
-  // 增肌表的“应吃热量”口径：理论平衡热量 × 1.05 × 0.8 = ×0.84
-  const eatingTraining=balanceTraining*0.84;
-  const eatingRest=balanceRest*0.84;
-
-  return {
-    ready:true,bmr,noExercise,strength,aerobic,
-    balanceTraining,balanceRest,
-    eatingTraining,eatingRest
-  };
+  return {ready:true,bmr,noExercise,strength,balanceTraining:noExercise+strength,balanceRest:noExercise};
 }
 function theoreticalMaintenance(profile){
   const x=songSongTheory(profile);
@@ -3031,8 +3272,60 @@ function estimatePersonalBaseline(){
   }
   return {ready:true,maintenance:Math.round(avg),days:days.length,changePct};
 }
+function getCardioHistory(){try{return JSON.parse(localStorage.getItem(CARDIO_STORE)||"[]")}catch{return[]}}
+function setCardioHistory(v){localStorage.setItem(CARDIO_STORE,JSON.stringify(v))}
+function cardioByDateKey(key){return getCardioHistory().filter(x=>dateKeyFromDate(new Date(x.date))===key)}
+function cardioCaloriesForDate(key){return cardioByDateKey(key).reduce((sum,x)=>sum+(Number(x.kcal)||0),0)}
+function hasStrengthWorkout(key){return workoutsByDateKey(key).length>0}
+function hasCardioWorkout(key){return cardioByDateKey(key).length>0}
+function dayTrainingLabel(key){const a=hasStrengthWorkout(key),b=hasCardioWorkout(key);if(a&&b)return "力训 + 有氧";if(a)return "力训日";if(b)return "有氧日";return "休息日"}
+const CARDIO_OPTIONS={
+ run:{label:"跑步",options:[{label:"6 km/h",rate:5.5},{label:"7 km/h",rate:7.2},{label:"8 km/h",rate:9.5},{label:"9 km/h",rate:9.6},{label:"9.66 km/h",rate:9.768},{label:"12 km/h",rate:10.1},{label:"13 km/h",rate:10.1},{label:"14 km/h",rate:10.4},{label:"15 km/h",rate:10.9},{label:"16 km/h",rate:12.7}]},
+ swim:{label:"游泳",options:[{label:"约 1.10 km/h",rate:4.224},{label:"约 2.47 km/h",rate:7.656},{label:"约 2.74 km/h",rate:9.24}]},
+ cycle:{label:"骑行",options:[{label:"户外 10 km/h",rate:3.6},{label:"户外 12 km/h",rate:3.9},{label:"户外 13 km/h",rate:4.4},{label:"户外 15 km/h",rate:5.5},{label:"户外 18 km/h",rate:6.5},{label:"户外 27 km/h",rate:7.5},{label:"户外 31 km/h",rate:10},{label:"户外 34 km/h",rate:12},{label:"室内 50–90 W",rate:4.8},{label:"室内 90–100 W",rate:6.8},{label:"室内 100–160 W",rate:8.8},{label:"室内 160–200 W",rate:11},{label:"室内 200–270 W",rate:14}]}
+};
+function cardioWeightFactor(weight){const w=Number(weight);if(!Number.isFinite(w)||w<=0||w<80)return 1;return Math.max(.4,1-0.03*((w-75)/5))}
+function cardioHourlyCalories(ratePerKg,weight){return Number(ratePerKg)*Number(weight)*cardioWeightFactor(weight)}
+function cardioSessionCalories(ratePerKg,weight,activeSec){return cardioHourlyCalories(ratePerKg,weight)*(Math.max(0,Number(activeSec)||0)/3600)}
+let pendingCardioType="run",pendingCardioOptionIndex=0,cardioSession=null,cardioTicker=null;
+function openCardioSetup(type){if(session){showToast("请先结束当前力量训练");return}if(cardioSession){showToast("已有有氧训练进行中");return}const p=getBodyProfile();if(!p){showToast("请先录入身体数据");openProfileDrawer();return}pendingCardioType=CARDIO_OPTIONS[type]?type:"run";pendingCardioOptionIndex=0;renderCardioSetup();$("cardioSetupBackdrop")?.classList.add("open");$("cardioSetupModal")?.classList.add("open")}
+function closeCardioSetup(){$("cardioSetupBackdrop")?.classList.remove("open");$("cardioSetupModal")?.classList.remove("open")}
+function renderCardioSetup(){const cfg=CARDIO_OPTIONS[pendingCardioType],p=getBodyProfile();$("cardioSetupTitle").textContent=`开始${cfg.label}`;$("cardioSetupOptions").innerHTML=cfg.options.map((o,i)=>`<button class="${i===pendingCardioOptionIndex?"active":""}" onclick="selectCardioOption(${i})"><span>${o.label}</span><b>${i===pendingCardioOptionIndex?"✓":""}</b></button>`).join("");const opt=cfg.options[pendingCardioOptionIndex];if(p&&opt)$("cardioSetupEstimate").innerHTML=`按当前 ${Number(p.weight).toFixed(1)} kg 估算：<b>${Math.round(cardioHourlyCalories(opt.rate,p.weight))} kcal / 小时</b>`}
+function selectCardioOption(i){pendingCardioOptionIndex=Number(i)||0;renderCardioSetup()}
+function startCardioSession(){if(session){showToast("请先结束当前力量训练");return}trainingMode="cardio";const p=getBodyProfile();if(!p)return;const cfg=CARDIO_OPTIONS[pendingCardioType],opt=cfg.options[pendingCardioOptionIndex];const now=Date.now();cardioSession={type:pendingCardioType,typeLabel:cfg.label,modeLabel:opt.label,ratePerKg:opt.rate,weight:Number(p.weight),startedAt:now,lastResumeAt:now,activeAccumMs:0,restAccumMs:0,paused:false,pauseStartedAt:null};persistCardioSession();closeCardioSetup();renderCardioState();clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500);switchView("trainView")}
+function cardioElapsed(){if(!cardioSession)return {activeMs:0,restMs:0,totalMs:0};const now=Date.now();return {activeMs:cardioSession.activeAccumMs+(cardioSession.paused?0:Math.max(0,now-cardioSession.lastResumeAt)),restMs:cardioSession.restAccumMs+(cardioSession.paused?Math.max(0,now-cardioSession.pauseStartedAt):0),totalMs:Math.max(0,now-cardioSession.startedAt)}}
+function persistCardioSession(){if(cardioSession)localStorage.setItem(CARDIO_ACTIVE_STORE,JSON.stringify(cardioSession));else localStorage.removeItem(CARDIO_ACTIVE_STORE)}
+function restoreCardioSession(){try{const x=JSON.parse(localStorage.getItem(CARDIO_ACTIVE_STORE)||"null");if(x?.startedAt&&CARDIO_OPTIONS[x.type]){cardioSession=x;clearInterval(cardioTicker);cardioTicker=setInterval(renderCardioState,500)}}catch(e){}renderCardioState()}
+function renderCardioState(){
+  const launcher=$("cardioLauncher"),active=$("cardioActive");
+  if(!launcher||!active)return;
+  if(!cardioSession){
+    launcher.style.display="grid";
+    active.style.display="none";
+    renderTrainingMode();
+    return;
+  }
+  trainingMode="cardio";
+  launcher.style.display="none";
+  active.style.display="block";
+  const t=cardioElapsed();
+  $("cardioActiveType").textContent=cardioSession.typeLabel;
+  $("cardioActiveMode").textContent=`${cardioSession.modeLabel} · 记录体重 ${Number(cardioSession.weight).toFixed(1)} kg`;
+  $("cardioActiveClock").textContent=fmtClock(t.totalMs/1000);
+  $("cardioActiveTime").textContent=fmtMMSS(t.activeMs/1000);
+  $("cardioRestTime").textContent=fmtMMSS(t.restMs/1000);
+  $("cardioLiveKcal").textContent=`${Math.round(cardioSessionCalories(cardioSession.ratePerKg,cardioSession.weight,t.activeMs/1000))} kcal`;
+  $("cardioPauseBtn").textContent=cardioSession.paused?"继续训练":"暂停休息";
+  $("cardioStateBadge").textContent=cardioSession.paused?"休息中":"进行中";
+  $("cardioStateBadge").classList.toggle("paused",!!cardioSession.paused);
+  renderTrainingMode();
+}
+function toggleCardioPause(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused){cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);cardioSession.pauseStartedAt=null;cardioSession.paused=false;cardioSession.lastResumeAt=now}else{cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt);cardioSession.paused=true;cardioSession.pauseStartedAt=now}persistCardioSession();renderCardioState()}
+function finishCardioSession(){if(!cardioSession)return;const now=Date.now();if(cardioSession.paused)cardioSession.restAccumMs+=Math.max(0,now-cardioSession.pauseStartedAt);else cardioSession.activeAccumMs+=Math.max(0,now-cardioSession.lastResumeAt);const activeSec=Math.round(cardioSession.activeAccumMs/1000),restSec=Math.round(cardioSession.restAccumMs/1000);if(activeSec<10){showToast("有效有氧时间太短");return}const kcal=Math.round(cardioSessionCalories(cardioSession.ratePerKg,cardioSession.weight,activeSec));const rec={id:`cardio_${Date.now()}`,date:new Date(cardioSession.startedAt).toISOString(),endedAt:new Date().toISOString(),kind:"cardio",type:cardioSession.type,typeLabel:cardioSession.typeLabel,modeLabel:cardioSession.modeLabel,ratePerKg:cardioSession.ratePerKg,weight:cardioSession.weight,activeSec,restSec,kcal};const h=getCardioHistory();h.unshift(rec);setCardioHistory(h);cardioSession=null;clearInterval(cardioTicker);persistCardioSession();renderCardioState();renderNutritionView();renderBodyTarget();renderCalendar();updateStats();showToast(`已记录 ${rec.typeLabel} · ${kcal} kcal`)}
+function deleteCardioRecord(id){setCardioHistory(getCardioHistory().filter(x=>x.id!==id));renderCalendar();renderNutritionView();renderBodyTarget();updateStats();if(selectedDateKey&&calendarDayPanel==="workout")renderCalendarDayDetail();showToast("有氧记录已删除")}
+
 function isTrainingDay(key){
-  return workoutsByDateKey(key).length>0;
+  return hasStrengthWorkout(key) || hasCardioWorkout(key);
 }
 
 function songSongMacroRange(profile,key,targetKcal){
@@ -3074,38 +3367,13 @@ function songSongMacroRange(profile,key,targetKcal){
 }
 
 function targetForDate(key){
-  const profile=getBodyProfile();
-  if(!profile) return {ready:false,reason:"先录入身体数据"};
-
-  const theory=songSongTheory(profile);
-  const personal=estimatePersonalBaseline();
-  const training=isTrainingDay(key);
-  const balance=training?theory.balanceTraining:theory.balanceRest;
-
-  let kcal=null, coefficient=1;
-  if(profile.goal==="gain"){
-    coefficient=0.84; // 1.05 × 0.8
-  }else if(profile.goal==="cut"){
-    coefficient=0.64; // 0.8 × 0.8
-  }else{
-    coefficient=0.8;  // 维持：无盈余，只保留记账修正
-  }
-  kcal=balance*coefficient;
-
-  const macros=songSongMacroRange(profile,key,kcal);
-  return {
-    ready:true,
-    kcal:Math.round(kcal),
-    coefficient,
-    training,
-    goal:profile.goal,
-    source:"songsong",
-    theory,
-    personal,
-    macros,
-    targetWeight:Number(profile.targetWeight)||null,
-    stageStartWeight:Number(profile.stageStartWeight)||null
-  };
+  const profile=getBodyProfile();if(!profile)return {ready:false,reason:"先录入身体数据"};
+  const theory=songSongTheory(profile),personal=estimatePersonalBaseline();
+  const strengthTraining=hasStrengthWorkout(key),cardioKcal=cardioCaloriesForDate(key),cardioTraining=cardioKcal>0;
+  const balance=theory.noExercise+(strengthTraining?theory.strength:0)+cardioKcal;
+  let coefficient=profile.goal==="gain"?0.84:profile.goal==="cut"?0.64:0.8;
+  const kcal=balance*coefficient,macros=songSongMacroRange(profile,key,kcal);
+  return {ready:true,kcal:Math.round(kcal),coefficient,training:strengthTraining,strengthTraining,cardioTraining,cardioKcal:Math.round(cardioKcal),dayLabel:dayTrainingLabel(key),balance:Math.round(balance),goal:profile.goal,source:"songsong",theory,personal,macros,targetWeight:Number(profile.targetWeight)||null,stageStartWeight:Number(profile.stageStartWeight)||null};
 }
 function renderBodyData(){
   const p=getBodyProfile();
@@ -3115,7 +3383,6 @@ function renderBodyData(){
     pendingTrainingLevel="new"; setTrainingLevel("new");
     pendingCutPhase="early"; setCutPhase("early");
     pendingBodyGoal="maintain"; setBodyGoal("maintain");
-    if($("bodyAerobic")) $("bodyAerobic").value="0";
     if($("bodyTargetWeight")) $("bodyTargetWeight").value="";
     renderBodyTarget();
     return;
@@ -3124,7 +3391,6 @@ function renderBodyData(){
   if($("bodyWeight")) $("bodyWeight").value=p.weight;
   if($("bodyWaist")) $("bodyWaist").value=p.waist;
   if($("bodyAge")) $("bodyAge").value=p.age ?? "";
-  if($("bodyAerobic")) $("bodyAerobic").value=p.aerobic ?? 0;
   if($("bodyTargetWeight")) $("bodyTargetWeight").value=Number(p.targetWeight)>0?Number(p.targetWeight).toFixed(1):"";
   pendingBodySex=p.sex||"male"; setBodySex(pendingBodySex);
   pendingTrainingLevel=p.trainingLevel||"new"; setTrainingLevel(pendingTrainingLevel);
@@ -3139,54 +3405,13 @@ function renderBodyData(){
   renderBodyTarget();
 }
 function renderBodyTarget(){
-  const state=$("bodyTargetState"), content=$("bodyTargetContent"); if(!state||!content)return;
-  const p=getBodyProfile();
-  if(!p){
-    state.textContent="等待身体数据";
-    content.innerHTML='<div class="tiny">录入身高、体重、腰围、年龄、性别和训练水平后显示松松表格口径。</div>';
-    return;
-  }
-  const x=songSongTheory(p);
-  const t=targetForDate(localDateKey());
-  state.textContent=t.training?"力训日":"休息日";
-
-  const formulaRows=`
-    <div class="songFormulaGrid">
-      <div><span>基础代谢 a</span><b>${Math.round(x.bmr)} kcal</b></div>
-      <div><span>无运动总消耗 b=a÷0.7</span><b>${Math.round(x.noExercise)} kcal</b></div>
-      <div><span>力训消耗 c</span><b>${Math.round(x.strength)} kcal</b></div>
-      <div><span>日均有氧 d</span><b>${Math.round(x.aerobic)} kcal</b></div>
-      <div><span>力训日平衡 e1</span><b>${Math.round(x.balanceTraining)} kcal</b></div>
-      <div><span>休息日平衡 e2</span><b>${Math.round(x.balanceRest)} kcal</b></div>
-    </div>`;
-
-  const macro=t.macros?`
-    <div class="songMacroBox">
-      <div class="tiny">${t.macros.modeNote} · ${t.training?"力训日":"休息日"}</div>
-      <div class="songMacroGrid">
-        <span>碳水 <b>${t.macros.carbG}g</b><small>由总热量倒推 · 参考 ${t.macros.carbLowG}–${t.macros.carbHighG}g</small></span>
-        <span>蛋白质 <b>${t.macros.proteinG}g</b><small>固定 ${t.macros.proteinPerKg} g/kg</small></span>
-        <span>脂肪 <b>${t.macros.fatG}g</b><small>固定 ${t.macros.fatPerKg} g/kg</small></span>
-      </div>
-    </div>`:"";
-
-  const stageGoal=p.goal!=="maintain" && Number(p.targetWeight)>0
-    ? `<div class="bodyStageGoal"><span>${p.goal==="gain"?"增肌":"减脂"}目标</span><b>${Number(p.targetWeight).toFixed(1)} kg</b></div>`
-    : "";
-
-  content.innerHTML=`
-    ${stageGoal}
-    ${formulaRows}
-    <div class="bodyTargetCalories">${t.kcal} <small>kcal</small></div>
-    <div class="tiny" style="margin-top:4px">${
-      p.goal==="gain"?"增肌“应吃热量” = 平衡热量 ×0.84":
-      p.goal==="cut"?"减脂“应吃热量” = 平衡热量 ×0.64":
-      "维持“应吃热量” = 平衡热量 ×0.8"
-    }</div>
-    ${macro}
-    <div class="tiny songWarning">碳水为倒推值：应吃热量 − 蛋白质热量 − 脂肪热量，再 ÷4。</div>`;
+  const state=$("bodyTargetState"),content=$("bodyTargetContent");if(!state||!content)return;const p=getBodyProfile();if(!p){state.textContent="等待身体数据";content.innerHTML='<div class="tiny">录入身高、体重、腰围、年龄、性别和训练水平后显示理论参考。</div>';return}
+  const x=songSongTheory(p),t=targetForDate(localDateKey());state.textContent=t.dayLabel;
+  const formulaRows=`<div class="songFormulaGrid"><div><span>基础代谢 a</span><b>${Math.round(x.bmr)} kcal</b></div><div><span>无运动总消耗 b=a÷0.7</span><b>${Math.round(x.noExercise)} kcal</b></div><div><span>今日力训 c</span><b>${t.strengthTraining?Math.round(x.strength):0} kcal</b></div><div><span>今日有氧 d</span><b>${t.cardioKcal} kcal</b></div><div class="wide"><span>今日平衡热量 e=b+c+d</span><b>${t.balance} kcal</b></div></div>`;
+  const macro=t.macros?`<div class="songMacroBox"><div class="tiny">${t.macros.modeNote} · ${t.dayLabel}</div><div class="songMacroGrid"><span>碳水 <b>${t.macros.carbG}g</b><small>由总热量倒推 · 参考 ${t.macros.carbLowG}–${t.macros.carbHighG}g</small></span><span>蛋白质 <b>${t.macros.proteinG}g</b><small>固定 ${t.macros.proteinPerKg} g/kg</small></span><span>脂肪 <b>${t.macros.fatG}g</b><small>固定 ${t.macros.fatPerKg} g/kg</small></span></div></div>`:"";
+  const stageGoal=p.goal!=="maintain"&&Number(p.targetWeight)>0?`<div class="bodyStageGoal"><span>${p.goal==="gain"?"增肌":"减脂"}目标</span><b>${Number(p.targetWeight).toFixed(1)} kg</b></div>`:"";
+  content.innerHTML=`${stageGoal}${formulaRows}<div class="bodyTargetCalories">${t.kcal} <small>kcal</small></div><div class="tiny" style="margin-top:4px">${p.goal==="gain"?"增肌“应吃热量” = 今日平衡热量 ×0.84":p.goal==="cut"?"减脂“应吃热量” = 今日平衡热量 ×0.64":"维持“应吃热量” = 今日平衡热量 ×0.8"}</div>${t.cardioKcal?`<div class="tiny songCardioNote">今日已完成有氧 ${t.cardioKcal} kcal，已计入理论热量。</div>`:""}${macro}<div class="tiny songWarning">碳水为倒推值：应吃热量 − 蛋白质热量 − 脂肪热量，再 ÷4。</div>`;
 }
-
 const MEAL_KEYS=[
   ["breakfast","早餐"],
   ["lunch","午餐"],
@@ -3262,7 +3487,7 @@ function renderFoodTarget(){
   title.textContent=m
     ? `${t.kcal} kcal · 碳 ${m.carbG}g / 蛋 ${m.proteinG}g / 脂 ${m.fatG}g`
     : `${t.kcal} kcal · 维持参考`;
-  dayType.textContent=t.training?"力训日":"休息日";
+  dayType.textContent=t.dayLabel||"休息日";
   if(goalLine){
     goalLine.textContent=profile?.goal!=="maintain" && Number(profile?.targetWeight)>0
       ? `${profile.goal==="gain"?"增肌":"减脂"}目标 ${Number(profile.targetWeight).toFixed(1)} kg`
@@ -3459,7 +3684,7 @@ function calendarFoodHtml(key){
         <div><span>脂肪</span><b>${fmtMacro(t.fat)} g</b></div>
       </div>
       ${(()=>{const goal=targetForDate(key);return goal.ready?`<div class="calendarGoalSummary">
-        <div class="tiny">当日参考 · ${goal.training?"训练日":"休息日"}${goal.targetWeight?` · 目标 ${Number(goal.targetWeight).toFixed(1)}kg`:""}</div>
+        <div class="tiny">当日参考 · ${goal.dayLabel||"休息日"}${goal.cardioKcal?` · 有氧 ${goal.cardioKcal}kcal`:""}${goal.targetWeight?` · 目标 ${Number(goal.targetWeight).toFixed(1)}kg`:""}</div>
         <b>${goal.kcal} kcal</b>
         <span>${goal.macros?`碳水 ${goal.macros.carbG}g · 蛋白质 ${goal.macros.proteinG}g · 脂肪 ${goal.macros.fatG}g`:"维持热量参考"}</span>
       </div>`:`<div class="calendarGoalSummary"><div class="tiny">当日参考</div><span>${goal.reason||"暂无目标"}</span></div>`})()}
@@ -3604,19 +3829,8 @@ function renderExerciseTrend(){
     </svg>`;
 }
 
-function calendarWorkoutHtml(key){
-  const h=getHistory();
-  const matches=h.map((w,index)=>({w,index})).filter(x=>dateKeyFromDate(new Date(x.w.date))===key);
-  if(!matches.length){
-    return `<div class="calendarDetailHeader">
-      <div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div>
-    </div><div class="card empty">当天没有训练记录</div>`;
-  }
-  return `<div class="calendarDetailHeader">
-    <div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div>
-    <div class="calendarDetailHint">${matches.length} 次训练</div>
-  </div>`+matches.map((x,i)=>workoutDetailHtml(x.w,x.index,h,i+1)).join("");
-}
+function cardioDetailHtml(c,ordinal){return `<div class="card calendarWorkoutCard cardioHistoryCard"><div class="calendarWorkoutTitle"><div><div class="tiny">当天第 ${ordinal} 次有氧</div><div class="calendarWorkoutName">${escapeHtml(c.typeLabel||"有氧")} · ${escapeHtml(c.modeLabel||"")}</div><div class="calendarWorkoutMeta">有效 ${fmtClock(c.activeSec||0)} · 休息 ${fmtMMSS(c.restSec||0)} · ${Math.round(c.kcal||0)} kcal</div></div><div class="calendarWorkoutTools"><div class="dayTypeBadge cardio">有氧</div><button class="calendarEditBtn" onclick="deleteCardioRecord('${c.id}')">删除</button></div></div><div class="historyDetail"><div class="sessionOverview"><div class="miniStat"><div class="tiny">方式</div><div class="miniVal">${escapeHtml(c.modeLabel||"-")}</div></div><div class="miniStat"><div class="tiny">有效时长</div><div class="miniVal">${fmtMMSS(c.activeSec||0)}</div></div><div class="miniStat"><div class="tiny">热量消耗</div><div class="miniVal">${Math.round(c.kcal||0)} kcal</div></div></div><div class="tiny" style="margin-top:10px">计算体重 ${Number(c.weight||0).toFixed(1)} kg · 暂停时间不计入有氧消耗。</div></div></div>`}
+function calendarWorkoutHtml(key){const h=getHistory();const matches=h.map((w,index)=>({w,index})).filter(x=>dateKeyFromDate(new Date(x.w.date))===key);const cardio=cardioByDateKey(key);if(!matches.length&&!cardio.length)return `<div class="calendarDetailHeader"><div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div></div><div class="card empty">当天没有训练记录</div>`;return `<div class="calendarDetailHeader"><div><div class="tiny">训练分析</div><div class="calendarDetailDate">${key}</div></div><div class="calendarDetailHint">${matches.length} 次力训 · ${cardio.length} 次有氧</div></div>`+matches.map((x,i)=>workoutDetailHtml(x.w,x.index,h,i+1)).join("")+cardio.map((c,i)=>cardioDetailHtml(c,i+1)).join("")}
 function renderCalendarDayDetail(){
   const box=$("calendarDayDetail");
   if(!box||!selectedDateKey||!calendarDayPanel){if(box)box.style.display="none";return}
@@ -3642,12 +3856,30 @@ let selectedParts=new Set(["胸","臂"]);
 let session=null,currentIndex=0,sessionTicker=null;
 let restState=null,restTicker=null,audioCtx=null;
 
+let trainingMode="strength";
+function setTrainingMode(mode){
+  mode=mode==="cardio"?"cardio":"strength";
+  if(mode==="cardio" && session){showToast("力量训练进行中，结束后再切换有氧");return}
+  if(mode==="strength" && cardioSession){showToast("有氧训练进行中，结束后再切换力量训练");return}
+  trainingMode=mode;
+  renderTrainingMode();
+}
+function renderTrainingMode(){
+  if(session)trainingMode="strength";
+  if(cardioSession)trainingMode="cardio";
+  $("trainingModeStrength")?.classList.toggle("active",trainingMode==="strength");
+  $("trainingModeCardio")?.classList.toggle("active",trainingMode==="cardio");
+  if($("strengthTrainingArea"))$("strengthTrainingArea").style.display=trainingMode==="strength"?"block":"none";
+  if($("cardioTrainingArea"))$("cardioTrainingArea").style.display=trainingMode==="cardio"?"block":"none";
+}
+
 function switchView(id){
   document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
   $(id).classList.add("active");
   document.querySelectorAll(".navBtn").forEach(b=>b.classList.toggle("active",b.dataset.view===id));
   if(id==="trendView") renderNutritionView();
   if(id==="calendarView") renderCalendar();
+  if(id==="trainView") renderTrainingMode();
 }
 document.querySelectorAll(".navBtn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 
@@ -3850,6 +4082,9 @@ function discardSavedSession(){
 
 
 function startSession(){
+  if(cardioSession){showToast("请先结束当前有氧训练");return}
+  trainingMode="strength";
+
   if(session){switchView("trainView");return}
   session={start:Date.now(),exercises:[]};
   persistActiveSession();
@@ -4375,7 +4610,8 @@ function updateStats(){
     return d>=weekStart && d<weekEnd;
   });
 
-  $("weekSessions").textContent=h.length;
+  const cardioWeek=getCardioHistory().filter(x=>{const d=new Date(x.date);return d>=weekStart&&d<weekEnd});
+  $("weekSessions").textContent=h.length+cardioWeek.length;
   $("weekSets").textContent=h.reduce((a,x)=>a+(Number(x.totalSets)||0),0);
   $("weekVolume").textContent=Math.round(h.reduce((a,x)=>a+(Number(x.totalVolume)||0),0));
 }
@@ -4617,16 +4853,13 @@ function workoutsByDateKey(key){
   return getHistory().filter(w=>dateKeyFromDate(new Date(w.date))===key);
 }
 function trainingDateSet(){
-  return new Set(getHistory().map(w=>dateKeyFromDate(new Date(w.date))));
+  return new Set([...getHistory().map(w=>dateKeyFromDate(new Date(w.date))),...getCardioHistory().map(w=>dateKeyFromDate(new Date(w.date)))]);
 }
 
 function trainingTypesByDate(){
   const map={};
-  for(const w of getHistory()){
-    const key=dateKeyFromDate(new Date(w.date));
-    if(!map[key]) map[key]=new Set();
-    map[key].add(workoutDayType(w).key);
-  }
+  for(const w of getHistory()){const key=dateKeyFromDate(new Date(w.date));if(!map[key])map[key]=new Set();map[key].add(workoutDayType(w).key)}
+  for(const c of getCardioHistory()){const key=dateKeyFromDate(new Date(c.date));if(!map[key])map[key]=new Set();map[key].add("cardio")}
   return map;
 }
 
@@ -4736,7 +4969,7 @@ function handleBackupFile(event){
       const weightDays=Object.keys(data.body_logs||{}).filter(k=>Number(data.body_logs?.[k]?.weight)>0).length;
       $("backupRestoreSummary").textContent=`备份时间：${data.exported_at?new Date(data.exported_at).toLocaleString():"未知"} · ${data.schema_version||"旧版备份"}`;
       $("backupRestoreStats").innerHTML=`
-        <div><span>训练记录</span><b>${data.workouts?.length||0}</b></div>
+        <div><span>力训记录</span><b>${data.workouts?.length||0}</b></div><div><span>有氧记录</span><b>${data.cardio_sessions?.length||0}</b></div>
         <div><span>饮食天数</span><b>${foodDays}</b></div>
         <div><span>体重记录</span><b>${weightDays}</b></div>
         <div><span>训练模板</span><b>${data.templates?.length||0}</b></div>`;
@@ -4765,10 +4998,13 @@ function confirmBackupRestore(){
     localStorage.setItem(DAILY_STATUS_STORE,JSON.stringify(d.daily_statuses||{}));
     localStorage.setItem(NUTRITION_STORE,JSON.stringify(d.nutrition||{}));
     localStorage.setItem(STORE,JSON.stringify(d.workouts||[]));
+    localStorage.setItem(CARDIO_STORE,JSON.stringify(d.cardio_sessions||[]));
     localStorage.setItem(TEMPLATE_STORE,JSON.stringify(d.templates||[]));
     localStorage.setItem(CUSTOM_EXERCISE_STORE,JSON.stringify(d.custom_exercises||{}));
     if(d.theme==="dark"||d.theme==="light")localStorage.setItem(THEME_KEY,d.theme);
     localStorage.removeItem(ACTIVE_SESSION_STORE);
+    localStorage.removeItem(CARDIO_ACTIVE_STORE);
+    cardioSession=null;
     closeBackupRestore();
     migrateLegacyMuscleLabels();
     applyTheme(localStorage.getItem(THEME_KEY)||"light");
@@ -4791,7 +5027,7 @@ function exportSelectedDate(){
   const bodyLogs=getBodyLogs();
   const target=targetForDate(selectedDateKey);
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V2.9",
+    schema_version:"A-OS_BODY_EXPORT_V3.0",
     export_type:"selected_date",
     exported_at:new Date().toISOString(),
     date:selectedDateKey,
@@ -4803,13 +5039,14 @@ function exportSelectedDate(){
       totals:nutritionTotal,
       target:target.ready?target:null
     },
-    workouts:workoutsByDateKey(selectedDateKey)
+    workouts:workoutsByDateKey(selectedDateKey),
+    cardio_sessions:cardioByDateKey(selectedDateKey)
   };
   downloadJson(`A-OS_Body_${selectedDateKey}.json`,payload);
 }
 function exportAllData(){
   const payload={
-    schema_version:"A-OS_BODY_EXPORT_V2.9",
+    schema_version:"A-OS_BODY_EXPORT_V3.0",
     export_type:"all",
     exported_at:new Date().toISOString(),
     body_profile:getBodyProfile(),
@@ -4817,6 +5054,7 @@ function exportAllData(){
     daily_statuses:getDailyStatuses(),
     nutrition:getNutritionStore(),
     workouts:getHistory(),
+    cardio_sessions:getCardioHistory(),
     templates:getTemplates(),
     custom_exercises:getCustomExercises(),
     theme:localStorage.getItem(THEME_KEY)||"light"
@@ -4827,12 +5065,12 @@ function exportData(){
   exportAllData();
 }
 
-window.addEventListener("pagehide",persistActiveSession);
+window.addEventListener("pagehide",()=>{persistActiveSession();persistCardioSession()});
 document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="hidden") persistActiveSession();
 });
 
-migrateLegacyMuscleLabels();renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();renderDailyStatus();renderNutritionView();renderBodyData();renderWeightModule();
+migrateLegacyMuscleLabels();renderParts();renderFocus();updateStats();renderHistory();renderCalendar();renderTemplates();updateQuickTemplateLabel();renderDailyStatus();renderNutritionView();renderBodyData();renderWeightModule();restoreCardioSession();renderTrainingMode();renderWeightEntrySelector();
 if($("templateWheel")){
   $("templateWheel").addEventListener("scroll",()=>{
     clearTimeout(window.__wheelTimer);
