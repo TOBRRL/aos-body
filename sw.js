@@ -1,5 +1,5 @@
-const CACHE = 'aos-body-v3.2.4-20261018';
-const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
+const CACHE = 'aos-body-v3.3-pos-20261027';
+const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './pos-health.js', './pos-health.css'];
 
 self.addEventListener('install', event => {
   event.waitUntil(
@@ -9,15 +9,13 @@ self.addEventListener('install', event => {
   );
 });
 self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+  // Keep historical caches; this preview must not remove another app's cache.
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
+  if (new URL(event.request.url).pathname.includes('/pos/')) return;
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)

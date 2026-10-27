@@ -1,0 +1,27 @@
+.aosHomeDuo>.posBodyTile,.aosHomeDuo>.aosQuickTile{aspect-ratio:auto;min-height:278px;align-self:stretch}
+.posBodyTile{display:flex;flex-direction:column;gap:9px;text-align:left;min-width:0}
+.posTag{font-size:9px!important;letter-spacing:.04em;background:rgba(34,197,94,.13);color:var(--text);padding:3px 6px;border-radius:6px;white-space:nowrap}
+.posTileMetrics{display:grid;grid-template-columns:1fr;gap:7px;width:100%;margin:2px 0}
+.posTileMetric{display:flex;align-items:baseline;justify-content:space-between;gap:4px}
+.posScoreHero{display:flex;align-items:baseline;gap:5px}.posScoreHero strong{font-size:38px!important;line-height:1;letter-spacing:-1px}.posScoreHero>span{font-size:10px;color:var(--muted)}
+.posScoreState{font-size:10px;font-weight:700;color:var(--muted);line-height:1.5}
+.posScoreBreakdown{border:1px solid var(--line);padding:14px;border-radius:13px;font-size:12px;line-height:1.7}
+.posScoreBreakdown h3{margin:0 0 8px;font-size:18px}.posScoreBreakdown p{margin:6px 0}.posScoreBreakdown ul{padding-left:17px;margin:8px 0}
+.posTrendTable{overflow-x:auto}.posTrendTable table{width:100%;border-collapse:collapse;font-size:10px;margin:10px 0}.posTrendTable th,.posTrendTable td{text-align:left;padding:7px 4px;border-bottom:1px solid var(--line);white-space:nowrap}
+.posTileMetric small{display:block;font-size:10px;font-weight:500;color:var(--muted);margin-bottom:3px}
+.posTileMetric b{font-size:16px;line-height:1.2;white-space:nowrap}
+.posTileMetric i{font-style:normal;font-size:9px;font-weight:500;margin-left:3px;color:var(--muted)}
+.posBodyTile .aosTileFoot{font-size:10px;white-space:normal;line-height:1.5}
+.posHealthPanel{padding:0 18px 24px}.posHealthActions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.posHealthActions label{display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--muted)}
+.posHealthActions select{background:var(--card);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:9px;font-size:13px}
+.posHealthActions button{width:auto;padding:10px 12px;font-size:12px}
+#posConnectionState{font-size:12px;color:var(--muted);line-height:1.6}
+.posDetailMetrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.posDetailMetric{border:1px solid var(--line);border-radius:13px;padding:13px;min-width:0;overflow-wrap:anywhere}
+.posDetailMetric h3{font-size:12px;color:var(--muted);margin:0 0 8px}.posDetailMetric strong{display:block;font-size:23px}
+.posDetailMetric small{display:block;color:var(--muted);font-size:10px;line-height:1.6;margin-top:6px}
+.posDetailMetric:last-child{grid-column:1/-1}
+.posHealthPanel details{margin-top:16px;border-top:1px solid var(--line);padding-top:12px;font-size:12px}
+.posHealthPanel .tiny{line-height:1.7;overflow-wrap:anywhere}
+@media(max-width:360px){.posTileMetric b{font-size:13px}.posTag{font-size:8px!important}.posDetailMetric strong{font-size:19px}}

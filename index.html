@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>A-OS Body V3.2.4</title>
+<title>A-OS Body V3.3 · POS 身体趋势</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
@@ -1725,6 +1725,7 @@ html[data-theme="dark"] .restClock{
 /* V3.2.2 compact food favorites and collapsed search */
 .aosFoodList:empty{display:none}.aosFavoritesBox{margin:9px 0;border:1px solid var(--line);border-radius:11px;background:var(--ui-card2);overflow:hidden}.aosFavoritesBox summary{cursor:pointer;padding:10px 12px;font-size:12px;font-weight:800;list-style:none;display:flex;justify-content:space-between;gap:8px}.aosFavoritesBox summary::-webkit-details-marker{display:none}.aosFavoritesBox summary small{font-size:10px;font-weight:500;color:var(--muted)}.aosFavoritesInside{padding:0 12px 12px}.aosFavoritesLabel{font-size:11px;font-weight:800;color:var(--muted);padding:10px 0 5px}.aosFavoritesInside .aosFoodLine{flex-wrap:wrap}.aosFavoritesInside .aosTinyAction{padding:5px 7px}.aosFavNameInput{min-width:0;flex:1;background:var(--ui-card);border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:12px;padding:8px 9px}
 </style>
+<link rel="stylesheet" href="pos-health.css">
 </head>
 <body>
 <div class="app">
@@ -1736,11 +1737,13 @@ html[data-theme="dark"] .restClock{
 
   <section id="homeView" class="view active">
     <div class="aosHomeDuo">
-      <button class="card aosBodyTile" onclick="openDailyStatusModal()">
-        <span class="aosTileHead">身体状态 <span>›</span></span>
-        <strong id="aosHealthHeadline">待记录</strong>
-        <span class="aosTileDetails" id="aosHealthDetails">HRV · 心率 · 睡眠</span>
-        <span class="aosTileFoot" id="aosHealthFoot">长期趋势观察</span>
+      <button class="card aosBodyTile posBodyTile" onclick="openDailyStatusModal()" aria-label="查看自动同步的身体状态">
+        <span class="aosTileHead">身体状态 <span class="posTag">POS 同步</span></span>
+        <span id="posTileDate" class="tiny">等待连接本机 POS</span>
+        <div class="posScoreHero"><strong id="posBodyScore">—</strong><span>/ 100</span></div>
+        <span id="posScoreState" class="posScoreState">身体总分 · 实验性趋势</span>
+        <div id="posTileMetrics" class="posTileMetrics"></div>
+        <span id="posTileState" class="aosTileFoot">自动读取已保存快照</span>
       </button>
     <div id="homeStartCard" class="card homeStartCard aosQuickTile">
       <div class="sectionTitle" style="margin-top:0"><h3>快速开始</h3></div>
@@ -2383,66 +2386,21 @@ html[data-theme="dark"] .restClock{
 
 
 <div id="dailyStatusBackdrop" class="pickerBackdrop" onclick="closeDailyStatusModal()"></div>
-<div id="dailyStatusSheet" class="pickerSheet dailyStatusSheet">
+<div id="dailyStatusSheet" class="pickerSheet dailyStatusSheet" role="dialog" aria-modal="true" aria-labelledby="posSheetTitle">
   <div class="pickerHandle"></div>
   <div class="pickerTop">
-    <div>
-      <div class="pickerTitle">更新今日状态</div>
-      <div class="pickerSub">约 20 秒 · 数据只保存在本机</div>
-    </div>
-    <button class="pickerClose" onclick="closeDailyStatusModal()">✕</button>
+    <div><div id="posSheetTitle" class="pickerTitle">身体状态 · 自动同步</div><div class="pickerSub">Google Health → Personal OS → AosBody</div></div>
+    <button class="pickerClose" onclick="closeDailyStatusModal()" aria-label="关闭身体状态">✕</button>
   </div>
-
-  <div class="dailyStatusForm">
-    <label class="statusField">
-      <span>昨晚睡眠</span>
-      <div class="statusInputWrap"><input id="statusSleepHours" class="statusInput" inputmode="decimal" placeholder="8.0"><b>小时</b></div>
-    </label>
-
-    <label class="statusField">
-      <span>睡眠评分</span>
-      <div class="statusInputWrap"><input id="statusSleepScore" class="statusInput" inputmode="numeric" placeholder="85"><b>/100</b></div>
-    </label>
-
-    <label class="statusField">
-      <span>今日静息心率 <em>可选</em></span>
-      <div class="statusInputWrap"><input id="statusRhr" class="statusInput" inputmode="numeric" placeholder="62"><b>bpm</b></div>
-    </label>
-
-    <div class="statusField">
-      <span>昨天训练负荷</span>
-      <div class="statusSegment" id="statusLoadSegment">
-        <button type="button" data-value="none" onclick="pickStatusLoad('none')">无</button>
-        <button type="button" data-value="light" onclick="pickStatusLoad('light')">轻</button>
-        <button type="button" data-value="moderate" onclick="pickStatusLoad('moderate')">中</button>
-        <button type="button" data-value="heavy" onclick="pickStatusLoad('heavy')">重</button>
-      </div>
-    </div>
-
-    <div class="statusField">
-      <span>现在精神状态</span>
-      <div class="statusSegment five" id="statusMoodSegment">
-        <button type="button" data-value="1" onclick="pickStatusMood(1)">1</button>
-        <button type="button" data-value="2" onclick="pickStatusMood(2)">2</button>
-        <button type="button" data-value="3" onclick="pickStatusMood(3)">3</button>
-        <button type="button" data-value="4" onclick="pickStatusMood(4)">4</button>
-        <button type="button" data-value="5" onclick="pickStatusMood(5)">5</button>
-      </div>
-      <div class="statusScaleHint"><span>很疲惫</span><span>精神很好</span></div>
-    </div>
-
-    <div class="aosHealthFormTitle">长期趋势指标 · Garmin 255（目前手动填写）</div>
-    <div class="aosHealthInputs">
-      <label>昨夜 HRV <input id="aosHrvOvernight" inputmode="decimal" type="number" placeholder="ms"></label>
-      <label>7 日 HRV <input id="aosHrv7" inputmode="decimal" type="number" placeholder="ms"></label>
-      <label>HRV 基线下限 <input id="aosHrvLow" inputmode="decimal" type="number" placeholder="ms"></label>
-      <label>HRV 基线上限 <input id="aosHrvHigh" inputmode="decimal" type="number" placeholder="ms"></label>
-      <label>晨起 Body Battery <input id="aosBattery" inputmode="numeric" type="number" placeholder="0–100"></label>
-    </div>
-    <button class="secondary aosSaveHealth" onclick="aosSaveHealthData()">保存长期监测数据</button>
-    <div id="statusBaselineNote" class="statusBaselineNote"></div>
-    <button class="primary" onclick="saveDailyStatus()">保存原有状态记录</button>
-    <div class="statusDisclaimer">状态分用于观察个人趋势，不用于诊断疾病或决定是否必须训练。</div>
+  <div class="posHealthPanel">
+    <div class="posHealthActions"><label>数据日期 <select id="posHealthDate" aria-label="身体状态数据日期"></select></label><button id="posHealthRefresh" class="secondary">重新读取</button></div>
+    <p id="posConnectionState" role="status">等待连接本机 POS</p>
+    <div id="posScoreBreakdown" class="posScoreBreakdown"></div>
+    <div id="posDetailMetrics" class="posDetailMetrics"></div>
+    <details><summary>近 7 日已保存数据</summary><div id="posTrendTable" class="posTrendTable"></div></details>
+    <p id="posCheckedAt" class="tiny"></p>
+    <p class="tiny">自动读取本地快照；Google 同步仍需手动触发。身体总分是实验性个人趋势，不能判断是否健康或适合训练。空白不等于零。</p>
+    <details><summary>计算方法与数据口径</summary><p class="tiny">总分 = 睡眠 40% + HRV 35% + 静息心率 25%，权重是本项目的工程选择，未经临床验证。睡眠暂按 8 小时目标试算，未按年龄个体化；达到目标不继续奖励，也不代表睡眠质量合格。可用启动参数调整目标。HRV 和静息心率与过去 28 天同来源个人常态比较，至少 14 个有效历史日且近 7 天至少 3 个有效日才出总分。HRV 取自然对数，以中位数和 MAD 衡量双向偏离，不把越高或越低一律视为越好。当前日不进入自己的基线，缺项不重新分配权重。手机睡眠总览可能与接口不同；日记录时区未返回。旧主观记录保留，不参与评分。</p></details>
   </div>
 </div>
 
@@ -2731,17 +2689,8 @@ function updateStatusBaselineNote(){
   }
 }
 function openDailyStatusModal(){
-  const today=getDailyStatuses()[localDateKey()];
-  $("statusSleepHours").value=today?.sleepHours ?? "";
-  $("statusSleepScore").value=today?.sleepScore ?? "";
-  $("statusRhr").value=today?.rhr ?? "";
-  pendingStatusLoad=today?.load ?? "none";
-  pendingStatusMood=Number(today?.mood ?? 3);
-  pickStatusLoad(pendingStatusLoad);
-  pickStatusMood(pendingStatusMood);
-  updateStatusBaselineNote();aosLoadHealthInputs();
-  $("dailyStatusBackdrop").classList.add("open");
-  $("dailyStatusSheet").classList.add("open");
+  if(window.posHealth)window.posHealth.open();
+  else showToast("POS 身体状态模块尚未就绪");
 }
 function closeDailyStatusModal(){
   $("dailyStatusBackdrop").classList.remove("open");
@@ -2784,7 +2733,7 @@ const AOS_HEALTH_STORE='aos_body_health_daily_v321';
 function aosHealthHistory(){try{return JSON.parse(aosStorage.getItem(AOS_HEALTH_STORE)||'{}')}catch{return {}}}
 function aosLoadHealthInputs(){const h=aosHealthHistory()[localDateKey()]||{};const fields={aosHrvOvernight:h.hrvOvernight,aosHrv7:h.hrv7,aosHrvLow:h.baselineLow,aosHrvHigh:h.baselineHigh,aosBattery:h.bodyBattery};Object.entries(fields).forEach(([id,value])=>{if($(id))$(id).value=value??''})}
 function aosSaveHealthData(){const vals={};for(const [key,id,min,max] of [['hrvOvernight','aosHrvOvernight',1,300],['hrv7','aosHrv7',1,300],['baselineLow','aosHrvLow',1,300],['baselineHigh','aosHrvHigh',1,300],['bodyBattery','aosBattery',0,100]]){const raw=$(id)?.value?.trim()||'';if(raw===''){vals[key]=null;continue}const n=Number(raw);if(!Number.isFinite(n)||n<min||n>max){showToast('请检查 '+id+' 的数值');return}vals[key]=n}if(vals.baselineLow!==null&&vals.baselineHigh!==null&&vals.baselineLow>vals.baselineHigh){showToast('HRV 基线范围不正确');return}const a=aosHealthHistory();a[localDateKey()]={...vals,date:localDateKey(),source:'manual',updatedAt:new Date().toISOString()};aosStorage.setItem(AOS_HEALTH_STORE,JSON.stringify(a));renderDailyStatus();closeDailyStatusModal();showToast('身体监测数据已保存')}
-function aosRenderHealthTile(){const h=aosHealthHistory()[localDateKey()],old=getDailyStatuses()[localDateKey()];const title=$('aosHealthHeadline'),details=$('aosHealthDetails'),foot=$('aosHealthFoot');if(!title)return;if(!h&&!old){title.textContent='待记录';details.textContent='HRV · 心率 · 睡眠';foot.textContent='点击录入 / 查看';return}const hrv=h?.hrv7;const low=h?.baselineLow,high=h?.baselineHigh;const balanced=hrv!=null&&low!=null&&high!=null;title.textContent=balanced?(hrv<low?'HRV 偏低':hrv>high?'HRV 偏高':'HRV 平衡'):hrv!=null?`HRV ${hrv} ms`:'趋势待建立';details.textContent=[hrv!=null?`HRV ${hrv} ms`:null,old?.rhr!=null?`心率 ${old.rhr}`:null,old?.sleepHours!=null?`睡眠 ${old.sleepHours}h`:null].filter(Boolean).join(' · ')||'数据待录入';foot.textContent=h?.bodyBattery!=null?`Body Battery ${h.bodyBattery} · 手动数据`:'非医疗诊断 · 点击查看'}
+function aosRenderHealthTile(){if(window.posHealth)window.posHealth.renderTile()}
 function renderDailyStatus(){
   // V3.2.4: The legacy daily status summary nodes were replaced by the
   // compact body status tile in V3.2.1. Keep historical records intact;
@@ -5371,11 +5320,12 @@ setTimeout(showRestorePromptIfNeeded,120);
 </script>
 
 <script>
-if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+if ('serviceWorker' in navigator && location.protocol === 'https:' && location.hostname !== '127.0.0.1' && location.hostname !== 'localhost') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
 }
 </script>
+<script src="pos-health.js"></script>
 </body>
 </html>
